@@ -1,4 +1,7 @@
 package tn.esprit.biol.dao;
 
-public interface EquipmentDao {
+import org.springframework.data.jpa.repository.JpaRepository;
+import tn.esprit.biol.entity.Equipment;
+
+public interface EquipmentDao  extends JpaRepository<Equipment,String> {
 }
