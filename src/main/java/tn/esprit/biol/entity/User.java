@@ -1,12 +1,16 @@
 package tn.esprit.biol.entity;
 
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class User implements Serializable {
 
