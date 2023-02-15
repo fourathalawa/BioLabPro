@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>tn.esprit</groupId>
-    <artifactId>lostandfound</artifactId>
+    <artifactId>Pi</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>PI esprit</name>
     <description>Pi Spring</description>
@@ -57,7 +57,11 @@
             <version>1.18.16</version>
         </dependency>
 
-
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.6.9</version>
+        </dependency>
 
     </dependencies>
 
