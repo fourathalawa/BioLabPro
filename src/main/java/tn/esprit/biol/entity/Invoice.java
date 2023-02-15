@@ -29,9 +29,11 @@ public class Invoice implements Serializable {
     private String descreptionInvoice;
     //0 if not payed - 1 if its payed
     private Integer statusPayment;
-    @ElementCollection
-    private List<TestType> testList = new ArrayList<>();
+
+//    @ElementCollection
+//    private List<TestType> testTypeList = new ArrayList<>();
 
     public Invoice() {
     }
 }
+

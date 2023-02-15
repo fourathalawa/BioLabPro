@@ -25,4 +25,7 @@ public class SampleResult implements Serializable {
     @OneToOne
     @JoinColumn(name = "PatientID")
     private User PatientID;
+
+    @ManyToOne
+    private User user;
 }

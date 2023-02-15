@@ -59,6 +59,11 @@ public class UserService {
         roleDao.save(patient);
 
 
+        Role trainer = new Role();
+        trainer.setRoleName("Trainer");
+        trainer.setRoleDescription("Trainer");
+        roleDao.save(trainer);
+
 
         User adminUser = new User();
         adminUser.setId("07998550");
@@ -99,6 +104,20 @@ public class UserService {
         biologistRoles.add(biologist);
         patientUser.setRole(biologistRoles);
         userDao.save(biologistUser);
+
+
+        User trainerUser = new User();
+        trainerUser.setId("09999556");
+        trainerUser.setUserPassword(getEncodedPassword("fourat123"));
+        trainerUser.setUserFirstName("fourat");
+        trainerUser.setUserLastName("halaoua");
+        trainerUser.setAdress("Rue Khairedine tunis");
+        trainerUser.setEmail("fourat@gmail.com");
+        trainerUser.setTel("+21653120001");
+        Set<Role> trainerRoles = new HashSet<>();
+        trainerRoles.add(trainer);
+        trainerUser.setRole(trainerRoles);
+        userDao.save(trainerUser);
 
     }
     public ResponseEntity<?> getUsers( ) {

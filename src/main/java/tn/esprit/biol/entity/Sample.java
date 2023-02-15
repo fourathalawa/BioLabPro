@@ -23,9 +23,8 @@ public class Sample implements Serializable {
     private Date Dateofwithdrawl;
     private boolean Urgency;
 
-    @OneToOne
-    @JoinColumn(name = "id")
-    private User userID;
+    @ManyToOne
+    private User user;
 
 
 
