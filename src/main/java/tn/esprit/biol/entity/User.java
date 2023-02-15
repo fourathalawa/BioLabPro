@@ -32,5 +32,12 @@ public class User implements Serializable {
     )
     private Set<Role> role;
 
+    @OneToOne
+    Staff_Details staff_details;
+    @OneToMany
+    Set<DaysOff> daysOff;
+
+    @ManyToMany(mappedBy = "users")
+    Set<NightShift> nightsShift;
 
 }
