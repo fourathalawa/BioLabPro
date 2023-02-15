@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>tn.esprit</groupId>
-    <artifactId>lostandfound</artifactId>
+    <artifactId>biol</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>PI esprit</name>
     <description>Pi Spring</description>
