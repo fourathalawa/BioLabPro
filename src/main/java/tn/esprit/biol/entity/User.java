@@ -30,7 +30,11 @@ public class User implements Serializable {
                     @JoinColumn(name = "ROLE_ID")
             }
     )
+
     private Set<Role> role;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="trainee")
+    private Set<Certifcate> certifcates;
 
-
+    @ManyToMany(mappedBy="trainees", cascade = CascadeType.ALL)
+    private Set<Training> trainings;
 }
