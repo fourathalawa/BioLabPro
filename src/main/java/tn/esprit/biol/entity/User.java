@@ -38,7 +38,33 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "user")
     private Set<Sample> samples;
-
+    /**
+     *  Chiheb
+     * */
     @OneToMany(mappedBy = "user")
     private Set<SampleResult> samplesResults;
+
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="trainee")
+    private Set<Certifcate> certifcates;
+    /**
+     *  Fourat
+     * */
+    @ManyToMany(mappedBy="trainees", cascade = CascadeType.ALL)
+    private Set<Training> trainings;
+    /**
+     *  Houde
+     * */
+    @OneToOne
+    Staff_Details staff_details;
+    /**
+     *  Houde
+     * */
+    @OneToMany
+    Set<DaysOff> daysOff;
+    /**
+     *  Houde
+     * */
+    @ManyToMany
+    Set<NightShift> nightsShift;
 }

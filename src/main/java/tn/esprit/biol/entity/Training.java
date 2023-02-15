@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @FieldDefaults(level= AccessLevel.PRIVATE)
@@ -26,5 +27,8 @@ public class Training {
     Date Training_startdate;
     @Temporal(TemporalType.DATE)
     Date Training_enddate;
-
+    @OneToOne(mappedBy="training")
+    private Certifcate certifcate;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<User> trainees;
 }

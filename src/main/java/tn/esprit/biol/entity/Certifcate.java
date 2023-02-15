@@ -20,12 +20,8 @@ public class Certifcate {
     int CertifiacteId;
     @Temporal(TemporalType.DATE)
     Date CertificateDate;
-    @OneToOne
-    @JoinColumn(name = "trainee_id")
-    User Trainee;
-    @OneToOne
-    @JoinColumn(name = "trainer_id")
-    User Trainer;
+    @ManyToOne
+    User trainee;
     @OneToOne
     @JoinColumn(name = "training_id")
     Training training;
