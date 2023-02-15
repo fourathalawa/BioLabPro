@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.biol.dao.RoleDao;
@@ -31,8 +31,8 @@ public class UserService {
     @Autowired
     private RoleDao roleDao;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     @PostConstruct
     public void initRoleAndUser() {
@@ -67,7 +67,7 @@ public class UserService {
 
         User adminUser = new User();
         adminUser.setId("07998550");
-        adminUser.setUserPassword(getEncodedPassword("chahine123"));
+        adminUser.setUserPassword(/*getEncodedPassword*/("chahine123"));
         adminUser.setUserFirstName("chahine");
         adminUser.setUserLastName("kouki");
         adminUser.setAdress("Rue Khairedine tunis");
@@ -80,7 +80,7 @@ public class UserService {
 
         User patientUser = new User();
         patientUser.setId("07998551");
-        patientUser.setUserPassword(getEncodedPassword("assyl123"));
+        patientUser.setUserPassword(/*getEncodedPassword*/("assyl123"));
         patientUser.setUserFirstName("assyl");
         patientUser.setUserLastName("kriaa");
         patientUser.setAdress("Rue Khairedine tunis");
@@ -94,7 +94,7 @@ public class UserService {
 
         User biologistUser = new User();
         biologistUser.setId("07998552");
-        biologistUser.setUserPassword(getEncodedPassword("chiheb123"));
+        biologistUser.setUserPassword(/*getEncodedPassword*/("chiheb123"));
         biologistUser.setUserFirstName("chieb");
         biologistUser.setUserLastName("aroua");
         biologistUser.setAdress("Rue Khairedine tunis");
@@ -108,7 +108,7 @@ public class UserService {
 
         User trainerUser = new User();
         trainerUser.setId("09999556");
-        trainerUser.setUserPassword(getEncodedPassword("fourat123"));
+        trainerUser.setUserPassword(/*getEncodedPassword*/("fourat123"));
         trainerUser.setUserFirstName("fourat");
         trainerUser.setUserLastName("halaoua");
         trainerUser.setAdress("Rue Khairedine tunis");
@@ -154,7 +154,7 @@ public class UserService {
             userRoles.add(role);
             user.setRole(userRoles);
             }
-            user.setUserPassword(getEncodedPassword(user.getUserPassword()));
+            user.setUserPassword(/*getEncodedPassword*/(user.getUserPassword()));
             userDao.save(user);
             return ResponseEntity.status(HttpStatus.CREATED).body(user);
         }
@@ -186,7 +186,7 @@ public class UserService {
 
         Optional<User> user = userDao.findById(id);
          if(!user.isPresent()) {
-             return ResponseEntity.status(HttpStatus.OK).body("there is no such user with this id: "+id);
+             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("there is no such user with this id: "+id);
          }
 
         userDao.deleteById(id);
@@ -194,8 +194,8 @@ public class UserService {
 
     }
 
-    public String getEncodedPassword(String password) {
-        return passwordEncoder.encode(password);
-    }
+//    public String getEncodedPassword(String password) {
+//        return passwordEncoder.encode(password);
+//    }
 
 }
