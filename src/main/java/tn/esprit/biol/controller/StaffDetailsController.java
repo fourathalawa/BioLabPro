@@ -11,6 +11,8 @@ import tn.esprit.biol.service.IStaffService;
 import tn.esprit.biol.service.StaffService;
 import tn.esprit.biol.service.UserService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/Staff")
 public class StaffDetailsController {
@@ -25,20 +27,29 @@ public class StaffDetailsController {
     public ResponseEntity<?> updateStaff(@PathVariable(value = "id") Long userId,@RequestBody Staff_Details s) {
 
             User user = userService.findById(userId);
-
             if (user == null) {
                 return ResponseEntity.notFound().build();
             }
 
             Staff_Details staffDet = user.getStaff_details();
-
             if (staffDet == null) {
                 return ResponseEntity.notFound().build();
             }
-        Staff_Details updatedStaffDet = staffService.updateStaff(staffDet);
+
+            Staff_Details updatedStaffDet = staffService.updateStaff(staffDet);
             return ResponseEntity.ok(updatedStaffDet);
         }
 
+    @DeleteMapping("/removeStaffDetails/{staff_det}")
+    public void removeOperateur(@PathVariable("staff_det") Integer id) {
+        staffService.deleteStaff(id);
+    }
+
+    @GetMapping("/all-staff-details")
+    public List<Staff_Details> getStaff() {
+        List<Staff_Details> listStaff = staffService.getAllStaffs();
+        return listStaff;
+    }
 
     }
 

@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class Staff_Details  implements Serializable {
 
     @Id
-     String id;
+     Integer id;
      Integer workingHPerWeek;
      Integer workingHPerDay;
      Integer workingHPerNight;
