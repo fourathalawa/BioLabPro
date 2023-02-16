@@ -10,9 +10,9 @@ public interface IequipmentService {
 
     Equipment AddEquipment(Equipment e);
 
-    Equipment retrieveEquipment(String Id_eq);
+    Equipment retrieveEquipment(Integer Id_eq);
 
-    void deleteEquipment(String Id_eq);
+    void deleteEquipment(Integer Id_eq);
 
     Equipment updateEquipment(Equipment e);
 }

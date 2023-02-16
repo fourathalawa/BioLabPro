@@ -25,12 +25,12 @@ public class EquipmentService implements IequipmentService{
     }
 
     @Override
-    public Equipment retrieveEquipment(String Id_eq) {
+    public Equipment retrieveEquipment(Integer Id_eq) {
         return EqRepo.findById(Id_eq).get();
     }
 
     @Override
-    public void deleteEquipment(String Id_eq) {
+    public void deleteEquipment(Integer Id_eq) {
         EqRepo.deleteById(Id_eq);
 
     }

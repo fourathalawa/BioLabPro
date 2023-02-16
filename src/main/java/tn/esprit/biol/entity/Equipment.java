@@ -20,7 +20,7 @@ import java.util.Date;
 public class Equipment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    String Id_eq;
+    Integer Id_eq;
     String Type;
     Date Sterilization_Date;
     Date Expiration_Date;
