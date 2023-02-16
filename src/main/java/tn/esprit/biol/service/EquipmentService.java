@@ -2,6 +2,7 @@ package tn.esprit.biol.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import tn.esprit.biol.dao.EquipmentDao;
 import tn.esprit.biol.entity.Equipment;
 
@@ -36,8 +37,13 @@ public class EquipmentService implements IequipmentService{
     }
 
     @Override
-    public Equipment updateEquipment(Equipment e) {
-        return EqRepo.save(e);
+    public Equipment updateEquipment(Equipment e,Integer idEq) {
+        Equipment eq = EqRepo.findById(idEq).get();
+        eq.setType(e.getType());
+        eq.setExpiration_Date(e.getExpiration_Date());
+        eq.setQuantity(e.getQuantity());
+        eq.setSterilization_Date(e.getSterilization_Date());
+        return EqRepo.save(eq);
     }
 
 }

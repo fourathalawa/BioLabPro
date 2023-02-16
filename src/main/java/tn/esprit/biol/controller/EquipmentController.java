@@ -22,7 +22,7 @@ public class EquipmentController {
         return listEquipment;
     }
     // http://localhost:8089/kaddem/equipe/retrieve-equipment/8
-    @GetMapping("/retrieve-equipe/{equipe-id}")
+    @GetMapping("/retrieve-equipement/{Id_eq}")
     public Equipment retrieveEquipment(@PathVariable("Id_eq") Integer Id_eq) {
         return equipmentService.retrieveEquipment(Id_eq);
     }
@@ -38,9 +38,9 @@ public class EquipmentController {
         equipmentService.deleteEquipment(Id_eq);
     }
     // http://localhost:8089/kaddem/equipe/update-equipe
-    @PutMapping("/update-equipe")
-    public Equipment updateEtudiant(@RequestBody Equipment e) {
-        Equipment equipment= equipmentService.updateEquipment(e);
+    @PutMapping("/updateEquipment/{id}")
+    public Equipment updateEquipment(@RequestBody Equipment e,@PathVariable("id") Integer id) {
+        Equipment equipment= equipmentService.updateEquipment(e,id);
         return equipment;
     }
 }

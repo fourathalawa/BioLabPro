@@ -14,5 +14,5 @@ public interface IequipmentService {
 
     void deleteEquipment(Integer Id_eq);
 
-    Equipment updateEquipment(Equipment e);
+    Equipment updateEquipment(Equipment e,Integer eq);
 }
