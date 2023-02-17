@@ -3,9 +3,7 @@ package tn.esprit.biol.entity;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,6 +12,7 @@ import java.util.Date;
 public class DaysOff  implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     String id;
     Date startDate;
     Date endDate;

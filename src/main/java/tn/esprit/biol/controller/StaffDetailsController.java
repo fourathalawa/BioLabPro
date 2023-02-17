@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.biol.dao.UserDao;
 import tn.esprit.biol.entity.Staff_Details;
 import tn.esprit.biol.entity.User;
 import tn.esprit.biol.service.IStaffService;
@@ -20,24 +21,19 @@ public class StaffDetailsController {
     IStaffService staffService;
     @Autowired
     UserService userService;
-
+    @Autowired
+    private UserDao userDao;
 
 
     @PutMapping("/{id}/update-staff")
-    public ResponseEntity<?> updateStaff(@PathVariable(value = "id") Long userId,@RequestBody Staff_Details s) {
+    public ResponseEntity<?> updateStaff(@PathVariable(value = "id") String userId,@RequestBody Staff_Details s) {
 
-            User user = userService.findById(userId);
-            if (user == null) {
-                return ResponseEntity.notFound().build();
+            User user =userDao.findById(userId).get();
+            if (user != null) {
+                Staff_Details updatedStaffDet = staffService.updateStaff(s);
+                return ResponseEntity.ok(updatedStaffDet);
             }
-
-            Staff_Details staffDet = user.getStaff_details();
-            if (staffDet == null) {
                 return ResponseEntity.notFound().build();
-            }
-
-            Staff_Details updatedStaffDet = staffService.updateStaff(staffDet);
-            return ResponseEntity.ok(updatedStaffDet);
         }
 
     @DeleteMapping("/removeStaffDetails/{staff_det}")
