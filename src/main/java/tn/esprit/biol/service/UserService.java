@@ -70,6 +70,7 @@ public class UserService {
         adminUser.setAdress("Rue Khairedine tunis");
         adminUser.setEmail("chahinekouki1998@gmail.com");
         adminUser.setTel("+21653000000");
+
         Set<Role> adminRoles = new HashSet<>();
         adminRoles.add(headSupervisor);
         adminUser.setRole(adminRoles);
@@ -83,6 +84,7 @@ public class UserService {
         patientUser.setAdress("Rue Khairedine tunis");
         patientUser.setEmail("assyl@gmail.com");
         patientUser.setTel("+21653100000");
+
         Set<Role> patientRoles = new HashSet<>();
         patientRoles.add(patient);
         patientUser.setRole(patientRoles);
@@ -111,6 +113,7 @@ public class UserService {
         trainerUser.setAdress("Rue Khairedine tunis");
         trainerUser.setEmail("fourat@gmail.com");
         trainerUser.setTel("+21653120001");
+
         Set<Role> trainerRoles = new HashSet<>();
         trainerRoles.add(trainer);
         trainerUser.setRole(trainerRoles);

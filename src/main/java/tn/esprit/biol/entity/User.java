@@ -23,6 +23,8 @@ public class User implements Serializable {
     private String email;
     private String adress;
     private Boolean isBanned=Boolean.FALSE;
+   @Column(name="details_staff_fk")
+    private Integer details_staff_fk;
 
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -55,7 +57,9 @@ public class User implements Serializable {
     /**
      *  Houde
      * */
+
     @OneToOne
+    @JoinColumn(name = "details_staff_fk",insertable=false, updatable=false)
     Staff_Details staff_details;
     /**
      *  Houde

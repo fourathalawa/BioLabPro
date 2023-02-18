@@ -12,8 +12,7 @@ import java.util.List;
 @Entity
 public class NightShift {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     String id;
     Date startDate;
     Date endDate;

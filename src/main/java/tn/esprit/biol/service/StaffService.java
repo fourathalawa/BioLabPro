@@ -1,12 +1,12 @@
 package tn.esprit.biol.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import tn.esprit.biol.dao.StaffRepository;
+import tn.esprit.biol.dao.UserDao;
 import tn.esprit.biol.entity.Staff_Details;
+import tn.esprit.biol.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,8 @@ public class StaffService implements IStaffService {
 
 @Autowired
     StaffRepository staffRepository;
+    @Autowired
+    private UserDao userDao;
 
 
     @Override
@@ -31,9 +33,15 @@ public class StaffService implements IStaffService {
     }
 
 
-    public Staff_Details updateStaff(Staff_Details s) {
-        staffRepository.save(s);
-        return s;
+    public ResponseEntity<Object> updateStaff(String id, Staff_Details s) {
+        User user =userDao.findById(id).get();
+        if (user != null) {
+            staffRepository.save(s);
+            user.setDetails_staff_fk(s.getId());
+            userDao.save(user);
+            return ResponseEntity.ok(s);
+        }
+        return ResponseEntity.notFound().build();
     }
 
 

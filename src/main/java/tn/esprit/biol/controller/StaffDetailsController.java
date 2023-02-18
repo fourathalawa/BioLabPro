@@ -19,21 +19,15 @@ import java.util.List;
 public class StaffDetailsController {
     @Autowired
     IStaffService staffService;
-    @Autowired
-    UserService userService;
+
     @Autowired
     private UserDao userDao;
 
 
     @PutMapping("/{id}/update-staff")
-    public ResponseEntity<?> updateStaff(@PathVariable(value = "id") String userId,@RequestBody Staff_Details s) {
+    public ResponseEntity<Object> updateStaff(@PathVariable(value = "id") String userId,@RequestBody Staff_Details s) {
 
-            User user =userDao.findById(userId).get();
-            if (user != null) {
-                Staff_Details updatedStaffDet = staffService.updateStaff(s);
-                return ResponseEntity.ok(updatedStaffDet);
-            }
-                return ResponseEntity.notFound().build();
+          return staffService.updateStaff(userId,s);
         }
 
     @DeleteMapping("/removeStaffDetails/{staff_det}")

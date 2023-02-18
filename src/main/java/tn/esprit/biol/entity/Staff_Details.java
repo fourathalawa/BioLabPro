@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class Staff_Details  implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
      Integer id;
      Integer workingHPerWeek;
      Integer workingHPerDay;
