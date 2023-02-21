@@ -8,6 +8,7 @@ import tn.esprit.biol.dao.UserDao;
 import tn.esprit.biol.entity.Staff_Details;
 import tn.esprit.biol.entity.User;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,13 +33,12 @@ public class StaffService implements IStaffService {
         return " Staff  Deleted";
     }
 
-
     public ResponseEntity<Object> updateStaff(String id, Staff_Details s) {
         User user =userDao.findById(id).get();
-        if (user != null) {
+        if (user != null ) {
+
+             s.setUser(user);
             staffRepository.save(s);
-            user.setDetails_staff_fk(s.getId());
-            userDao.save(user);
             return ResponseEntity.ok(s);
         }
         return ResponseEntity.notFound().build();
@@ -51,9 +51,7 @@ public class StaffService implements IStaffService {
     }
 
     public List<Staff_Details> getAllStaffs() {
-        List<Staff_Details> staffs = new ArrayList<>();
-        staffRepository.findAll().forEach(staffs::add);
-        return staffs;
+       return staffRepository.findAll();
     }
 
 }

@@ -64,13 +64,12 @@ public class UserService {
 
         User adminUser = new User();
         adminUser.setId("07998550");
-        adminUser.setUserPassword(/*getEncodedPassword*/("chahine123"));
-        adminUser.setUserFirstName("chahine");
-        adminUser.setUserLastName("kouki");
+        adminUser.setUserPassword(/*getEncodedPassword*/("houda123"));
+        adminUser.setUserFirstName("Houda");
+        adminUser.setUserLastName("Koubaa");
         adminUser.setAdress("Rue Khairedine tunis");
-        adminUser.setEmail("chahinekouki1998@gmail.com");
-        adminUser.setTel("+21653000000");
-
+        adminUser.setEmail("houda.koubaa@esprit.tn");
+        adminUser.setTel("+21694533488");
         Set<Role> adminRoles = new HashSet<>();
         adminRoles.add(headSupervisor);
         adminUser.setRole(adminRoles);

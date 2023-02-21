@@ -37,8 +37,7 @@ public class StaffDetailsController {
 
     @GetMapping("/all-staff-details")
     public List<Staff_Details> getStaff() {
-        List<Staff_Details> listStaff = staffService.getAllStaffs();
-        return listStaff;
+        return  staffService.getAllStaffs();
     }
 
     }

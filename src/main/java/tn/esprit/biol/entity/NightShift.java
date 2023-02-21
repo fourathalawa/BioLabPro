@@ -18,7 +18,7 @@ public class NightShift {
     Date endDate;
     Integer numberOfEffectivByNight;
 
-    @ManyToMany
-    @JsonIgnore
-    List<User> users;
+   // @ManyToMany
+  //  @JsonIgnore
+  //  List<User> users;
 }

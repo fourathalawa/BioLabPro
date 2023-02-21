@@ -1,5 +1,6 @@
 package tn.esprit.biol.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -24,9 +25,12 @@ public class Staff_Details  implements Serializable {
      @Enumerated(EnumType.STRING)
      Contrat contrat;
 
-    @OneToOne(mappedBy = "staff_details")
-    User user;
 
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonIgnore // Ignorer la sérialisation de cette propriété
+
+    private  User user;
 
 
 }
