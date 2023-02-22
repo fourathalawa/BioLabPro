@@ -2,10 +2,7 @@ package tn.esprit.biol.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tn.esprit.biol.dao.DaysOffDao;
 import tn.esprit.biol.entity.DaysOff;
 import tn.esprit.biol.entity.User;
@@ -13,6 +10,7 @@ import tn.esprit.biol.service.DaysOffService;
 import tn.esprit.biol.service.EmailService;
 
 @RestController
+@RequestMapping("/DaysOff")
 public class DaysOffController {
 
 @Autowired
@@ -20,7 +18,7 @@ public class DaysOffController {
     @Autowired
     private DaysOffDao daysOffDao;
 
-    @PostMapping({"/DaysOff"})
+    @PostMapping({"/RequestDaysOff"})
 
 public DaysOff SendRequest(@RequestBody DaysOff daysOff)
 {
