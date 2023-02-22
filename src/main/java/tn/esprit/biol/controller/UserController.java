@@ -9,22 +9,24 @@ import tn.esprit.biol.entity.JwtRequest;
 import tn.esprit.biol.entity.JwtResponse;
 import tn.esprit.biol.entity.User;
 
+import tn.esprit.biol.service.IUserService;
+import tn.esprit.biol.service.JwtService;
 import tn.esprit.biol.service.UserService;
 
 
 @RestController
 public class UserController {
-//    @Autowired
-//    private JwtService jwtService;
+    @Autowired
+    private JwtService jwtService;
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
 
-//    @PostMapping({"/authenticate"})
-//    public JwtResponse createJwtToken(@RequestBody JwtRequest jwtRequest) throws Exception {
-//        return jwtService.createJwtToken(jwtRequest);
-//    }
+    @PostMapping({"/authenticate"})
+    public JwtResponse createJwtToken(@RequestBody JwtRequest jwtRequest) throws Exception {
+        return jwtService.createJwtToken(jwtRequest);
+    }
 
     @PostMapping({"/signup"})
     public ResponseEntity<?> registerNewUser(@RequestBody User user)
