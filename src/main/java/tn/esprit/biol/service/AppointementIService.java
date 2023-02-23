@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface AppointementIService {
-    public Integer FindAppointementsNumberPerDateandHour(LocalDateTime dateApp);
+
     public Appointement AddAppointement(Appointement a);
     public void DeleteAppointement(Integer id);
     public Appointement updateAppointement(Integer id , Appointement ap);
@@ -19,4 +19,17 @@ public interface AppointementIService {
     public Appointement StatusAppointment_not_validated(Integer id);
     public List<Appointement> retreiveAllAppointment();
     public Appointement getAppById(Integer id );
+    //Stat
+    public Integer FindAppointementsNumberPerDateandHour(LocalDateTime dateApp);
+    public Integer NumberOfAppointementsByMonth(Integer month);
+    public Integer NumberOfAppointementsByDayAndMonth(Integer day,Integer month);
+    public Integer NumberOfAppointementsByYear(Integer year);
+    public Integer NumberOfAppointementsByPatient(String Patientid);
+    public Integer NumberOfAppointementsByPatientByYearMonth(String Patientid,Integer month , Integer year);
+    public Integer NumberOfAppointementsNotYetReachedThisMonth();
+    public Integer NumberOfAppointementsValidatedThisMonth();
+    public Integer NumberOfAppointementsNotValidatedThisMonth();
+    public Integer NumlberofAppointmentsValidatedByPatient(String idPatient);
+    //Stat
+    public void envoyersms();
 }

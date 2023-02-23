@@ -7,4 +7,5 @@ import tn.esprit.biol.entity.Invoice;
 @Repository
 public interface InvoiceDao extends JpaRepository<Invoice,Integer> {
 
+    public Invoice findInvoiceByIdInvoice(Integer id);
 }

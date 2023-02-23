@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        h1{
+            color: brown;
+        }
+        .quotation {
+            width: 100%;
+        }
+        .quotation, .quotation th, .quotation td {
+            border: 1px solid brown;
+            border-collapse: collapse;
+        }
+        .quotation th {
+            background-color: brown;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h1>Invoice</h1>
+<table>
+    <tr>
+        <td th:text="'Company : '+${pdf.companyName}"></td><!-- + ${}  + ${}  + ${}  + ${pdf.email}   +  -->
+    </tr>
+    <tr>
+        <td th:text="'Date: '+${S}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Adress: '+${pdf.Adress}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Email: '+${pdf.Email}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Patient ID: '+${pdf.PatientId}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Payment Status: '+${pdf.PaymentStatus} "></td>
+    </tr>
+</table>
+<br />
+<table class="quotation">
+    <tr>
+        <th>Test(s)</th>
+        <th>Description</th>
+        <th>Total</th>
+    </tr>
+
+    <tr th:each="item, iterStat: ${PdfFactureQuote}">
+        <td th:text="${item.testName}"></td>
+        <td th:text="${item.description}"></td>
+        <td th:text="${item.total}"></td>
+    </tr>
+
+</table>
+</body>
+</html>
