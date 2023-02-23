@@ -25,6 +25,15 @@ public class UserController {
 //    public JwtResponse createJwtToken(@RequestBody JwtRequest jwtRequest) throws Exception {
 //        return jwtService.createJwtToken(jwtRequest);
 //    }
+/*
+
+test fourat
+*/
+    @GetMapping("/getuser/{id}")
+    public User getUserByid(@PathVariable("id") String id)
+    {
+    return     userService.getUserById(id);
+    }
 
     @PostMapping({"/signup"})
     public ResponseEntity<?> registerNewUser(@RequestBody User user)

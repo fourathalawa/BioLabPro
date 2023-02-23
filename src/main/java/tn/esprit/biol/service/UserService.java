@@ -194,6 +194,15 @@ public class UserService {
 
     }
 
+/*
+
+test fourat
+
+*/
+public User getUserById(String id)
+    {
+        return userDao.findById(id).get();
+    }
 //    public String getEncodedPassword(String password) {
 //        return passwordEncoder.encode(password);
 //    }

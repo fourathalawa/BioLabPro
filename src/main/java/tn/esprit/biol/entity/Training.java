@@ -1,11 +1,15 @@
 package tn.esprit.biol.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -29,6 +33,13 @@ public class Training {
     Date Training_enddate;
     @OneToOne(mappedBy="training")
     private Certifcate certifcate;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "trainings")
+    @JsonIgnoreProperties("Training")
     private Set<User> trainees;
+
 }
