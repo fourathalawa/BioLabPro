@@ -20,7 +20,7 @@ public class Appointement implements Serializable {
     - email envoyé pour notifier le patient lors l'ajout d'un rendez
     - sms envoyé avant de 30 mn de rendez vous
     - stats
-    -
+    -ban si le patient a effectuer 3 appointments no valider
     * */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

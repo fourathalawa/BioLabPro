@@ -1,9 +1,6 @@
 package tn.esprit.biol.controller;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.ListItem;
-import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +10,10 @@ import tn.esprit.biol.service.InvoiceService;
 import tn.esprit.biol.service.PdfGenerateService;
 import tn.esprit.biol.service.TestTypeService;
 
+import javax.mail.MessagingException;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -96,8 +96,46 @@ public class InvoiceController {
 
     @PutMapping("/updateInvoice/{id}")
     @ResponseBody
-    public Invoice updateInvoice(@PathVariable Integer id ,@RequestBody Invoice a) {
-        return invoiceService.updateInvoice(id,a);
+    public Invoice updateInvoice(@PathVariable Integer id ,@RequestBody Invoice a) throws IOException, DocumentException, MessagingException {
+        Invoice c=  invoiceService.updateInvoice(id,a);
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream("C:\\PdfInvoices\\"+c.getIdInvoice()+".pdf"));
+        // Open the document
+        document.open();
+
+        Image image = Image.getInstance("D:\\BioLabPro\\src\\main\\resources\\pdf-templates\\logo.png");
+        document.add(image);
+        // Add some content to the document
+        Paragraph paragraph = new Paragraph("Invoice Updated Please find below the details for the file number :"+c.getIdInvoice()+" concerning \n the test(s) carried out on :"+c.getDateInvoice()+" by = "+c.getIdPatient()+" \n\n\n ");
+        document.add(paragraph);
+        Paragraph paragraph2 = new Paragraph("Analyses performed :\n\n ");
+        document.add(paragraph2);
+        List list = new ArrayList();
+        for(TestType t :c.getTestList()) {
+            list.add(new ListItem(" - "+t.getTestName()));
+
+        }
+        for (Object item : list) {
+            Paragraph paragraph3 = new Paragraph(item.toString());
+            document.add(paragraph3);
+        }
+        Paragraph paragraph0 = new Paragraph("Your Total Ammount (tva included)  : "+c.getTotalAmount()+"\n\n ");
+        document.add(paragraph0);
+        Paragraph paragraph4 = new Paragraph("Descreption  : "+c.getDescreptionInvoice()+"\n\n ");
+        document.add(paragraph4);
+
+
+
+        // Close the document
+        document.close();
+
+        //integration
+        String to = "assyl.kriaa@gmail.com";
+        String subject = "Your Invoice (Updated)";
+        //integration patient name
+        String text = "Hello\t"+c.getIdPatient()+", \n This is your invoice an SMS will be sent after 48 minutes of this date  time to remind you about the payment in case you didnt pay .\n thank you \n ";
+        emailService.sendMessageWithAttachment(to,subject,text,"C:\\PdfInvoices\\"+c.getIdInvoice()+".pdf");
+        return c;
     }
     @PostMapping("/addTestType")
     @ResponseBody

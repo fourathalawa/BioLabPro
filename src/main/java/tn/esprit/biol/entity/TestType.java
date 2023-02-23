@@ -29,6 +29,7 @@ public class TestType {
    @Column(name="idTestType")
    private Integer idTestType;
    private String testName;
+
     @ManyToMany(mappedBy = "TestList" )
     private List<Invoice> invoices = new ArrayList<>();
 

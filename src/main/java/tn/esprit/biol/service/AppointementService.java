@@ -145,7 +145,7 @@ public class AppointementService implements AppointementIService{
         Integer i=0;
         List<Appointement> liste = appointementDao.findAll();
         for(Appointement a : liste){
-            if(a.getIdPatient()==Patientid){
+            if(a.getIdPatient().equals(Patientid)==true){
                 i=i+1;
             }
         }
@@ -157,7 +157,7 @@ public class AppointementService implements AppointementIService{
         Integer i=0;
         List<Appointement> liste = appointementDao.findAll();
         for(Appointement a : liste){
-            if(a.getIdPatient()==Patientid){
+            if(a.getIdPatient().equals(Patientid)){
                 if(a.getDateAppointement().getYear()==year){
                     if(a.getDateAppointement().getMonthValue()==month){ i=i+1;}
                 }
@@ -216,7 +216,7 @@ public class AppointementService implements AppointementIService{
        Integer i =0;
         List<Appointement> list = appointementDao.findAll();
         for(Appointement a:list){
-            if((a.getIdPatient()==idPatient) &&(a.getStatusAppointement()==1)){
+            if((a.getIdPatient().equals(idPatient)) &&(a.getStatusAppointement()==1)){
                 i = i+1;
             }
         }

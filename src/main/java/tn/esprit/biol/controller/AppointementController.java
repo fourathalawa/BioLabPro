@@ -30,7 +30,7 @@ public class AppointementController {
     //Format de Date 08-7-2019 08:51:58
     @GetMapping("/NumberAppointementsByDate/{date}")
     public Integer getNumberAppointementsByDate(@PathVariable String date) throws ParseException {
-        Date d = new SimpleDateFormat("yyyy-M-d hh:mm:ss").parse(date);
+        Date d = new SimpleDateFormat("yyyy-MM-dd").parse(date);
         Instant instant = d.toInstant();
         LocalDateTime df = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
         return appointementService.FindAppointementsNumberPerDateandHour(df);

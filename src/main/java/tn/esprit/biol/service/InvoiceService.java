@@ -133,13 +133,13 @@ public class InvoiceService implements InvoiceIService{
 
     @Override
     public Invoice findInvoiceById(Integer id) {
-        return findInvoiceById(id);
+        return invoiceDao.findInvoiceByIdInvoice(id);
     }
 
     @Override
     public void AddTestTypetoInvoice(Integer id, String testType) {
         Invoice invoice = invoiceDao.findInvoiceByIdInvoice(id);
-        invoice.getTestList().add(testTypeDao.findTestTypeByTestName(testType));
+        invoice.getTestList().add(testTypeDao.findFirstByTestName(testType));
     }
 
     @Override

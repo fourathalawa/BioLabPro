@@ -43,6 +43,7 @@ public class Invoice implements Serializable {
     //0 if not payed - 1 if its payed
     private Integer statusPayment;
 
+
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name = "invoice_test_type",
             joinColumns = @JoinColumn(name = "invoice_id"),

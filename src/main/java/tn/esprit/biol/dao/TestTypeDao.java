@@ -7,5 +7,5 @@ import tn.esprit.biol.entity.TestType;
 @Repository
 public interface TestTypeDao extends JpaRepository<TestType,Integer> {
 
-    public TestType findTestTypeByTestName(String name);
+    public TestType findFirstByTestName(String name);
 }
