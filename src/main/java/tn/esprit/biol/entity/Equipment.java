@@ -1,14 +1,12 @@
 package tn.esprit.biol.entity;
 
+import com.sun.istack.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @FieldDefaults(level= AccessLevel.PRIVATE)
@@ -21,9 +19,17 @@ public class Equipment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer Id_eq;
-    String Type;
-    Date Sterilization_Date;
-    Date Expiration_Date;
-    Integer Quantity;
+    @NotNull
+    @Column(nullable = false)
+    String type;
+    @NotNull
+    @Column(nullable = false)
+    LocalDate Sterilization_Date;
+    @NotNull
+    @Column(nullable = false)
+    LocalDate Expiration_Date;
+    @NotNull
+    @Column(nullable = false)
+    Integer quantity;
 
 }
