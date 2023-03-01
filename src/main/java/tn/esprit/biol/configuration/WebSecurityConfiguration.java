@@ -42,11 +42,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity.cors();
         httpSecurity.csrf().disable()
                 .authorizeRequests().antMatchers("/authenticate"
-                ,"/signup",
-                "/addNewUser",
-                "/update/**",
-                "/delete/**",
-                "/getAllUser")
+                ,"/user/authenticate",
+                "/chat/**")
                 .permitAll()
                 .antMatchers(HttpHeaders.ALLOW).permitAll()
                 .anyRequest().authenticated()

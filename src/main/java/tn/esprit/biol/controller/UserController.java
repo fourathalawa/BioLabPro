@@ -3,6 +3,7 @@ package tn.esprit.biol.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import tn.esprit.biol.entity.JwtRequest;
@@ -15,6 +16,7 @@ import tn.esprit.biol.service.UserService;
 
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     private JwtService jwtService;
@@ -35,25 +37,30 @@ public class UserController {
 
     }
 
-    @GetMapping({"/getAllUser"})
+    @PostMapping({"/addNew"})
+    @PreAuthorize("hasRole('HeadSupervisor') ")
+    public ResponseEntity<?> addNewUser(@RequestBody User user)
+    {
+        return userService.signUp(user,true);
+    }
+
+    @GetMapping({"/getAll"})
     public ResponseEntity<?> getUsers()
     {
         return userService.getUsers();
 
     }
 
-    @PostMapping({"/addNewUser"})
-    public ResponseEntity<?> addNewUser(@RequestBody User user)
-    {
-        return userService.signUp(user,true);
-    }
+
 
     @PutMapping({"/update/{id}"})
     public ResponseEntity<?> updateUser(@RequestBody User user,@PathVariable("id") String id)
     {
         return userService.updateUser(user,id);
     }
+
     @DeleteMapping({"/delete/{id}"})
+    @PreAuthorize("hasRole('HeadSupervisor') ")
     public ResponseEntity<?> updateUser(@PathVariable("id") String id)
     {
         return userService.deleteUser(id);
