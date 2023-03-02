@@ -62,8 +62,7 @@ public class User implements Serializable {
             inverseJoinColumns = { @JoinColumn(name = "training_id") })
     @JsonIgnoreProperties("trainees")
     private Set<Training> trainings;
- /*   @OneToOne(mappedBy = "user")
-    private Search search;*/
+
     /**
      *  Houde
      * */

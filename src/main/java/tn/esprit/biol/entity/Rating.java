@@ -1,5 +1,6 @@
 package tn.esprit.biol.entity;
 
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -12,13 +13,18 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-public class Search {
+public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int idSearch;
-
+    int idRating;
     @OneToOne
     @JoinColumn(name = "user_id")
     User user;
-    String expression;
+
+    @OneToOne
+    @JoinColumn(name = "training_id")
+    Training training;
+
+    int rating;
+
 }
