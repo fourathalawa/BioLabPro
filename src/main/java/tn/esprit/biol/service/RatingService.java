@@ -38,7 +38,7 @@ public class RatingService implements IRatingService{
 {
     return ratingDao.findAll();
 }
-
+//
 public List<Rating> getRatingByUserID(String iduser)
 {
     return ratingDao.getRatingByIDUSER(iduser);

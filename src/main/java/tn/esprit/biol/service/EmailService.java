@@ -21,7 +21,7 @@ public class EmailService implements IEmailService  {
 
     @Value("${spring.mail.username}") private String sender;
 
-    // Method 1
+    // Method 1//
     // To send a simple email
     @Override
     public String sendSimpleMail(Email details)
