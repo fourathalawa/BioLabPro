@@ -24,8 +24,7 @@ public class Sample implements Serializable {
     private boolean Urgency;
 
     @OneToOne
-    @JoinColumn(name = "id")
-    private User userID;
+     private User userID;
 
 
 
