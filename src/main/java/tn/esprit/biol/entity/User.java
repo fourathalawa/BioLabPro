@@ -1,12 +1,16 @@
 package tn.esprit.biol.entity;
 
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class User implements Serializable {
 
@@ -32,5 +36,35 @@ public class User implements Serializable {
     )
     private Set<Role> role;
 
+    @OneToMany(mappedBy = "user")
+    private Set<Sample> samples;
+    /**
+     *  Chiheb
+     * */
+    @OneToMany(mappedBy = "user")
+    private Set<SampleResult> samplesResults;
 
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="trainee")
+    private Set<Certifcate> certifcates;
+    /**
+     *  Fourat
+     * */
+    @ManyToMany(mappedBy="trainees", cascade = CascadeType.ALL)
+    private Set<Training> trainings;
+    /**
+     *  Houde
+     * */
+    @OneToOne
+    Staff_Details staff_details;
+    /**
+     *  Houde
+     * */
+    @OneToMany
+    Set<DaysOff> daysOff;
+    /**
+     *  Houde
+     * */
+    @ManyToMany
+    Set<NightShift> nightsShift;
 }
