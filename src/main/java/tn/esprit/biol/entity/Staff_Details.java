@@ -24,6 +24,8 @@ public class Staff_Details  implements Serializable {
      Float salary;
      @Enumerated(EnumType.STRING)
      Contrat contrat;
+     Integer nbrDaysOffPerYears=22;
+     Integer  SommeDaysOff;
 
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)

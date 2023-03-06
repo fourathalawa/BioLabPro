@@ -24,7 +24,7 @@ public class StaffDetailsController {
     private UserDao userDao;
 
 
-    @PutMapping("/{id}/update-staff")
+    @PutMapping("/update-staff/{id}")
     public ResponseEntity<Object> updateStaff(@PathVariable(value = "id") String userId,@RequestBody Staff_Details s) {
 
           return staffService.updateStaff(userId,s);
