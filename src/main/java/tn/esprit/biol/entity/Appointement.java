@@ -16,6 +16,14 @@ import java.util.Date;
 @ToString
 public class Appointement implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    /*
+    -systeme de repartition de charge (salle)/(heure) exemple 2 salle pour chaque heure de de rendez vous
+    - email envoyé pour notifier le patient lors l'ajout d'un rendez
+    - sms envoyé avant de 30 mn de rendez vous
+    - stats
+    -systeme de ban avec notif si le patient a effectuer 3 appointments no valider ne peut pas effectuer un  autre rendez-vous
+    * */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idAppointement")
@@ -30,7 +38,9 @@ public class Appointement implements Serializable {
     //par defaut status = 0
     private Integer statusAppointement=0;
     //intgeration
-    private Integer idPatient=0;
+
+    private String idPatient="0";
+
 
     public Appointement() {
     }
@@ -42,7 +52,8 @@ public class Appointement implements Serializable {
         //par défaut le status de rendez vous est 0
         this.statusAppointement = 0;
         // phase integration this.idPatient = Session.idPatient
-        this.idPatient = 0;
+
+        this.idPatient = "0";
     }
     public Appointement(Integer idAppointement, LocalDateTime dateAppointement, String typeAppointement , Integer statusAppointement , Integer Idpatient) {
         this.idAppointement = idAppointement;
@@ -51,6 +62,8 @@ public class Appointement implements Serializable {
         //par défaut le status de rendez vous est 0
         this.statusAppointement = 0;
         // phase integration this.idPatient = Session.idPatient
-        this.idPatient = 0;
+
+        this.idPatient = "0";
+
     }
 }
