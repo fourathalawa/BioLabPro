@@ -44,6 +44,7 @@ public class Invoice implements Serializable {
     private Integer statusPayment;
 
 
+
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name = "invoice_test_type",
             joinColumns = @JoinColumn(name = "invoice_id"),

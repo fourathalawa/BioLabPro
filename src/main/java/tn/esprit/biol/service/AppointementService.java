@@ -12,6 +12,7 @@ import tn.esprit.biol.entity.Appointement;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,8 @@ public class AppointementService implements AppointementIService{
     @Autowired
     AppointementDao appointementDao;
     @Autowired
+    AppointementService appointementService;
+    @Autowired
     SmsService smsService;
 
     @Override
@@ -27,7 +30,9 @@ public class AppointementService implements AppointementIService{
         Integer i = 0;
         List<Appointement> liste = appointementDao.findAll();
         for(Appointement a : liste){
-            if(a.getDateAppointement().equals(dateApp.plusHours(1))){
+            if(a.getDateAppointement().withSecond(0).equals(dateApp.withHour(a.getDateAppointement().getHour()).withMinute(a.getDateAppointement().getMinute()).withSecond(0)/*.plusHours(1)*/)){
+               /* System.out.println("ma date :"+a.getDateAppointement().withSecond(0));
+                System.out.println("sys date :"+dateApp.withSecond(0).plusHours(1));*/
                 i = i +1 ;
             }
         }
@@ -221,6 +226,32 @@ public class AppointementService implements AppointementIService{
             }
         }
         return i;
+    }
+
+    @Override
+    public Integer NumberOfAppointementsNotValidatedByPatient(String idPatient) {
+        Integer i =0;
+        List<Appointement> list = appointementDao.findAll();
+        for(Appointement a:list){
+            if((a.getIdPatient().equals(idPatient)) &&(a.getStatusAppointement()==2)){
+                i = i+1;
+            }
+        }
+        return i;
+    }
+
+    @Override
+    public List<String> PatientBanned() {
+        List<String> patientbanned = new ArrayList<>();
+        List<Appointement> list = appointementDao.findAll();
+        for(Appointement a:list){
+            if(appointementService.NumberOfAppointementsNotValidatedByPatient(a.getIdPatient())>=3){
+                // pas de redandance
+               if(!patientbanned.contains(a.getIdPatient()))
+               {patientbanned.add(a.getIdPatient());}
+            }
+        }
+        return patientbanned;
     }
 
     @Override

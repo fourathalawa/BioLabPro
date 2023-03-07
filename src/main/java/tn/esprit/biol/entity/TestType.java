@@ -30,6 +30,7 @@ public class TestType {
    private Integer idTestType;
    private String testName;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "TestList" )
     private List<Invoice> invoices = new ArrayList<>();
 

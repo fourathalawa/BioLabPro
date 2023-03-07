@@ -30,6 +30,8 @@ public interface AppointementIService {
     public Integer NumberOfAppointementsValidatedThisMonth();
     public Integer NumberOfAppointementsNotValidatedThisMonth();
     public Integer NumlberofAppointmentsValidatedByPatient(String idPatient);
+    public Integer NumberOfAppointementsNotValidatedByPatient(String idPatient);
+    public List<String> PatientBanned();
     //Stat
     public void envoyersms();
 }

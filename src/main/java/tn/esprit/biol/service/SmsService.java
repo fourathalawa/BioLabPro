@@ -11,11 +11,11 @@ public class SmsService {
 
     private final TwilioRestClient client;
 
-   // @Value("${twilio.accountSid}")
+  // @Value("${twilio.accountSid}")
     private String accountSid="ACbadd0dcac66727e50e266ab2513d29f2";
 
     //@Value("${twilio.authToken}")
-    private String authToken="8d44e6082661bdcc0f84b0438b4213bb";
+    private String authToken="7c4105f794405c76ded0b09a6825395b";
 
     //@Value("${twilio.fromPhoneNumber}")
     private String fromPhoneNumber="+14344742778";

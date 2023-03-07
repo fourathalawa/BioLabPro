@@ -15,11 +15,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.time.ZoneId;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/Invoice")
@@ -133,7 +134,7 @@ public class InvoiceController {
         String to = "assyl.kriaa@gmail.com";
         String subject = "Your Invoice (Updated)";
         //integration patient name
-        String text = "Hello\t"+c.getIdPatient()+", \n This is your invoice an SMS will be sent after 48 minutes of this date  time to remind you about the payment in case you didnt pay .\n thank you \n ";
+        String text = "Hello\t"+c.getIdPatient()+", \n This is your invoice an SMS will be sent after 48 hours of this date  time to remind you about the payment in case you didnt pay .\n thank you \n ";
         emailService.sendMessageWithAttachment(to,subject,text,"C:\\PdfInvoices\\"+c.getIdInvoice()+".pdf");
         return c;
     }
@@ -149,4 +150,45 @@ public class InvoiceController {
          invoiceService.AddTestTypetoInvoice(id,testType);
     }
 
+    @GetMapping("/PourcentageTest/{testName}")
+    @ResponseBody
+    public Float PourcentageTestType( @PathVariable  String testName) {
+       return testTypeService.PourcentageTestTypes(testName);
+    }
+
+    @GetMapping("/revenuesPerDate/{date}")
+    @ResponseBody
+    public Float revenuesPerDate( @PathVariable  String date ) throws ParseException {
+        Date d = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        Instant instant = d.toInstant();
+        LocalDateTime df = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+        return invoiceService.revenuesPerDate(df);
+    }
+    @GetMapping("/revenuesPerMonthYear/{Year}/{Month}")
+    @ResponseBody
+    public Float revenuesPerMonthYear( @PathVariable  Integer Year,@PathVariable  Integer Month ){
+        return invoiceService.revenuesPerMont(Month,Year);
+    }
+    @GetMapping("/revenuesPerYear/{Year}")
+    @ResponseBody
+    public Float revenuesPerYear( @PathVariable  Integer Year )  {
+        return invoiceService.revenuesPerYear(Year);
+    }
+
+    @GetMapping("/Unpayed_AmmountPerMonthYear/{Year}/{Month}")
+    @ResponseBody
+    public Float Unpayed_AmmountPerMonthYear( @PathVariable  Integer Year,@PathVariable  Integer Month ){
+        return invoiceService.AmmountNotPayedPerMont(Month,Year);
+    }
+    @GetMapping("/Unpayed_AmmountPerYear/{Year}")
+    @ResponseBody
+    public Float Unpayed_AmmountPerYear( @PathVariable  Integer Year )  {
+        return invoiceService.AmmountNotPayedPerYear(Year);
+    }
+
+    @PutMapping("/changePaymentStatus/{id}")
+    @ResponseBody
+    public Invoice changePaymentStatus(@PathVariable Integer id){
+        return invoiceService.changePaymentStatus(id);
+    }
     }

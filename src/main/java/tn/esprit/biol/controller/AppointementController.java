@@ -30,7 +30,7 @@ public class AppointementController {
     //Format de Date 08-7-2019 08:51:58
     @GetMapping("/NumberAppointementsByDate/{date}")
     public Integer getNumberAppointementsByDate(@PathVariable String date) throws ParseException {
-        Date d = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        Date d = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(date);
         Instant instant = d.toInstant();
         LocalDateTime df = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
         return appointementService.FindAppointementsNumberPerDateandHour(df);
@@ -47,6 +47,18 @@ public class AppointementController {
     @ResponseBody
     public Appointement addAppointement(@RequestBody Appointement appointement) {
 
+        // 3 rendez vous pas valider ( aaml rendez vous 3 marrat w majech ) => BAN
+        if(appointementService.NumberOfAppointementsNotValidatedByPatient(appointement.getIdPatient())>=3){
+            //integration appointment.patientid | patientid getEmailPatient
+            String to = "assyl.kriaa@gmail.com";
+            String subject = "You have Been Banned " ;
+            //integration patient name
+            String text = "Hello\t"+appointement.getIdPatient()+", \n By this email we tell you that you have been banned \n " +
+                    "Contact us on +216 12 345 543 to settle your status .\n thank you \n ";
+            emailService.sendSimpleMessage(to, subject, text);
+            return null;
+        }
+        else{
         //partie front controle de saisie seul accepte 01:00 or 01:30 repartie charge nombre de salle exemple nbr salle (2)
         if(appointementService.FindAppointementsNumberPerDateandHour(appointement.getDateAppointement())<2 )
         {
@@ -59,8 +71,9 @@ public class AppointementController {
             emailService.sendSimpleMessage(to, subject, text);
 
             return appointementService.AddAppointement(appointement);}
-
         else return null;
+
+       }
     }
     @DeleteMapping("/deleteAppointement/{id}")
     @ResponseBody
@@ -135,6 +148,18 @@ public class AppointementController {
     public Integer NumlberofAppointmentsValidatedByPatient(@PathVariable String idPatient) {
         return appointementService.NumlberofAppointmentsValidatedByPatient(idPatient);
     }
+    @GetMapping("/NumberOfAppointementsNotValidatedByPatient/{idPatient}")
+    @ResponseBody
+    public Integer NumberOfAppointementsNotValidatedByPatient(@PathVariable String idPatient) {
+        return appointementService.NumberOfAppointementsNotValidatedByPatient(idPatient);
+    }
+
+    @GetMapping("/PatientBanned")
+    @ResponseBody
+    public List<String> PatientBanned() {
+        return appointementService.PatientBanned();
+    }
+
 
     @GetMapping("/sms/{toPhoneNum}/{msg}")
     @ResponseBody

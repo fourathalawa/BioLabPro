@@ -15,4 +15,25 @@ public class TestTypeService {
     public TestType addTest(TestType testType){
         return testTypeDao.save(testType);
     }
+    public Float PourcentageTestTypes(String testName){
+        Float i=(float)0;
+        Float x=(float)0;
+        Float res=(float)0;
+        List<TestType> list = testTypeDao.findAll();
+        for(TestType t : list){
+            i = i+1;
+
+        }
+        System.out.println(i);
+        for(TestType p:list){
+            if(p.getTestName().equals(testName)){
+                x=x+1;
+            }
+        }
+        System.out.println(x);
+        res = x/i ;
+
+        return (res*100);
+
+    }
 }

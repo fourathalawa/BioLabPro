@@ -12,10 +12,7 @@ import tn.esprit.biol.entity.TestType;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
+import java.util.*;
 
 @Service
 public class InvoiceService implements InvoiceIService{
@@ -27,6 +24,8 @@ public class InvoiceService implements InvoiceIService{
     AppointementDao appointementDao;
     @Autowired
     AppointementService appointementService;
+    @Autowired
+    InvoiceService invoiceService;
 
     @Autowired
     SmsService smsService;
@@ -140,6 +139,78 @@ public class InvoiceService implements InvoiceIService{
     public void AddTestTypetoInvoice(Integer id, String testType) {
         Invoice invoice = invoiceDao.findInvoiceByIdInvoice(id);
         invoice.getTestList().add(testTypeDao.findFirstByTestName(testType));
+    }
+
+    @Override
+    public Float revenuesPerDate(LocalDateTime date) {
+        Float x = (float)0;
+        for(Invoice i:invoiceDao.findAll()){
+            if(i.getDateInvoice().withHour(0).withMinute(0).withSecond(0).withNano(0).equals(date)){
+                x = x+i.getTotalAmount();
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public Float revenuesPerMont(Integer Month, Integer year) {
+        Float x = (float)0;
+        for(Invoice i:invoiceDao.findAll()){
+            if((i.getDateInvoice().getMonthValue()==Month)&&(i.getDateInvoice().getYear()==year)&&(i.getStatusPayment()==1)){
+                x = x+i.getTotalAmount();
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public Float revenuesPerYear(Integer year) {
+        Float x = (float)0;
+        for(Invoice i:invoiceDao.findAll()){
+            if((i.getDateInvoice().getYear()==year)&&(i.getStatusPayment()==1)){
+                x = x+i.getTotalAmount();
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public Float AmmountNotPayedPerMont(Integer Month, Integer year) {
+        Float x = (float)0;
+        for(Invoice i:invoiceDao.findAll()){
+            if((i.getDateInvoice().getMonthValue()==Month)&&(i.getDateInvoice().getYear()==year)&&(i.getStatusPayment()==0)){
+                x = x+i.getTotalAmount();
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public Float AmmountNotPayedPerYear(Integer year) {
+        Float x = (float)0;
+        for(Invoice i:invoiceDao.findAll()){
+            if((i.getDateInvoice().getYear()==year)&&(i.getStatusPayment()==0)){
+                x = x+i.getTotalAmount();
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public Invoice changePaymentStatus(Integer id){
+        Invoice v = invoiceDao.getInvoiceByIdInvoice(id);
+
+       if(v.getStatusPayment()==0){
+            v.setStatusPayment(1);
+
+        }
+       else  if(v.getStatusPayment()==1)
+        {
+            v.setStatusPayment(0);
+
+        }
+
+        return invoiceDao.save(v);
     }
 
     @Override
