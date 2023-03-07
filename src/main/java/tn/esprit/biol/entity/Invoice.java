@@ -1,6 +1,5 @@
 package tn.esprit.biol.entity;
 
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.persistence.*;
 import java.io.Serializable;
 
+
 import java.time.LocalDateTime;
+
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +24,7 @@ import java.util.List;
 public class Invoice implements Serializable {
     private static final long serialVersionUID = 1L;
 
+
     /*
     -systeme de calcul de totalammount de facture en fonction des type de test choisi et en fonction de plage de total
      un taux de tva sera ajouté
@@ -33,15 +35,18 @@ public class Invoice implements Serializable {
     (table TestType) - les pourcentages de type de Test
     * */
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idInvoice")
     private Integer idInvoice;
 
 
+
     //@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime dateInvoice;
     private String idPatient;
+
 
     private Float totalAmount;
     private String descreptionInvoice;
@@ -72,5 +77,6 @@ public class Invoice implements Serializable {
         this.statusPayment = statusPayment;
         this.TestList = testList;
     }
+
 }
 

@@ -19,11 +19,16 @@ import java.util.Set;
 public class TestType {
    /* BloodTest,
 
+=======
+public enum TestType {
+    BloodTest,
+>>>>>>> origin/Training_Management
     Urinalysis,
     MicrobialCultureTest,
     EnzymeTest,
     HormoneTest,
     TissueTest,
+<<<<<<< HEAD
 
     MolecuralTest*/
 
@@ -63,5 +68,6 @@ public class TestType {
         this.idTestType = idTestType;
         this.testName = testName;
     }
+
 
 }

@@ -7,7 +7,7 @@ import tn.esprit.biol.entity.User;
 import java.util.List;
 
 public interface IUserService {
-    public void initRoleAndUser();
+
     public ResponseEntity<?> getUsers( );
 
     public ResponseEntity<?> signUp(User user , boolean isStaff );
@@ -19,4 +19,6 @@ public interface IUserService {
     public String getEncodedPassword(String password);
 
     public ResponseEntity<?> allowUser(String id);
+
+    public User getUserById(String id);
 }

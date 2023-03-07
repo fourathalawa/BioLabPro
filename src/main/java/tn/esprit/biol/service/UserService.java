@@ -2,14 +2,17 @@ package tn.esprit.biol.service;
 
 
 import lombok.AllArgsConstructor;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.biol.dao.RoleDao;
@@ -239,5 +242,19 @@ public class UserService implements  IUserService {
             return principal.toString();
         }
     }
+
+
+
+
+/*
+
+test fourat
+
+*/
+public User getUserById(String id)
+    {
+        return userDao.findById(id).get();
+    }
+
 
 }

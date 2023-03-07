@@ -1,5 +1,7 @@
 package tn.esprit.biol.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -44,14 +46,22 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private Set<SampleResult> samplesResults;
 
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="trainee")
-    private Set<Certifcate> certifcates;
     /**
      *  Fourat
      * */
-    @ManyToMany(mappedBy="trainees", cascade = CascadeType.ALL)
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="trainee")
+    private Set<Certificate> certificates;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_training",
+            joinColumns = { @JoinColumn(name = "user_id",nullable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "training_id",nullable = false) })
+    @JsonIgnoreProperties("trainees")
     private Set<Training> trainings;
+
+    @OneToOne
+    @JoinColumn(name = "trainer_id")
+    Training training;
     /**
      *  Houde
      * */
@@ -67,4 +77,8 @@ public class User implements Serializable {
      * */
     @ManyToMany
     Set<NightShift> nightsShift;
+
+
+
+
 }
