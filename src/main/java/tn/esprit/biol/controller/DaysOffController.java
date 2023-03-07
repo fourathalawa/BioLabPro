@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -34,13 +35,13 @@ public class DaysOffController {
     @Autowired
     private DaysOffDao daysOffDao;
 
-
+/*
     @PostMapping("/RequestDaysOff")
 
-    public ResponseEntity<String> sendRequest(@RequestParam("justification") String justification,
-                                              @RequestParam("startDate") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDate,
-                                              @RequestParam("endDate") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate endDate,
-                                              @RequestParam(value = "image",required = false) MultipartFile file) throws Exception {
+    public ResponseEntity<?> sendRequest(@RequestParam("image") MultipartFile file,
+                                              @RequestParam("jus") String justification,
+                                              @RequestParam("st")LocalDate startDate,
+                                              @RequestParam("end")LocalDate endDate) throws Exception {
 
         // Créer un objet DaysOff à partir des paramètres reçus
         //  DaysOff daysOff = new DaysOff(justification, startDate, endDate, imageData.getBytes());
@@ -48,7 +49,7 @@ public class DaysOffController {
         String jus = "Le biologiste ayant l'identifiant 07998550 demande les codes des résultats de la période allant du " + startDate + " jusqu'au " + endDate+" avec la justification ci -dessus "+justification;
         // Envoyer la demande de congé
         boolean success = daysOffService.sendLeaveRequest("houda.koubaa@esprit.tn", "07998550", startDate,
-                endDate, jus, null);
+                endDate, jus, file);
 
         if (!success) {
             return ResponseEntity.badRequest().body("La demande n'est pas valide, vérifiez vos dates.");
@@ -57,10 +58,15 @@ public class DaysOffController {
         }
     }
 
-
+*/
     @PostMapping("/demandeConge/{idConge}")
     public ResponseEntity<String> traiterDemandeCongeTest(@PathVariable Integer idConge) {
-        String result = daysOffService.traiterDemandeConge(idConge);
+        String result = null;
+        try {
+            result = daysOffService.traiterDemandeConge(idConge);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         return ResponseEntity.ok(result);
     }
 
@@ -76,13 +82,13 @@ public class DaysOffController {
     }
 
 
-    @Autowired
-    private StorageService service;
 
-    @PostMapping
-    public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file) throws IOException {
-        String uploadImage = service.uploadImage(file);
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(uploadImage);
+    @PostMapping("/RequestDaysOff")
+    public String sendLeaveRequest(@RequestParam("image") MultipartFile file,
+                                   @RequestParam("jus") String justification,
+                                   @RequestParam("st")LocalDate startDate,
+                                   @RequestParam("end") LocalDate endDate) throws IOException {
+        return daysOffService.uploadImage(file, justification,startDate);
     }
+
 }

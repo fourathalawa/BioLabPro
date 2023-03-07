@@ -1,6 +1,7 @@
 package tn.esprit.biol.service;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.itextpdf.text.*;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
@@ -20,29 +21,22 @@ import tn.esprit.biol.dao.StaffRepository;
 import tn.esprit.biol.dao.UserDao;
 import tn.esprit.biol.entity.DaysOff;
 import tn.esprit.biol.entity.Etat;
-import tn.esprit.biol.entity.Staff_Details;
 import tn.esprit.biol.entity.User;
 
-import javax.servlet.http.Part;
-import javax.sql.rowset.serial.SerialBlob;
-import javax.validation.ConstraintValidatorContext;
-import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
-import java.util.Date;
 import java.util.List;
 
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfGState;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class DaysOffService implements IDaysOffService {
     @Autowired
@@ -52,9 +46,25 @@ public class DaysOffService implements IDaysOffService {
     UserDao userDao;
     @Autowired
     DaysOffDao daysOffDao;
+    public String uploadImage(MultipartFile file, String text, LocalDate date) throws IOException {
 
+        byte[] compressedImageData = ImageUtils.compressImage(file.getBytes());
+        DaysOff imageData = DaysOff.builder()
+                .imageData(compressedImageData)
+                .justification(text)
+                .startDate(date)
+                .build();
 
+        DaysOff savedImageData = daysOffDao.save(imageData);
 
+        if (savedImageData != null) {
+            return "file uploaded successfully: " + file.getOriginalFilename();
+        }
+
+        return null;
+    }
+
+/*
     public Boolean sendLeaveRequest(String to, String id,LocalDate startDate, LocalDate endDate, String justification, MultipartFile file) throws IOException {
 
 
@@ -77,7 +87,7 @@ public class DaysOffService implements IDaysOffService {
             if (imageData != null) {
                 System.out.println( "file uploaded successfully : " + file.getOriginalFilename());
             }
-           */
+
 
             daysOff.setUser(user);
             daysOffDao.save(daysOff);
@@ -87,7 +97,7 @@ public class DaysOffService implements IDaysOffService {
             return false;
         }
     }
-
+ */
     public boolean validateLeaveRequest(LocalDate startDate, LocalDate endDate) {
         LocalDate currentDate = LocalDate.now();
         long daysNotice = ChronoUnit.DAYS.between(currentDate,startDate);
@@ -107,7 +117,7 @@ public class DaysOffService implements IDaysOffService {
 
     }
 
-    public String traiterDemandeConge(Integer idConge) {
+    public String traiterDemandeConge(Integer idConge) throws Exception {
 
         DaysOff daysOff = daysOffDao.findById(idConge).get();
         Integer NB_MAX_DEMANDES_PAR_PERIODE = 3;
@@ -137,6 +147,7 @@ if(daysOff.getImageData()==null) {
         daysOff.setEtat(Etat.EnCour);
         daysOffDao.save(daysOff);
         //sendSMS();
+        genererPdf(daysOff);
         return "Demande de congé acceptée.";
     }
 
@@ -150,4 +161,59 @@ if(daysOff.getImageData()==null) {
 
         return new ResponseEntity<String>("Message sent successfully", HttpStatus.OK);
     }
+    public void genererPdf(DaysOff daysOff) throws Exception {
+
+        // Chargement du logo du laboratoire
+        Image logo = Image.getInstance("src/main/java/tn/esprit/biol/Images/logo.png");
+        logo.scaleToFit(180, 180); // Redimensionnement du logo
+
+        // Chargement de la signature
+        Image signature = Image.getInstance("src/main/java/tn/esprit/biol/Images/cache.png");
+        signature.scaleToFit(250, 250); // Redimensionnement de la signature
+
+        // Création d'un nouveau document
+        Document document = new Document();
+
+        // Ajout des métadonnées du document
+        document.addTitle("Demande de congé");
+        document.addAuthor("Nom de l'auteur");
+        document.addSubject("Demande de congé pour " + daysOff.getUser().getUserFirstName());
+        document.addKeywords("congé, demande");
+
+        // Ouverture du document
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("C:/Users/asus/Desktop/PdfConge/"+daysOff.getUser().getId()+".pdf"));
+        document.open();
+
+        // Ajout du logo en haut de la page
+        Paragraph logoParagraphe = new Paragraph();
+        logo.setAlignment(Element.ALIGN_LEFT);
+        logoParagraphe.add(logo);
+        document.add(logoParagraphe);
+
+        // Ajout de la signature en bas à droite
+        signature.setAbsolutePosition(document.right() - 100, document.bottom() + 10);
+        signature.scaleAbsolute(50, 50);
+        document.add(signature);
+
+        // Ajout des informations sur la demande de congé
+        Paragraph titre = new Paragraph("Demande de congé", new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD));
+        titre.setAlignment(Element.ALIGN_CENTER);
+
+        // Création d'un cadre autour des informations sur la demande de congé
+        Rectangle rect = new Rectangle(36, 36, 559, 806);
+        rect.setBorder(Rectangle.BOX);
+        rect.setBorderWidth(1);
+        document.add(rect);
+
+        document.add(titre);
+        document.add(new Paragraph("ID du médecin : " + daysOff.getUser().getId()));
+        document.add(new Paragraph("Date de début : " + daysOff.getStartDate()));
+        document.add(new Paragraph("Date de fin : " + daysOff.getEndDate()));
+
+        // Fermeture du document
+        document.close();
+    }
+
 }
+
+

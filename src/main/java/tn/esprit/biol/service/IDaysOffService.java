@@ -13,7 +13,8 @@ import java.util.Date;
 import java.util.List;
 
 public interface IDaysOffService {
-    public Boolean sendLeaveRequest(String to, String id, LocalDate startDate, LocalDate endDate, String justification,MultipartFile file) throws IOException;
+  //  public Boolean sendLeaveRequest(String to, String id, LocalDate startDate, LocalDate endDate, String justification,MultipartFile file) throws IOException;
+  public String uploadImage(MultipartFile file, String text, LocalDate date) throws IOException;
 
     public boolean validateLeaveRequest(LocalDate startDate, LocalDate endDate);
     public List<DaysOff> getAllDaysOff();
