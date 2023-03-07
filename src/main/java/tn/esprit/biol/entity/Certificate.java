@@ -14,12 +14,13 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class Certifcate {
+public class Certificate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int CertifiacteId;
     @Temporal(TemporalType.DATE)
     Date CertificateDate;
+
     @ManyToOne
     User trainee;
     @OneToOne

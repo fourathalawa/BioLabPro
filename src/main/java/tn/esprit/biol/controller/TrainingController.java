@@ -65,7 +65,7 @@ public class TrainingController {
         return training;
     }
 
-    @PutMapping("/affect-trainee-training/{id-user}/{id-training}")
+    @PostMapping("/affect-trainee-training/{id-user}/{id-training}")
     public void affectTraineeToTraining(@PathVariable("id-user") String iduser , @PathVariable("id-training") int idtraining)
     {
         trainingService.affectTraineeToTraining(iduser,idtraining);

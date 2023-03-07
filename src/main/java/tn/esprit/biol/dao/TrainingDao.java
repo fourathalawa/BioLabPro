@@ -20,7 +20,7 @@ public interface TrainingDao extends JpaRepository<Training,Integer> {
     @Query(value = " SELECT * FROM user_training   where user_id like :iduser",nativeQuery = true)
     List<Training> getTrainingByIDUSER(String iduser);
 
-    @Query(value = " SELECT * FROM user_training as us, training as tr where us.user_id like :iduser and us.training_id = tr.trainig_id group by tr.training_name",nativeQuery = true)
+    @Query(value = " SELECT * FROM user_training as us, training as tr where us.user_id like :iduser and us.training_id = tr.training_id group by tr.training_name",nativeQuery = true)
     List<Training> getTrainingByIDUSERG(String iduser);
 
     @Query(value = " SELECT * FROM training   where training_subject like :word",nativeQuery = true)

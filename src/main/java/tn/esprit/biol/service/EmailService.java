@@ -19,10 +19,10 @@ import javax.mail.internet.MimeMessage;
 public class EmailService implements IEmailService  {
     @Autowired private JavaMailSender javaMailSender;
 
-    @Value("${spring.mail.username}") private String sender;
+   private String sender="BioLab9900@gmail.com";
 
     // Method 1//
-    // To send a simple email
+    // To send a simple email=!
     @Override
     public String sendSimpleMail(Email details)
     {

@@ -123,7 +123,7 @@ public List<Training> RecommandedTraining(String iduser)
 
     }
     List<Training> trainingList1=new ArrayList<>();
-    recommanded.entrySet().stream().sorted(Map.Entry.comparingByValue()).findFirst();
+    recommanded.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).findFirst();
     Iterator it = recommanded.entrySet().iterator();
     while(it.hasNext())
     {
@@ -135,4 +135,15 @@ public List<Training> RecommandedTraining(String iduser)
     }
 return trainingList1;
 }
+@Override
+    public void affectTrainerToTraining(String iduser, int idtraining)
+    {
+        User trainer = userDao.findById(iduser).get();
+
+        Training training = trainingDao.findById(idtraining).get();
+        training.setTrainer(trainer);
+        trainer.setTraining(training);
+        userDao.save(trainer);
+        trainingDao.save(training);
+    }
 }
