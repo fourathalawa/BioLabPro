@@ -1,96 +1,58 @@
 package tn.esprit.biol.service;
 
 
+
 import java.io.File;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import tn.esprit.biol.entity.Email;
 
+
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.io.File;
 
 @Service
-public class EmailService implements IEmailService  {
-    @Autowired private JavaMailSender javaMailSender;
+public class EmailService implements EmailIService{
 
-   private String sender="BioLab9900@gmail.com";
+    @Autowired
+    private JavaMailSender emailSender;
 
-    // Method 1//
-    // To send a simple email=!
-    @Override
-    public String sendSimpleMail(Email details)
-    {
+    public void sendSimpleMessage(
+            String to, String subject, String text) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(text);
+        emailSender.send(message);
+    }
+    public void sendMessageWithAttachment(
+            String to, String subject, String text, String pathToAttachment) throws MessagingException {
+        // ...
 
-        // Try block to check for exceptions
-        try {
+        MimeMessage message = emailSender.createMimeMessage();
 
-            // Creating a simple mail message
-            SimpleMailMessage mailMessage
-                    = new SimpleMailMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-            // Setting up necessary details
-            mailMessage.setFrom(sender);
-            mailMessage.setTo(details.getRecipient());
-            mailMessage.setText(details.getMsgBody());
-            mailMessage.setSubject(details.getSubject());
+        helper.setFrom("noreply@baeldung.com");
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(text);
 
-            // Sending the mail
-            javaMailSender.send(mailMessage);
-            return "Mail Sent Successfully...";
-        }
+        FileSystemResource file
+                = new FileSystemResource(new File(pathToAttachment));
+        helper.addAttachment("Invoice", file);
 
-        // Catch block to handle the exceptions
-        catch (Exception e) {
-            return "Error while Sending Mail";
-        }
+        emailSender.send(message);
+        // ...
     }
 
-    // Method 2
-    // To send an email with attachment
-    public String
-    sendMailWithAttachment(Email details)
-    {
-        // Creating a mime message
-        MimeMessage mimeMessage
-                = javaMailSender.createMimeMessage();
-        MimeMessageHelper mimeMessageHelper;
-
-        try {
-
-            // Setting multipart as true for attachments to
-            // be send
-            mimeMessageHelper
-                    = new MimeMessageHelper(mimeMessage, true);
-            mimeMessageHelper.setFrom(sender);
-            mimeMessageHelper.setTo(details.getRecipient());
-            mimeMessageHelper.setText(details.getMsgBody());
-            mimeMessageHelper.setSubject(
-                    details.getSubject());
-
-            // Adding the attachment
-            FileSystemResource file
-                    = new FileSystemResource(
-                    new File(details.getAttachment()));
-
-            mimeMessageHelper.addAttachment(
-                    file.getFilename(), file);
-
-            // Sending the mail
-            javaMailSender.send(mimeMessage);
-            return "Mail sent Successfully";
-        }
-
-        // Catch block to handle MessagingException
-        catch (MessagingException e) {
-
-            // Display message when exception occurred
-            return "Error while sending mail!!!";
-        }
-    }
 }
+

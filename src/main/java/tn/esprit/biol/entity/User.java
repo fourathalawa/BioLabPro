@@ -1,5 +1,6 @@
 package tn.esprit.biol.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -26,7 +27,7 @@ public class User implements Serializable {
     private Boolean isBanned=Boolean.FALSE;
 
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "USER_ROLE",
             joinColumns = {
                     @JoinColumn(name = "USER_ID")
@@ -44,6 +45,7 @@ public class User implements Serializable {
      * */
     @OneToMany(mappedBy = "user")
     private Set<SampleResult> samplesResults;
+
     /**
      *  Fourat
      * */

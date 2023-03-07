@@ -109,13 +109,13 @@ public class TrainingController {
         return ratingService.getRatingByUserID(iduser);
     }
 
-    @PostMapping("/sendMail")
-    public String
-    sendMail(@RequestBody Email details)
-    {
-        String status
-                = emailService.sendSimpleMail(details);
-
-        return status;
-    }
+//    @PostMapping("/sendMail")
+//    public String
+//    sendMail(@RequestBody Email details)
+//    {
+//        String status
+//                = emailService.(details);
+//
+//        return status;
+//    }
 }
