@@ -2,6 +2,7 @@ package tn.esprit.biol.service;
 
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 @Service
+@Slf4j
 public class UserService implements  IUserService {
 
 
@@ -34,6 +36,9 @@ public class UserService implements  IUserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private LoginAttemptService loginAttemptService;
 
     @PostConstruct
     public void initRoleAndUser() {
@@ -183,6 +188,7 @@ public class UserService implements  IUserService {
             return ResponseEntity.status(HttpStatus.OK).body(oldUser);
 
     }
+    @Transactional
     public ResponseEntity<?> deleteUser(String id ) {
 
         Optional<User> user = userDao.findById(id);
@@ -193,6 +199,29 @@ public class UserService implements  IUserService {
         userDao.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body("User deleted");
 
+    }
+
+    public void banUser(String id) throws Exception {
+        Optional<User> user = userDao.findById(id);
+        if(user.isPresent() ){
+            user.get().setIsBanned(Boolean.TRUE);
+            userDao.save(user.get());
+            log.debug("User banned", user);
+        } else throw new Exception(String.valueOf(HttpStatus.NOT_ACCEPTABLE));
+    }
+
+    public ResponseEntity<?> allowUser(String id) {
+
+        Optional<User> user = userDao.findById(id);
+        if(user.isPresent() ){
+            user.get().setIsBanned(Boolean.FALSE);
+            userDao.save(user.get());
+            loginAttemptService.evictUserFromLoginAttemptCache(user.get().getId());
+            log.debug("User allowed", user);
+
+            return  ResponseEntity.status(HttpStatus.OK).body("user authorized ");
+
+        } else  return ResponseEntity.status(HttpStatus.OK).body("Invalid Id ");
     }
 
     public String getEncodedPassword(String password) {

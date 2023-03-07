@@ -1,6 +1,8 @@
 package tn.esprit.biol.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -17,7 +19,9 @@ import tn.esprit.biol.entity.User;
 import tn.esprit.biol.util.JwtUtil;
 
 
+import javax.xml.ws.Response;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -35,25 +39,29 @@ public class JwtService implements UserDetailsService {
         String id = jwtRequest.getId();
         String userPassword = jwtRequest.getUserPassword();
         authenticate(id, userPassword);
-
         UserDetails userDetails = loadUserByUsername(id);
         String newGeneratedToken = jwtUtil.generateToken(userDetails);
 
         User user = userDao.findById(id).get();
+
         return new JwtResponse(user, newGeneratedToken);
+
+
+
     }
 
     @Override
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-        User user = userDao.findById(id).get();
+        Optional<User> user = userDao.findById(id);
 
-        if (user != null) {
+        if (user.isPresent()) {
             return new org.springframework.security.core.userdetails.User(
-                    user.getId(),
-                    user.getUserPassword(),
-                    getAuthority(user)
+                    user.get().getId(),
+                    user.get().getUserPassword(),
+                    getAuthority(user.get())
             );
-        } else {
+        }
+        else {
             throw new UsernameNotFoundException("User not found with id: " + id);
         }
     }
@@ -67,6 +75,7 @@ public class JwtService implements UserDetailsService {
     }
 
     private void authenticate(String id, String userPassword) throws Exception {
+
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(id,  userPassword));
         } catch (DisabledException e) {

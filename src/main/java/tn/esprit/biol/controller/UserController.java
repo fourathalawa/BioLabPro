@@ -33,6 +33,7 @@ public class UserController {
     @PostMapping({"/signup"})
     public ResponseEntity<?> registerNewUser(@RequestBody User user)
     {
+
        return userService.signUp(user,false);
 
     }
@@ -61,9 +62,14 @@ public class UserController {
 
     @DeleteMapping({"/delete/{id}"})
     @PreAuthorize("hasRole('HeadSupervisor') ")
-    public ResponseEntity<?> updateUser(@PathVariable("id") String id)
+    public ResponseEntity<?> deleteUser(@PathVariable("id") String id)
     {
         return userService.deleteUser(id);
+    }
+    @PutMapping({"/allow/{id}"})
+    public ResponseEntity<?> updateUser(@PathVariable("id") String id)
+    {
+        return userService.allowUser(id);
     }
 
 }

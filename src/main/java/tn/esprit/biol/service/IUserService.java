@@ -17,4 +17,6 @@ public interface IUserService {
     public ResponseEntity<?> deleteUser(String id ) ;
 
     public String getEncodedPassword(String password);
+
+    public ResponseEntity<?> allowUser(String id);
 }
