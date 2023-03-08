@@ -92,13 +92,15 @@ public class UserController {
 
     }
 
-    @GetMapping({"/prediciton"})
-    public ResponseEntity<?> prediction()
+    @GetMapping({"/prediciton/{id}"})
+    public ResponseEntity<?> prediction(@PathVariable("id") int id)
     {
-
-        double tubes =  predictionService.predictForValue(50) +10 ;
+        double prediction =predictionService.predictForValue(id)+10;
+        double tubes =  prediction +10 ;
        return ResponseEntity.status(HttpStatus.OK).body("le nombre de prelevement estimé pour demain" +
-                predictionService.predictForValue(10));
+               prediction+"\n le nombre de tube est recommendé est "+tubes+"\n"
+       +"le nombre de biologist recommendé est nombre "+Math.round(prediction/7));
+
 
 
     }
