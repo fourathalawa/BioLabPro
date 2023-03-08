@@ -12,4 +12,6 @@ public interface EmailIService {
 
     public void sendSimpleMessage(
             String to, String subject, String text);
-}
+    public void sendLeaveRequestEmail(String toAddress, String subject, String body);
+
+    }

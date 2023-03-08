@@ -53,6 +53,13 @@ public class EmailService implements EmailIService{
         emailSender.send(message);
         // ...
     }
+    public void sendLeaveRequestEmail(String toAddress, String subject, String body) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(toAddress);
+        message.setSubject(subject);
+        message.setText(body);
+        emailSender.send(message);
+    }
 
 }
 
