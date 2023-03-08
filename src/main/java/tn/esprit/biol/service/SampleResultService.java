@@ -3,6 +3,10 @@ package tn.esprit.biol.service;
 
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+<<<<<<< Updated upstream
+=======
+import org.springframework.data.repository.query.Param;
+>>>>>>> Stashed changes
 import org.springframework.stereotype.Service;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -34,6 +38,10 @@ import lombok.extern.slf4j.Slf4j;
 import tn.esprit.biol.entity.SampleResult;
 
 import javax.management.Query;
+<<<<<<< Updated upstream
+=======
+import javax.persistence.TypedQuery;
+>>>>>>> Stashed changes
 
 @Slf4j
 
@@ -87,4 +95,12 @@ public class SampleResultService implements ISampleResultService{
         ImageIO.write(bufferedImage, "png", path.toFile());
             }
 
+<<<<<<< Updated upstream
 }
+=======
+
+
+
+}
+
+>>>>>>> Stashed changes
