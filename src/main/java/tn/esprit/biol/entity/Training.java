@@ -1,6 +1,8 @@
 package tn.esprit.biol.entity;
 
 
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -28,7 +30,15 @@ public class Training {
     @Temporal(TemporalType.DATE)
     Date Training_enddate;
     @OneToOne(mappedBy="training")
+
     private Certifcate certifcate;
-    @ManyToMany(cascade = CascadeType.ALL)
+
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "trainings")
+    @JsonIgnoreProperties("Training")
     private Set<User> trainees;
+    @OneToOne(mappedBy = "training")
+    User trainer;
+
+
 }
