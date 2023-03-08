@@ -2,6 +2,7 @@ package tn.esprit.biol.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,6 +14,7 @@ import tn.esprit.biol.entity.User;
 
 import tn.esprit.biol.service.IUserService;
 import tn.esprit.biol.service.JwtService;
+import tn.esprit.biol.service.PredictionService;
 import tn.esprit.biol.service.UserService;
 
 
@@ -24,6 +26,9 @@ public class UserController {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private PredictionService predictionService;
 
 
     @PostMapping({"/authenticate"})
@@ -84,6 +89,17 @@ public class UserController {
     {
 
         return userService.allowUser(id);
+
+    }
+
+    @GetMapping({"/prediciton"})
+    public ResponseEntity<?> prediction()
+    {
+
+        double tubes =  predictionService.predictForValue(50) +10 ;
+       return ResponseEntity.status(HttpStatus.OK).body("le nombre de prelevement estimé pour demain" +
+                predictionService.predictForValue(10));
+
 
     }
 
