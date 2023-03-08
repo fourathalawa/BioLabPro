@@ -23,11 +23,7 @@ public interface ISampleResultService {
      SampleResult getById(int ResultID);
      SampleResult assign (Integer resultid, Integer sampleid);
 
-      void generateQRCodeImage(String text, int width, int height, String filePath) throws WriterException, IOException;
-<<<<<<< Updated upstream
+     void generateQRCodeImage(String text, int width, int height, String filePath) throws WriterException, IOException;
+
+
 }
-=======
-
-
- }
->>>>>>> Stashed changes

@@ -45,7 +45,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/authenticate"
                 ,"/user/**",
                 "/Appointement/**",
-                "/Invoice/**",
+                "/Invoice/**","/sampleResult/**","/sample/**",
                 "/chat/**")
                 .permitAll()
                 .antMatchers(HttpHeaders.ALLOW).permitAll()

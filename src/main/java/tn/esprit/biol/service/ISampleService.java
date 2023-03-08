@@ -14,8 +14,4 @@ public interface ISampleService {
     List<Sample> getSamplesInDateRange(Date startDate, Date endDate);
     List<Sample> getSamplesWithResult();
     List<Sample> getSamplesWithoutResult();
-<<<<<<< Updated upstream
- }
-=======
-     }
->>>>>>> Stashed changes
+}

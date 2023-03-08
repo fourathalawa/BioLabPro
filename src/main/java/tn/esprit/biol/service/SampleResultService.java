@@ -3,10 +3,7 @@ package tn.esprit.biol.service;
 
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
-<<<<<<< Updated upstream
-=======
 import org.springframework.data.repository.query.Param;
->>>>>>> Stashed changes
 import org.springframework.stereotype.Service;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -26,7 +23,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import org.springframework.stereotype.Service;
- import tn.esprit.biol.dao.SampleRepository;
+import tn.esprit.biol.dao.SampleRepository;
 import tn.esprit.biol.dao.SampleResultRepository;
 import tn.esprit.biol.entity.Sample;
 
@@ -38,10 +35,7 @@ import lombok.extern.slf4j.Slf4j;
 import tn.esprit.biol.entity.SampleResult;
 
 import javax.management.Query;
-<<<<<<< Updated upstream
-=======
 import javax.persistence.TypedQuery;
->>>>>>> Stashed changes
 
 @Slf4j
 
@@ -82,7 +76,7 @@ public class SampleResultService implements ISampleResultService{
         return  SampleResultDao.save(sampleResult);
 
     }
-     public void generateQRCodeImage(String text, int width, int height, String filePath)
+    public void generateQRCodeImage(String text, int width, int height, String filePath)
 
             throws WriterException, IOException {
 //        filePath="C:\\pitest";
@@ -93,14 +87,10 @@ public class SampleResultService implements ISampleResultService{
         Path path = FileSystems.getDefault().getPath(filePath);
         BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix);
         ImageIO.write(bufferedImage, "png", path.toFile());
-            }
+    }
 
-<<<<<<< Updated upstream
-}
-=======
 
 
 
 }
 
->>>>>>> Stashed changes
