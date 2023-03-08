@@ -23,8 +23,8 @@ public class Sample implements Serializable {
     private Date Dateofwithdrawl;
     private boolean Urgency;
 
-    @ManyToOne
-    private User user;
+    @OneToOne
+     private User userID;
 
 
 
