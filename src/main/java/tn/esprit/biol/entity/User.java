@@ -38,13 +38,6 @@ public class User implements Serializable {
     )
     private Set<Role> role;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Sample> samples;
-    /**
-     *  Chiheb
-     * */
-    @OneToMany(mappedBy = "user")
-    private Set<SampleResult> samplesResults;
 
     /**
      *  Fourat
