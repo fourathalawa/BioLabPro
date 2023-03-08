@@ -27,7 +27,7 @@ public class UserController {
 
 
     @PostMapping({"/authenticate"})
-    public JwtResponse createJwtToken(@RequestBody JwtRequest jwtRequest) throws Exception {
+    public ResponseEntity<?> createJwtToken(@RequestBody JwtRequest jwtRequest) throws Exception {
         return jwtService.createJwtToken(jwtRequest);
 
 
@@ -76,9 +76,13 @@ public class UserController {
     {
         return userService.deleteUser(id);
     }
+
+
+
     @PutMapping({"/allow/{id}"})
     public ResponseEntity<?> updateUser(@PathVariable("id") String id)
     {
+
         return userService.allowUser(id);
 
     }

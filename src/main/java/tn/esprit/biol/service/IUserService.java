@@ -19,6 +19,7 @@ public interface IUserService {
     public String getEncodedPassword(String password);
 
     public ResponseEntity<?> allowUser(String id);
-
     public User getUserById(String id);
+
+
 }
