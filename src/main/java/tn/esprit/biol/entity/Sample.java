@@ -7,6 +7,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -22,8 +23,8 @@ public class Sample implements Serializable {
     private Date Dateofwithdrawl;
     private boolean Urgency;
 
-    @ManyToOne
-    private User user;
+    @OneToOne
+     private User userID;
 
 
 

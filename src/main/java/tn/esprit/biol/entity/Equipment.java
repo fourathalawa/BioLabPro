@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.sql.Blob;
 import java.util.Date;
 
 @Entity
@@ -23,7 +22,6 @@ public class Equipment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     String Id_eq;
     String Type;
-
     Date Sterilization_Date;
     Date Expiration_Date;
     Integer Quantity;
