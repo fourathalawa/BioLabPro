@@ -1,14 +1,7 @@
 package tn.esprit.biol.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 
 import javax.persistence.*;
@@ -48,10 +41,19 @@ public class DaysOff  implements Serializable {
 
 
 
-    public DaysOff( String justification,LocalDate startDate, LocalDate endDate, byte[] imageData) {
+    public DaysOff( String justification,LocalDate startDate, LocalDate endDate, byte[] imageBytes) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.justification = justification;
-        this.imageData = imageData;
+        this.imageData = imageBytes;
+    }
+
+
+    public DaysOff(LocalDate startDate, LocalDate endDate, byte[] imageBytes, String justification, Etat etat) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.justification = justification;
+        this.imageData = imageBytes;
+        this.etat=etat;
     }
 }

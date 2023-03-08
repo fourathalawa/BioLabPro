@@ -14,5 +14,6 @@ import java.util.List;
 public interface DaysOffDao extends JpaRepository<DaysOff,Integer> {
     @Query("SELECT COUNT(c) FROM DaysOff c WHERE c.etat= 'EnCour' AND c.startDate >= :startDate AND c.endDate <= :endDate")
     int countPersonnesEnCongeEntreDates(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+    List<DaysOff> findByEndDate(LocalDate endDate);
 
 }

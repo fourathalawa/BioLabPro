@@ -1,23 +1,15 @@
 package tn.esprit.biol.service;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.itextpdf.text.*;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.servlet.MultipartProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.support.StandardServletMultipartResolver;
-import org.springframework.web.servlet.DispatcherServlet;
 import tn.esprit.biol.dao.DaysOffDao;
-import tn.esprit.biol.dao.StaffRepository;
 import tn.esprit.biol.dao.UserDao;
 import tn.esprit.biol.entity.DaysOff;
 import tn.esprit.biol.entity.Etat;
@@ -29,13 +21,6 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
-import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfGState;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class DaysOffService implements IDaysOffService {
@@ -46,25 +31,7 @@ public class DaysOffService implements IDaysOffService {
     UserDao userDao;
     @Autowired
     DaysOffDao daysOffDao;
-    public String uploadImage(MultipartFile file, String text, LocalDate date) throws IOException {
 
-        byte[] compressedImageData = ImageUtils.compressImage(file.getBytes());
-        DaysOff imageData = DaysOff.builder()
-                .imageData(compressedImageData)
-                .justification(text)
-                .startDate(date)
-                .build();
-
-        DaysOff savedImageData = daysOffDao.save(imageData);
-
-        if (savedImageData != null) {
-            return "file uploaded successfully: " + file.getOriginalFilename();
-        }
-
-        return null;
-    }
-
-/*
     public Boolean sendLeaveRequest(String to, String id,LocalDate startDate, LocalDate endDate, String justification, MultipartFile file) throws IOException {
 
 
@@ -79,16 +46,7 @@ public class DaysOffService implements IDaysOffService {
             daysOff.setStartDate(startDate);
             daysOff.setEndDate(endDate);
             daysOff.setJustification(justification);
-            System.out.println(file);
-            //daysOff.setImageData(imaImageUtils.compressImage(file.getBytes()));
-/*
-            DaysOff imageData = daysOffDao.save(DaysOff.builder()
-                    .imageData(ImageUtils.compressImage(file.getBytes())).build());
-            if (imageData != null) {
-                System.out.println( "file uploaded successfully : " + file.getOriginalFilename());
-            }
-
-
+            daysOff.setImageData(ImageUtils.compressImage(file.getBytes()));
             daysOff.setUser(user);
             daysOffDao.save(daysOff);
 
@@ -97,7 +55,7 @@ public class DaysOffService implements IDaysOffService {
             return false;
         }
     }
- */
+
     public boolean validateLeaveRequest(LocalDate startDate, LocalDate endDate) {
         LocalDate currentDate = LocalDate.now();
         long daysNotice = ChronoUnit.DAYS.between(currentDate,startDate);

@@ -25,9 +25,10 @@ public class StorageService {
         return null;
     }
 
-    public byte[] downloadImage(byte[] imageData ){
+    public byte[] downloadImage( Integer id){
 
-        byte[] images=ImageUtils.decompressImage(imageData);
+        Optional<DaysOff> dbImageData = repository.findById(id);
+        byte[] images=ImageUtils.decompressImage(dbImageData.get().getImageData());
         return images;
     }
 }
