@@ -1,16 +1,16 @@
 package tn.esprit.biol.entity;
 
+<<<<<<< Updated upstream
 import lombok.*;
+=======
+import lombok.ToString;
+>>>>>>> Stashed changes
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
 public class User implements Serializable {
 
@@ -36,6 +36,7 @@ public class User implements Serializable {
     )
     private Set<Role> role;
 
+<<<<<<< Updated upstream
     @OneToMany(mappedBy = "user")
     private Set<Sample> samples;
     /**
@@ -67,4 +68,7 @@ public class User implements Serializable {
      * */
     @ManyToMany
     Set<NightShift> nightsShift;
+=======
+
+>>>>>>> Stashed changes
 }
