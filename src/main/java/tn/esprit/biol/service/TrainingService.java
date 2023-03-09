@@ -2,6 +2,7 @@ package tn.esprit.biol.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import tn.esprit.biol.dao.RatingDao;
@@ -10,6 +11,7 @@ import tn.esprit.biol.dao.TrainingDao;
 import tn.esprit.biol.dao.UserDao;
 import tn.esprit.biol.entity.*;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -21,6 +23,8 @@ public class TrainingService  implements  ITrainingService{
     UserDao userDao;
     @Autowired
     SearchDao searchDao;
+    @Autowired
+    EmailService emailService;
     @Autowired
     RatingDao ratingDao;
 //EmailService emailService;
@@ -100,7 +104,7 @@ public List<Training> RecommandedTraining(String iduser)
 
         for(Rating rs:ratingList)
         {
-            if(training.getTrainigId()==rs.getTraining().getTrainigId())
+            if(training.getTrainingId()==rs.getTraining().getTrainingId())
             {
                 score+=3.5*rs.getRating();
                 //  recommanded.put(training.getTrainingSubject(),score);
@@ -146,4 +150,23 @@ return trainingList1;
         userDao.save(trainer);
         trainingDao.save(training);
     }
-}
+
+
+    @Override
+    @Scheduled(fixedDelay = 40000) //chaque 40 sec
+    public void SendMailReminder() {
+        List<Training> liste = trainingDao.findAll();
+        for (Training a : liste) {
+
+            if (a.getTraining_startdate().minusHours(1).withSecond(0).withNano(0).compareTo(LocalDateTime.now().withSecond(0).withNano(0).plusMinutes(30)) == 0) {
+                //intgeration phone number a.getPatientId | getPhoneNumberById(a.getPatientId)
+
+                Set<User> user = a.getTrainees();
+                for (User b : user) {
+                    emailService.sendSimpleMessage(b.getEmail(), "Training Reminder", "Hello ,\n This is a reminder for your training. \n Thank you for being present on time.");
+                }
+            }
+        }
+    }
+    }
+

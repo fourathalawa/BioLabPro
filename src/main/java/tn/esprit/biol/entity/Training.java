@@ -7,6 +7,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -20,15 +21,13 @@ import java.util.Set;
 public class Training {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int TrainigId;
+    int TrainingId;
     String TrainingName;
     String TrainingSubject;
     @Enumerated(EnumType.STRING)
     TrainingMethod trainingMethod;
-    @Temporal(TemporalType.DATE)
-    Date Training_startdate;
-    @Temporal(TemporalType.DATE)
-    Date Training_enddate;
+    LocalDateTime Training_startdate;
+    LocalDateTime Training_enddate;
     @OneToOne(mappedBy="training")
 
     private Certifcate certifcate;

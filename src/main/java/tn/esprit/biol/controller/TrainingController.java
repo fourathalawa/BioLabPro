@@ -2,6 +2,7 @@ package tn.esprit.biol.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.biol.dao.TrainingDao;
 import tn.esprit.biol.dao.UserDao;
@@ -19,9 +20,9 @@ import java.util.List;
 public class TrainingController {
     @Autowired
     TrainingService trainingService;
-
     @Autowired
     EmailService emailService;
+
     @Autowired
     RatingService ratingService;
     @Autowired
@@ -41,7 +42,6 @@ public class TrainingController {
     {
          trainingService.deleteTraining(id);
     }
-
 
     @GetMapping("/getAllTraining")
     public List<Training> getAllTraining()
@@ -71,10 +71,10 @@ public class TrainingController {
         trainingService.affectTraineeToTraining(iduser,idtraining);
         Training training = trainingDao.findById(idtraining).get();
         User user = userDao.findById(iduser).get();
-        String message="Hello Mr/Ms"+user.getUserFirstName()+",\n"+
-                "your registration for the training  "+training.getTrainingSubject()+" is well registered.";
-
-        //emailService.sendLeaveRequestEmail(training.getTrainingSubject(),user.getEmail(),message);
+        String subjet= "New training";
+        String message="Hello Mr/Ms "+user.getUserFirstName()+",\n"+
+                "your registration for the training  "+training.getTrainingName()+" is well registered.";
+           emailService.sendSimpleMessage(user.getEmail(),subjet,message);
     }
     @GetMapping("/getTraining/suggestion")
     public List<Training> SuggestionTraining()

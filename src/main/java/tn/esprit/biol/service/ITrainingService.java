@@ -14,5 +14,6 @@ public interface ITrainingService {
     void affectTraineeToTraining(String iduser, int idtraining);
     void affectTrainerToTraining(String iduser, int idtraining);
      List<Training> RecommandedTraining(String iduser);
+    void SendMailReminder();
 
 }
