@@ -5,9 +5,9 @@ import tn.esprit.biol.entity.Certificate;
 import java.util.List;
 
 public interface ICertificateService {
-    Certificate addCertification(Certificate certificate, String iduser);
+    Certificate addCertification(int id_training,Certificate certificate)    ;
     Certificate getCertificate(int id);
     List<Certificate> getAllCertificate();
     void deleteCertificate( int id);
-    Certificate updateCertificate(Certificate certificate);
+    Certificate updateCertificate(Certificate certificate,int idcertificate);
 }

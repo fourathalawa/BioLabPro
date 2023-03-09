@@ -46,7 +46,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 ,"/user/**",
                 "/Appointement/**",
                 "/Invoice/**",
-                "/chat/**","/Training/**","/Certification/**","/rating/**","/search/**")
+                "/chat/**","/Training/**","/Certificate/**","/rating/**","/search/**")
                 .permitAll()
                 .antMatchers(HttpHeaders.ALLOW).permitAll()
                 .anyRequest().authenticated()
