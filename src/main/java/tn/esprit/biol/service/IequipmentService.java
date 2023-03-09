@@ -12,7 +12,7 @@ public interface IequipmentService {
 
    // Equipment AddEquipment(Equipment e);
 
-    Equipment retrieveEquipment(Integer Id_eq);
+  //  Equipment retrieveEquipment(Integer Id_eq);
 
    // ResponseEntity<?> deleteEquipment(Integer Id_eq);
 
@@ -30,5 +30,9 @@ public interface IequipmentService {
 
     ResponseEntity<?> deleteEq(Integer Id_eq);
     ResponseEntity<?> AddEq(Equipment equipment);
-     Equipment getEquipment(Integer id);
+     Equipment getEquipment(Integer Id_eq);
+
+    void Deletep(Integer id_eq);
+     int ExpirationThisMonth();
+     int totalQuantexpThisMonth();
 }
