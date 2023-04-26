@@ -133,7 +133,7 @@ public class EquipmentController {
 
 
     @GetMapping("/export/pdf/{Id_eq}")
-    public void exportToPDF(HttpServletResponse response, @PathVariable int Id_eq) throws DocumentException, IOException,MessagingException {
+    public void exportToPDF(HttpServletResponse response, @PathVariable int Id_eq) throws DocumentException, IOException, MessagingException, com.lowagie.text.DocumentException {
 
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
