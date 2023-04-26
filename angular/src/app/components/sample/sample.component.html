@@ -1,0 +1,27 @@
+<table>
+  <thead>
+    <tr>
+      <th>Sample ID</th>
+      <th>Date of Withdrawal</th>
+      <th>Urgency</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sample of Samples">
+      <td>{{ sample.sampleID }}</td>
+      <td>{{ sample.dateofwithdrawl }}</td>
+      <td>{{ sample.urgency }}</td>
+      <td>
+        <button (click)="showSampleDetails(sample.sampleID)">Show Details</button>
+        <button (click)="deleteSample(sample.sampleID)">Delete</button>
+        <button (click)="editSample(sample.sampleID)">update</button>
+       </td>
+    </tr>
+  </tbody>
+  <button (click)="createsample(id)">create a new sample</button>
+
+</table>
+ 
+
+ 

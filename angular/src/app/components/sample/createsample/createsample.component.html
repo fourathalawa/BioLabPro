@@ -1,0 +1,12 @@
+<h1>Add Sample</h1>
+<form>
+  <div>
+    <label for="withdrawal-date">Date of Withdrawal:</label>
+    <input type="date" id="DateOfWithdrawal" name="DateOfWithdrawal" [(ngModel)]="sample.Dateofwithdrawl">
+  </div>
+  <div>
+    <label for="urgency">Urgency:</label>
+    <input type="checkbox" id="urgency" name="urgency" [(ngModel)]="sample.Urgency">
+  </div>
+  <button type="button" (click)="addSample(sample)">Add Sample</button>
+</form>

@@ -1,0 +1,22 @@
+ 
+<html>
+<head>
+	<title>Edit Sample</title>
+</head>
+<body>
+	<h1>Edit Sample</h1>
+	<form>
+		 
+		<label for="withdrawl-date">Date of Withdrawal:</label>
+		<input type="date" id="withdrawl-date" name="withdrawl-date" [ngModel]="sample.dateofwithdrawl | date:'yyyy-MM-dd'" (ngModelChange)="sample.dateofwithdrawl=$event"><br><br>
+		<label for="urgency">Urgency:</label>
+<input type="checkbox" id="urgency" name="urgency" [ngModel]="sample.urgency" (ngModelChange)="sample.urgency=$event">
+
+<!-- 
+		<label for="urgency">userid:</label>
+		<input type="text" id="userid" name="userid" value="{{sample.userid}}"><br><br>
+ -->
+        <button (click)="editSample(sample,sampleID)">Submit</button>
+	</form>
+</body>
+</html>
