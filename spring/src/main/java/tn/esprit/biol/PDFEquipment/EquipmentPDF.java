@@ -46,7 +46,7 @@ public class EquipmentPDF {
         table.addCell(equipment.getQuantity().toString());
 
     }
-    public void export(HttpServletResponse response) throws DocumentException, IOException {
+    public void export(HttpServletResponse response) throws DocumentException, IOException, com.lowagie.text.DocumentException {
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, response.getOutputStream());
 
