@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .app-headerback {
+    flex-basis: 100%;
+  }
+  
+  .app-sidebar {
+    flex-basis: 300px; /* ajustez la largeur de la barre latérale selon vos besoins */
+  }
+  
+  .card {
+    flex-basis: calc(100% - 300px); /* ajustez la largeur de la carte en fonction de la largeur de la barre latérale */
+    margin-left: 15px; /* ajustez la marge gauche en fonction de vos préférences */
+    margin-top: 30px;
+    margin-right: 15px;
+
+  }
+  
+  
