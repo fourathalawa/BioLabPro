@@ -1,6 +1,9 @@
 package tn.esprit.biol.service;
 
 import com.itextpdf.text.*;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Rectangle;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
@@ -11,28 +14,29 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import tn.esprit.biol.dao.DaysOffDao;
 import tn.esprit.biol.dao.UserDao;
-import tn.esprit.biol.entity.DaysOff;
-import tn.esprit.biol.entity.Etat;
-import tn.esprit.biol.entity.User;
+import tn.esprit.biol.entity.*;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 
 import com.itextpdf.text.pdf.PdfWriter;
+
 @Service
 public class DaysOffService implements IDaysOffService {
     @Autowired
     EmailService emailService;
-
+    @Autowired
+    SmsService smsService;
     @Autowired
     UserDao userDao;
     @Autowired
     DaysOffDao daysOffDao;
 
-    public Boolean sendLeaveRequest(String to, String id,LocalDate startDate, LocalDate endDate, String justification, MultipartFile file) throws IOException {
+    public Boolean sendLeaveRequest(String to, String id, LocalDate startDate, LocalDate endDate, String justification) throws IOException {
 
 
         // Envoi de l'email de demande de congé
@@ -46,7 +50,6 @@ public class DaysOffService implements IDaysOffService {
             daysOff.setStartDate(startDate);
             daysOff.setEndDate(endDate);
             daysOff.setJustification(justification);
-            daysOff.setImageData(ImageUtils.compressImage(file.getBytes()));
             daysOff.setUser(user);
             daysOffDao.save(daysOff);
 
@@ -58,7 +61,7 @@ public class DaysOffService implements IDaysOffService {
 
     public boolean validateLeaveRequest(LocalDate startDate, LocalDate endDate) {
         LocalDate currentDate = LocalDate.now();
-        long daysNotice = ChronoUnit.DAYS.between(currentDate,startDate);
+        long daysNotice = ChronoUnit.DAYS.between(currentDate, startDate);
         if (startDate.isAfter(endDate)) {
             return false;
         } else if (daysNotice <= 5) //si demande de congé n'est pas envoyé avant 5 jrs de date debut de demande
@@ -68,57 +71,58 @@ public class DaysOffService implements IDaysOffService {
             return true;
         }
     }
+/*
+
 
     @Override
     public List<DaysOff> getAllDaysOff() {
-        return   daysOffDao.findAll();
+        return daysOffDao.findAll();
 
     }
-
+*/
     public String traiterDemandeConge(Integer idConge) throws Exception {
 
         DaysOff daysOff = daysOffDao.findById(idConge).get();
         Integer NB_MAX_DEMANDES_PAR_PERIODE = 3;
         daysOff.setRequest(true);
-        int demandesEnCours = daysOffDao.countPersonnesEnCongeEntreDates( daysOff.getStartDate(), daysOff.getStartDate());
-if(daysOff.getImageData()==null) {
-    // Vérifier si l'utilisateur a dépassé le nombre maximum de jours de congé par année
+        int demandesEnCours = daysOffDao.countPersonnesEnCongeEntreDates(daysOff.getStartDate(), daysOff.getStartDate());
+        if (daysOff.getImageData() == null) {
+            // Vérifier si l'utilisateur a dépassé le nombre maximum de jours de congé par année
 
-    long nbJoursCongeDemande = daysOff.getStartDate().until(daysOff.getEndDate(), ChronoUnit.DAYS) + 1;
-    int nbJoursCongeUtilisateur = daysOff.getUser().getStaff_details().getSommeDaysOff();
+            long nbJoursCongeDemande = daysOff.getStartDate().until(daysOff.getEndDate(), ChronoUnit.DAYS) + 1;
+            int nbJoursCongeUtilisateur = 0;
 
-    if ((nbJoursCongeUtilisateur + nbJoursCongeDemande) > daysOff.getUser().getStaff_details().getNbrDaysOffPerYears()) {
-        daysOff.setEtat(Etat.Refuse);
-        return "Demande de congé refusée : l'utilisateur a dépassé le nombre maximum de jours de congé par année.";
-    }
+            if ((nbJoursCongeUtilisateur + nbJoursCongeDemande) > daysOff.getUser().getStaff_details().getNbrDaysOffPerYears()) {
+                daysOff.setEtat(Etat.Refuse);
+                return "Demande de congé refusée : l'utilisateur a dépassé le nombre maximum de jours de congé par année.";
+            }
 
-    // Vérifier si d'autres utilisateurs ont déjà demandé des congés pendant la même période
+            // Vérifier si d'autres utilisateurs ont déjà demandé des congés pendant la même période
 
-    if (demandesEnCours > NB_MAX_DEMANDES_PAR_PERIODE) {
+            if (demandesEnCours > NB_MAX_DEMANDES_PAR_PERIODE) {
 
-        daysOff.setEtat(Etat.EnCour);
-        return "Demande de congé refusée : le nombre maximal de demandes de congé pour cette période a été atteint.";
-    }
+                daysOff.setEtat(Etat.EnCour);
+                return "Demande de congé refusée : le nombre maximal de demandes de congé pour cette période a été atteint.";
+            }
 
-}
+        }
         // Enregistrer la demande de congé dans la base de données
         daysOff.setEtat(Etat.EnCour);
         daysOffDao.save(daysOff);
-        //sendSMS();
+        sendSMS();
         genererPdf(daysOff);
         return "Demande de congé acceptée.";
     }
 
     public ResponseEntity<String> sendSMS() {
 
-        String accountSid = "ACc7590419e3a8dc6a9773214b2835a2cf";
-        String authToken = "679c05522fa99ede0a8b682c58a4df6a";
-        Twilio.init(accountSid, authToken);
-        Message.creator(new PhoneNumber("+21694533488"),
-                new PhoneNumber("+15746266388" ), "Hello votre demande de congé a ete accepté   📞").create();
+        smsService.sendSms("+21694533488", "Hello votre demande de congé a ete accepté ");
+        System.out.println("sms");
+
 
         return new ResponseEntity<String>("Message sent successfully", HttpStatus.OK);
     }
+
     public void genererPdf(DaysOff daysOff) throws Exception {
 
         // Chargement du logo du laboratoire
@@ -139,7 +143,7 @@ if(daysOff.getImageData()==null) {
         document.addKeywords("congé, demande");
 
         // Ouverture du document
-        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("C:/Users/asus/Desktop/PdfConge/"+daysOff.getUser().getId()+".pdf"));
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("C:/Users/asus/Desktop/PdfConge/" + daysOff.getUser().getId() + ".pdf"));
         document.open();
 
         // Ajout du logo en haut de la page
@@ -172,6 +176,38 @@ if(daysOff.getImageData()==null) {
         document.close();
     }
 
+    public double getPercentageOfStateAtDate(Etat etat, Date date) {
+        Integer total = daysOffDao.getTotalDaysOff();
+        long count = daysOffDao.countByEtatAndDateBetween(etat, date);
+        return (double) count / total * 100;
+    }
+/*
+
+
+    @Override
+    public void deleteDaysOff(Integer Id) {
+        daysOffDao.deleteById(Id);
+
+    }
+    @Override
+    public DaysOff retrieveDaysOff(String Id_eq) {
+        return daysOffDao.findById(Integer.valueOf(Id_eq)).get();
+    }
+    */
+public ResponseEntity<Object> updateDaysOff(String id, DaysOff s) {
+    DaysOff days =daysOffDao.findById(Integer.valueOf(id)).get();
+    if (days != null ) {
+        daysOffDao.save(s);
+        return ResponseEntity.ok(s);
+    }
+    return ResponseEntity.notFound().build();
 }
+}
+
+
+
+
+
+
 
 
