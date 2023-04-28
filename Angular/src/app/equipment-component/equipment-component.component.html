@@ -1,0 +1,45 @@
+<app-header></app-header>
+
+<br><br><br><br>
+<br>
+
+
+<h3 style="margin-top: 50px;"> Liste des equipements </h3>
+<div class="body table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+          <!--      <th>Id</th>-->
+                <th>Type</th>
+                <th>Quantité</th>
+                <th>Date de stérilisation</th>
+                <th>Date d'expiration</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+     
+    <tr *ngFor="let equipment of listEquipment">
+        <!--  <th scope="row">{{equipment.id_eq}}</th>-->
+        <td>{{equipment.type}}</td>
+        <td>{{equipment.quantity}}</td>
+        <td>{{equipment.sterilization_Date}}</td>
+        <td>{{equipment.expiration_Date}}</td>
+        <td><button (click)="deleteEquipment(equipment.id_eq)" type="button" class="btn btn-primary">DELETE</button></td>
+        <td><button (click)="updateEquipment(equipment.id_eq)" type="button" class = "btn btn-info"> Update</button></td>
+        <td><button (click)="EquipmentDetails(equipment.id_eq)" type="button" class = "btn btn-info"> View</button></td>
+        <li class="active">
+            <a [routerLink]="['/addeq']">
+               <!-- <i class="material-icons">add</i> -->
+                <span>Add equipements</span>
+            </a>
+        </li>
+
+
+
+</tr>
+</tbody>
+</table>
+</div>
+
+<app-footer></app-footer>

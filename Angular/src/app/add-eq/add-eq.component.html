@@ -1,0 +1,69 @@
+<app-header> </app-header>
+<div class="body">
+    <form class="form-horizontal">
+        <div class="row clearfix">
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                <label for="type">Type</label>
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                <div class="form-group">
+                    <div class="form-line">
+                        <input name="type" [(ngModel)]="eq.type" type="text" id="type" class="form-control" placeholder="Enter equipment type">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                <label for="Sterilization_Date">Sterilization_Date</label>
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                <div class="form-group">
+                    <div class="form-line">
+                        <input type="datetime-local" id="Sterilization_Date" name="Sterilization_Date"[(ngModel)]="eq.sterilization_Date"> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                <label for="Expiration_Date">Expiration_Date</label>
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                <div class="form-group">
+                    <div class="form-line">
+                        <input type="datetime-local" id="Expiration_Date" name="Expiration_Date"[(ngModel)]="eq.expiration_Date"> 
+                                       </div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                <label for="quantity">quantity</label>
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                <div class="form-group">
+                    <div class="form-line">
+                        <input name="quantity" [(ngModel)]="eq.quantity" type="text" id="quantity" class="form-control" placeholder="Enter quantity">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row clearfix">
+            <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
+                <button (click)="addeq()" type="button" class="btn btn-primary m-t-15 waves-effect">Add</button>
+            </div>
+        </div>
+</form>
+            </div>
+        
+
+
+
+
+
+
+
+
+<app-footer>   </app-footer>

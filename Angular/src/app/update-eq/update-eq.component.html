@@ -1,0 +1,41 @@
+<app-header> </app-header>
+<br><br><br><br>
+<br><br><br><br>
+<div class="col-md-6 offset-md-3">
+    <h3> Update equipment </h3>
+    <form (ngSubmit) = "onSubmit()">
+    
+        <div class="form-group">
+            <label> Type</label>
+            <input type="text" class ="form-control" id = "Type"
+                [(ngModel)] = "equipment.type" name = "Type">
+        </div>
+    
+        <div class="form-group">
+            <label> Sterilization_Date</label>
+            <input type="datetime" class ="form-control" id = "Sterilization_Date"
+                [(ngModel)] = "equipment.sterilization_Date" name = "Sterilization_Date">
+        </div>
+    
+        <div class="form-group">
+            <label> Expiration_Date</label>
+            <input type="datetime" class ="form-control" id = "Expiration_Date"
+                [(ngModel)] = "equipment.expiration_Date" name = "Expiration_Date">
+        </div>
+
+        <div class="form-group">
+            <label> quantity</label>
+            <input type="text" class ="form-control" id = "quantity"
+                [(ngModel)] = "equipment.quantity" name = "quantity">
+        </div>
+    
+        <button class = "btn btn-success" type ="submit">Submit</button>
+        <input type="button" value="Go back!" onclick="history.back()">
+    
+    </form>
+    </div> 
+
+
+
+
+<app-footer>   </app-footer>
