@@ -1,0 +1,130 @@
+
+
+<body>
+<!-- Content -->
+
+<div class="container-xxl" style="width: 500px">
+  <div class="authentication-wrapper authentication-basic container-p-y">
+    <div class="authentication-inner">
+      <!-- Register Card -->
+      <div class="card">
+        <div class="card-body">
+          <!-- Logo -->
+          <div class="app-brand justify-content-center">
+            <a>
+              <img width="200px" height="200" style="margin-top: -50px;margin-bottom: -20px"
+                   src="assets/img/biolab.png"
+                   alt="Logo">
+            </a>
+          </div>
+          <!-- /Logo -->
+          <h4 class="mb-2" style="text-align: center">Commencez l'aventure 🚀</h4>
+          <p class="mb-4" style="text-align: center">Merci de remplir le formulaire correctement </p>
+
+          <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+            <div class="mb-3">
+              <label for="cin" class="form-label"> n° CIN </label>
+              <input [(ngModel)]="cin"
+                type="text"
+                class="form-control"
+                id="cin"
+                name="cin"
+                placeholder="Entrer votre numero CIN"
+                autofocus
+              />
+            </div>
+            <div class="mb-2" style="width: 200px;">
+              <label for="nom" class="form-label"> Nom </label>
+              <input [(ngModel)]="firstName"
+                type="text"
+                class="form-control"
+                id="nom"
+                name="nom"
+                placeholder="Entrer votre numero Nom"
+                autofocus
+              />
+              <label for="prenom" class="form-label"> Prenom </label>
+              <input  [(ngModel)]="lastName"
+                type="text"
+                class="form-control"
+                id="prenom"
+                name="prenom"
+                placeholder="Entrer votre numero Prenom"
+                autofocus
+              />
+            </div>
+            <div class="mb-2">
+
+            </div>
+            <div class="mb-3">
+              <label for="tel" class="form-label"> N° Tel </label>
+              <input [(ngModel)]="tel"
+                type="text"
+                class="form-control"
+                id="tel"
+                name="tel"
+                placeholder="Entrer votre numero Tel"
+                autofocus
+              />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input [(ngModel)]="email"
+                type="text"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="Enter your email" />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Adresse</label>
+              <input [(ngModel)]="adress" type="text" class="form-control" id="adresse" name="adresse" placeholder="Entrer votre adresse" />
+            </div>
+            <div class="mb-3 form-password-toggle">
+              <label class="form-label" for="password">Password</label>
+              <div class="input-group input-group-merge">
+                <input [(ngModel)]="password"
+                  type="password"
+                  id="password"
+                  class="form-control"
+                  name="password"
+                  placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                  aria-describedby="password"
+                />
+                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <div class="form-check">
+                <input [(ngModel)]="checked" class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
+                <label class="form-check-label" for="terms-conditions">
+                  I agree to
+                  <a href="javascript:void(0);">privacy policy & terms</a>
+                </label>
+              </div>
+            </div>
+            <button (click)="signup()" class="btn btn-primary d-grid w-100">Sign up</button>
+          </form>
+
+          <p class="text-center">
+            <span>Already have an account?</span>
+            <a href="auth-login-basic.html">
+              <span>Sign in instead</span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <!-- Register Card -->
+    </div>
+  </div>
+</div>
+
+<!-- / Content -->
+
+
+
+
+</body>
+
+

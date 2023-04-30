@@ -18,8 +18,11 @@ import tn.esprit.biol.service.PredictionService;
 import tn.esprit.biol.service.UserService;
 
 
+
 @RestController
+
 @RequestMapping("/user")
+
 public class UserController {
     @Autowired
     private JwtService jwtService;
@@ -54,7 +57,7 @@ public class UserController {
 
 
     @PostMapping({"/addNew"})
-    @PreAuthorize("hasRole('HeadSupervisor') ")
+    @PreAuthorize(value = "hasRole('HeadSupervisor') ")
     public ResponseEntity<?> addNewUser(@RequestBody User user)
     {
         return userService.signUp(user,true);
@@ -85,10 +88,18 @@ public class UserController {
 
 
     @PutMapping({"/allow/{id}"})
-    public ResponseEntity<?> updateUser(@PathVariable("id") String id)
+    public ResponseEntity<?> allowUser(@PathVariable("id") String id)
     {
 
         return userService.allowUser(id);
+
+    }
+
+    @PutMapping({"/ban/{id}"})
+    public ResponseEntity<?> banUser(@PathVariable("id") String id)
+    {
+
+        return userService.banUser(id);
 
     }
 

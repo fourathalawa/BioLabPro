@@ -206,13 +206,15 @@ public class UserService implements  IUserService {
 
     }
 
-    public void banUser(String id) throws Exception {
+    public ResponseEntity<?> banUser(String id)  {
         Optional<User> user = userDao.findById(id);
         if(user.isPresent() ){
             user.get().setIsBanned(Boolean.TRUE);
             userDao.save(user.get());
             log.debug("User banned", user);
-        } else throw new Exception(String.valueOf(HttpStatus.NOT_ACCEPTABLE));
+            return  ResponseEntity.status(HttpStatus.OK).body("");
+        }
+        else return  ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("");
     }
 
     public ResponseEntity<?> allowUser(String id) {
