@@ -20,5 +20,8 @@ public interface IUserService {
 
     public ResponseEntity<?> allowUser(String id);
 
+    public ResponseEntity<?> banUser(String id);
     public User getUserById(String id);
+
+
 }

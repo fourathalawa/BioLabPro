@@ -2,6 +2,7 @@ package tn.esprit.biol.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,11 +14,15 @@ import tn.esprit.biol.entity.User;
 
 import tn.esprit.biol.service.IUserService;
 import tn.esprit.biol.service.JwtService;
+import tn.esprit.biol.service.PredictionService;
 import tn.esprit.biol.service.UserService;
 
 
+
 @RestController
+
 @RequestMapping("/user")
+
 public class UserController {
     @Autowired
     private JwtService jwtService;
@@ -25,9 +30,12 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private PredictionService predictionService;
+
 
     @PostMapping({"/authenticate"})
-    public JwtResponse createJwtToken(@RequestBody JwtRequest jwtRequest) throws Exception {
+    public ResponseEntity<?> createJwtToken(@RequestBody JwtRequest jwtRequest) throws Exception {
         return jwtService.createJwtToken(jwtRequest);
 
 
@@ -49,7 +57,7 @@ public class UserController {
 
 
     @PostMapping({"/addNew"})
-    @PreAuthorize("hasRole('HeadSupervisor') ")
+    @PreAuthorize(value = "hasRole('HeadSupervisor') ")
     public ResponseEntity<?> addNewUser(@RequestBody User user)
     {
         return userService.signUp(user,true);
@@ -76,10 +84,35 @@ public class UserController {
     {
         return userService.deleteUser(id);
     }
+
+
+
     @PutMapping({"/allow/{id}"})
-    public ResponseEntity<?> updateUser(@PathVariable("id") String id)
+    public ResponseEntity<?> allowUser(@PathVariable("id") String id)
     {
+
         return userService.allowUser(id);
+
+    }
+
+    @PutMapping({"/ban/{id}"})
+    public ResponseEntity<?> banUser(@PathVariable("id") String id)
+    {
+
+        return userService.banUser(id);
+
+    }
+
+    @GetMapping({"/prediciton/{id}"})
+    public ResponseEntity<?> prediction(@PathVariable("id") int id)
+    {
+        double prediction =predictionService.predictForValue(id)+10;
+        double tubes =  prediction +10 ;
+       return ResponseEntity.status(HttpStatus.OK).body("le nombre de prelevement estimé pour demain" +
+               prediction+"\n le nombre de tube est recommendé est "+tubes+"\n"
+       +"le nombre de biologist recommendé est nombre "+Math.round(prediction/7));
+
+
 
     }
 

@@ -1,6 +1,7 @@
 package tn.esprit.biol.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -43,6 +44,7 @@ public class User implements Serializable {
      *  Fourat
      * */
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy="trainee")
     private Set<Certificate> certificates;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -63,11 +65,13 @@ public class User implements Serializable {
     /**
      *  Houde
      * */
+    @JsonIgnore
     @OneToMany
     Set<DaysOff> daysOff;
     /**
      *  Houde
      * */
+    @JsonIgnore
     @ManyToMany
     Set<NightShift> nightsShift;
 
