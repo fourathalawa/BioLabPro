@@ -82,13 +82,13 @@ public class EquipmentController {
         return equipment;
     }
 
-    @PostMapping({"/Sterilization"})
-    @Scheduled(cron ="* * * 30 * *")
-    public void SendRequest()
-    {
-        equipmentService.sendSterilizationRequest("hannachifedi12@gmail.com","ALERT STERILIZATION","STERILIZATION DATE IS HERE !!!!!!");
-
-    }
+//    @PostMapping({"/Sterilization"})
+//    @Scheduled(cron ="* * * 30 * *")
+//    public void SendRequest()
+//    {
+//        equipmentService.sendSterilizationRequest("hannachifedi12@gmail.com","ALERT STERILIZATION","STERILIZATION DATE IS HERE !!!!!!");
+//
+//    }
 
     @PostMapping({"/Storage"})
     @Scheduled(cron ="* * * * 12 *")
