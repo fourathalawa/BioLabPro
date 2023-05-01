@@ -2,25 +2,76 @@
 
 <br><br><br><br>
 <br>
+<!--<mat-table [dataSource]="listEquipment" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
+        <mat-cell *matCellDef="let equipment"> {{equipment.type}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="quantity">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </mat-header-cell>
+        <mat-cell *matCellDef="let equipment"> {{equipment.quantity}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="sterilization_Date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Sterilization_Date </mat-header-cell>
+        <mat-cell *matCellDef="let equipment"> {{equipment.sterilization_Date}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="expiration_Date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Expiration_Date </mat-header-cell>
+        <mat-cell *matCellDef="let equipment"> {{equipment.expiration_Date}} </mat-cell>
+    </ng-container>
+    </mat-table>-->
 
+
+  <!-- <mat-table [dataSource]="listEquipment" class="mat-elevation-z8">
+        <ng-container matColumnDef="type">
+          <mat-header-cell *matHeaderCellDef>type </mat-header-cell>
+          <mat-cell *matCellDef="let equipment"> {{equipment.type}} </mat-cell>
+        </ng-container>
+      
+        <ng-container matColumnDef="quantity">
+          <mat-header-cell *matHeaderCellDef> quantity</mat-header-cell>
+          <mat-cell *matCellDef="let equipment"> {{equipment.quantity}} </mat-cell>
+        </ng-container>
+      
+
+        <ng-container matColumnDef="sterilization_Date">
+          <mat-header-cell *matHeaderCellDef> sterilization_date </mat-header-cell>
+          <mat-cell *matCellDef="let equipment"> {{equipment.sterilization_date}} </mat-cell>
+        </ng-container>
+      
+        <ng-container matColumnDef="expiration">
+          <mat-header-cell *matHeaderCellDef> expiration_Date </mat-header-cell>
+          <mat-cell *matCellDef="let equipment"> {{equipment.expiration_date}} </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    -->
+      
+
+      
 
 <h3 style="margin-top: 50px;"> Liste des equipements </h3>
+<nav class="navbar">
+    <input class="form-control" type="text" name="type" [(ngModel)]="type" (ngModelChange)="Search()"
+     placeholder="Type">
+</nav>
 <div class="body table-responsive">
     <table class="table table-bordered">
         <thead>
             <tr>
-          <!--      <th>Id</th>-->
-                <th>Type</th>
-                <th>Quantité</th>
-                <th>Date de stérilisation</th>
-                <th>Date d'expiration</th>
+               <!--<th>Id</th>--->
+                <th (click)="sort('type')">Type&nbsp;<i class="fa fa-sort" > </i>  </th>
+                <th (click)="sort('quantity')">quantity&nbsp;<i class="fa fa-sort" > </i>  </th>
+                <th (click)="sort('sterilization_Date')">sterilization_Date&nbsp;<i class="fa fa-sort" > </i>  </th>
+                <th (click)="sort('expiration_Date')">expiration_Date&nbsp;<i class="fa fa-sort" > </i>  </th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
      
-    <tr *ngFor="let equipment of listEquipment">
-        <!--  <th scope="row">{{equipment.id_eq}}</th>-->
+    <tr *ngFor="let equipment of listEquipment | orderBy: key: reverse|paginate:{itemsPerPage:8,currentPage:p};">
+      <!---  <th scope="row">{{equipment.id_eq}}</th>-->
         <td>{{equipment.type}}</td>
         <td>{{equipment.quantity}}</td>
         <td>{{equipment.sterilization_Date}}</td>
@@ -30,7 +81,7 @@
         <td><button (click)="EquipmentDetails(equipment.id_eq)" type="button" class = "btn btn-info"> View</button></td>
         <li class="active">
             <a [routerLink]="['/addeq']">
-               <!-- <i class="material-icons">add</i> -->
+                <i class="material-icons">add</i>
                 <span>Add equipements</span>
             </a>
         </li>
@@ -39,6 +90,7 @@
 
 </tr>
 </tbody>
+<pagination-controls (pageChange)="p = $event" ></pagination-controls>
 </table>
 </div>
 

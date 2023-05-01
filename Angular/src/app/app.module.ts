@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { FormsModule } from '@angular/forms';
 import { BackhomeComponent } from './backoffice/backhome/backhome.component';
@@ -17,6 +19,13 @@ import { EquipmentComponentComponent } from './equipment-component/equipment-com
 import { EquipmentDetailsComponent } from './equipment-details/equipment-details.component';
 import { AddEqComponent } from './add-eq/add-eq.component';
 import { UpdateEqComponent } from './update-eq/update-eq.component';
+import{MatSortModule  } from '@angular/material/sort';
+import{MatTableModule  } from '@angular/material/table';
+import{MatPaginatorModule  } from '@angular/material/paginator';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import{ NgxPaginationModule  } from 'ngx-pagination';
 
 
 @NgModule({
@@ -39,7 +48,7 @@ import { UpdateEqComponent } from './update-eq/update-eq.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,HttpClientModule
+    FormsModule,HttpClientModule,MatFormFieldModule,MatSortModule,MatTableModule,MatPaginatorModule, NoopAnimationsModule,Ng2SearchPipeModule,Ng2OrderModule,NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
