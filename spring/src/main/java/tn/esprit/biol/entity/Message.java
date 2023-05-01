@@ -26,6 +26,9 @@ public class Message {
     @Column(name = "sender")
     private String sender;
 
+    @Column(name = "id")
+    private String id;
+
     @Column(name = "t_stamp")
     private String t_stamp;
 

@@ -9,6 +9,7 @@ import {UserdetailsComponent} from "./backoffice/userdetails/userdetails.compone
 import {RegisterComponent} from "./register/register.component";
 import {EdituserComponent} from "./backoffice/edituser/edituser.component";
 import {AuthGuard} from "./authentification/auth.guard";
+import {ChatComponent} from "./backoffice/chat/chat.component";
 
 
 const routes: Routes = [
@@ -35,9 +36,15 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {roles: ['HeadSupervisor']}
   },
-   {path:"**", redirectTo:"/login", pathMatch:"full"},
 
+  {
+    path: 'chat/:user', component: ChatComponent ,
+    
+  },
 
+   {path:"**", redirectTo:"/login", pathMatch:"full"}
+
+  
 
 
 

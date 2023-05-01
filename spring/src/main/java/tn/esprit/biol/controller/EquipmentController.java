@@ -82,21 +82,21 @@ public class EquipmentController {
         return equipment;
     }
 
-    @PostMapping({"/Sterilization"})
-    @Scheduled(cron ="* * * 30 * *")
-    public void SendRequest()
-    {
-        equipmentService.sendSterilizationRequest("hannachifedi12@gmail.com","ALERT STERILIZATION","STERILIZATION DATE IS HERE !!!!!!");
+//    @PostMapping({"/Sterilization"})
+//    @Scheduled(cron ="* * * 30 * *")
+//    public void SendRequest()
+//    {
+//        equipmentService.sendSterilizationRequest("hannachifedi12@gmail.com","ALERT STERILIZATION","STERILIZATION DATE IS HERE !!!!!!");
+//
+//    }
 
-    }
-
-    @PostMapping({"/Storage"})
-    @Scheduled(cron ="* * * * 12 *")
-    public void SendStorageRequest()
-    {
-            equipmentService.sendLowStorageRequest("hannachifedi12@gmail.com","LOW STORAGE ALERT","CHECK QUANTITY !!!!!!");
-
-    }
+//    @PostMapping({"/Storage"})
+//    @Scheduled(cron ="* * * * 12 *")
+//    public void SendStorageRequest()
+//    {
+//            equipmentService.sendLowStorageRequest("hannachifedi12@gmail.com","LOW STORAGE ALERT","CHECK QUANTITY !!!!!!");
+//
+//    }
 
     @GetMapping("/A/{field}")
     public List<Equipment> getEquipmentswithASCSorting(@PathVariable String field) {

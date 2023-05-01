@@ -77,7 +77,7 @@ public class ChatController {
             return messageDAO.findAllByChat(ce.getChat_id());
         }
         else{
-            return new ArrayList<Message>();
+            return new ArrayList<>();
         }
     }
 

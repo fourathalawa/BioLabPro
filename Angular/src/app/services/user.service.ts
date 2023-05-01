@@ -2,7 +2,8 @@ import { HttpClient, HttpEvent, HttpHeaders, HttpRequest, HttpResponse } from '@
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import {User} from "../models/user";
-import {UserAuthService} from "./user-auth.service";
+import { userAuthService } from './user-auth.service';
+
 
 
 @Injectable({
@@ -16,7 +17,7 @@ export class UserService implements OnInit  {
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
   constructor(
     private httpclient: HttpClient,
-    private userAuthService :UserAuthService
+    private userAuthService :userAuthService
 
   ) {}
 
@@ -93,6 +94,20 @@ export class UserService implements OnInit  {
     return isMatch;
 
   }
+
+  public getUserChat(nom:string):Observable<any> {
+
+    const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
+        return this.httpclient.post<any>(this.PATH_OF_API+'/getChats/',nom, {
+         headers: headers
+       });
+      }
+
+   getUserByNickname(cin:string):Observable<User> {
+    
+    return this.httpclient.get<User> (`${this.PATH_OF_API}${'/getuser/'}${cin}`);
+
+   }
 
 
 }
