@@ -21,10 +21,11 @@
           <h4 class="mb-2" style="text-align: center">Commencez l'aventure 🚀</h4>
           <p class="mb-4" style="text-align: center">Merci de remplir le formulaire correctement </p>
 
-          <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+          <form #f="ngForm" id="formAuthentication" class="mb-3"  >
             <div class="mb-3">
               <label for="cin" class="form-label"> n° CIN </label>
-              <input [(ngModel)]="cin"
+              <input [(ngModel)]="cin"  #cinv="ngModel"
+                     pattern="[0-9]{8}"
                 type="text"
                 class="form-control"
                 id="cin"
@@ -32,33 +33,47 @@
                 placeholder="Entrer votre numero CIN"
                 autofocus
               />
+              <div *ngIf="cinv.hasError('pattern')" class="error-message" style="color: red ; font-size: 14px">
+                <i class="bi bi-exclamation-triangle-fill"></i> Le numéro CIN doit contenir exactement un nombre de 8 chiffre
+              </div>
             </div>
+            <div>
             <div class="mb-2" style="width: 200px;">
               <label for="nom" class="form-label"> Nom </label>
-              <input [(ngModel)]="firstName"
+              <input [(ngModel)]="firstName" #firstNamev="ngModel" pattern="\b[a-zA-Z][a-z]{2,}\b"
                 type="text"
                 class="form-control"
                 id="nom"
                 name="nom"
-                placeholder="Entrer votre numero Nom"
+                placeholder="Entrer votre nom de famille"
                 autofocus
               />
+
+              <div *ngIf="firstNamev.hasError('pattern')" class="error-message" style="color: red ; font-size: 14px">
+                <i class="bi bi-exclamation-triangle-fill"> </i>Entrer un Nom Correct qui se compose seulement des chiffre
+              </div>
+              </div>
+              <div>
               <label for="prenom" class="form-label"> Prenom </label>
-              <input  [(ngModel)]="lastName"
+              <input  [(ngModel)]="lastName" #lastNamev="ngModel" pattern="\b[a-zA-Z][a-z]{2,}\b"
                 type="text"
                 class="form-control"
                 id="prenom"
                 name="prenom"
-                placeholder="Entrer votre numero Prenom"
+                placeholder="Entrer votre Prenom"
                 autofocus
               />
+              <div *ngIf="lastNamev.hasError('pattern')" class="error-message" style="color: red ; font-size: 14px">
+                <i class="bi bi-exclamation-triangle-fill"></i> Entrer un Prenom Correct qui se compose seulement des chiffre
+              </div>
+              </div>
             </div>
             <div class="mb-2">
 
             </div>
             <div class="mb-3">
               <label for="tel" class="form-label"> N° Tel </label>
-              <input [(ngModel)]="tel"
+              <input [(ngModel)]="tel" #telv="ngModel" pattern="[0-9]{8}"
                 type="text"
                 class="form-control"
                 id="tel"
@@ -66,19 +81,29 @@
                 placeholder="Entrer votre numero Tel"
                 autofocus
               />
+              <div *ngIf="telv.hasError('pattern')" class="error-message" style="color: red ; font-size: 14px">
+                <i class="bi bi-exclamation-triangle-fill"></i> Entrer un Prenom Correct qui se compose seulement des chiffre
+              </div>
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input [(ngModel)]="email"
+              <input [(ngModel)]="email" #mailv="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}"
                 type="text"
                 class="form-control"
                 id="email"
                 name="email"
-                placeholder="Enter your email" />
+                placeholder="Enter your email"
+              />
+
+              <div *ngIf="mailv.hasError('pattern')" class="error-message" style="color: red ; font-size: 14px">
+                <i class="bi bi-exclamation-triangle-fill"></i> Entrer une adresse email Correcte
+              </div>
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Adresse</label>
-              <input [(ngModel)]="adress" type="text" class="form-control" id="adresse" name="adresse" placeholder="Entrer votre adresse" />
+              <input [(ngModel)]="adress"
+                     type="text" class="form-control" id="adresse" name="adresse" placeholder="Entrer votre adresse" />
+
             </div>
             <div class="mb-3 form-password-toggle">
               <label class="form-label" for="password">Password</label>
@@ -104,7 +129,13 @@
                 </label>
               </div>
             </div>
-            <button (click)="signup()" class="btn btn-primary d-grid w-100">Sign up</button>
+            <button (click)="signup()" class="btn btn-primary d-grid w-100" [disabled]="f.invalid" >Sign up</button>
+<!--            <div class="alert alert-danger d-flex align-items-center" role="alert" style="height: 28px; margin-top: 12px">-->
+<!--              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>-->
+<!--              <div>-->
+<!--                An example danger alert with an icon-->
+<!--              </div>-->
+<!--            </div>-->
           </form>
 
           <p class="text-center">

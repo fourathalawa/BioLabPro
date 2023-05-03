@@ -3,6 +3,7 @@ import {User} from "../models/user";
 import {Router} from "@angular/router";
 import {UserService} from "../services/user.service";
 
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
