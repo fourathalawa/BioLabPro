@@ -1,19 +1,13 @@
 package tn.esprit.biol.service;
 
-import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.rest.lookups.v1.PhoneNumber;
-import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.biol.dao.AppointementDao;
 import tn.esprit.biol.entity.Appointement;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -42,19 +36,19 @@ public class AppointementService implements AppointementIService{
     @Override
     public Appointement AddAppointement(Appointement a){
         // kan fi date w fil heure heki fama akal min 2 rendez vous yet3ada
-        if(FindAppointementsNumberPerDateandHour(a.getDateAppointement().plusHours(1))<2)
+       /* if(FindAppointementsNumberPerDateandHour(a.getDateAppointement().plusHours(1))<2)
         {
             if(a.getDateAppointement().plusHours(1).toLocalDate().isAfter(LocalDate.now()))
-            {a.setDateAppointement(a.getDateAppointement().plusHours(1));
+            {a.setDateAppointement(a.getDateAppointement().plusHours(1));*/
         return appointementDao.save(a);}
-            else
+           /* else
                 return null;
 
 
         }
         else
-            return null;
-    }
+            return null; }*/
+
 
     @Override
     public void DeleteAppointement(Integer id){
@@ -65,16 +59,16 @@ public class AppointementService implements AppointementIService{
     @Override
     public Appointement updateAppointement(Integer id, Appointement ap) {
         // kan fi date w fil heure heki fama akal min 2 rendez vous yet3ada
-        if(FindAppointementsNumberPerDateandHour(ap.getDateAppointement())<2){
-            if(ap.getDateAppointement().plusHours(1).toLocalDate().isAfter(LocalDate.now())){
+       /* if(FindAppointementsNumberPerDateandHour(ap.getDateAppointement())<2){
+            if(ap.getDateAppointement().plusHours(1).toLocalDate().isAfter(LocalDate.now())){*/
         Appointement a  = appointementDao.getAppointementByIdAppointement(id);
         a.setDateAppointement(ap.getDateAppointement().plusHours(1));
         a.setTypeAppointement(ap.getTypeAppointement());
        return appointementDao.save(a);}
-        else return null ;}
+      /*  else return null ;}
         else
             return null;
-    }
+    }*/
 
     @Override
     public Appointement StatusAppointment_not_yet_reached(Integer id) {
@@ -217,6 +211,21 @@ public class AppointementService implements AppointementIService{
     }
 
     @Override
+    public Integer NumberOfAppointementsThisMonth() {
+        int i=0;
+        List<Appointement> liste = appointementDao.findAll();
+        for(Appointement a : liste){
+            if(a.getDateAppointement().getMonth()==LocalDateTime.now().getMonth()){
+
+                    i=i+1;
+
+
+            }
+        }
+        return i;
+    }
+
+    @Override
     public Integer NumlberofAppointmentsValidatedByPatient(String idPatient) {
        Integer i =0;
         List<Appointement> list = appointementDao.findAll();
@@ -241,6 +250,31 @@ public class AppointementService implements AppointementIService{
     }
 
     @Override
+    public Integer NumberOfAppointementsNotReachedByPatient(String idPatient) {
+        Integer i =0;
+        List<Appointement> list = appointementDao.findAll();
+        for(Appointement a:list){
+            if((a.getIdPatient().equals(idPatient)) &&(a.getStatusAppointement()==0)){
+                i = i+1;
+            }
+        }
+        return i;
+    }
+
+    @Override
+    public List<Appointement> AppointementsByPatient(String idPatient) {
+        List<Appointement> lists = new ArrayList<>();
+        Integer i =0;
+        List<Appointement> list = appointementDao.findAll();
+        for(Appointement a:list){
+            if((a.getIdPatient().equals(idPatient))){
+                lists.add(a);
+            }
+        }
+        return lists;
+    }
+
+    @Override
     public List<String> PatientBanned() {
         List<String> patientbanned = new ArrayList<>();
         List<Appointement> list = appointementDao.findAll();
@@ -252,6 +286,30 @@ public class AppointementService implements AppointementIService{
             }
         }
         return patientbanned;
+    }
+
+    @Override
+    public String Ban(String idPatient) {
+        List<Appointement> list= appointementDao.findAll();
+        for(Appointement a:list){
+            if(a.getIdPatient().equals(idPatient)){
+                a.setIsBanned(1);
+                appointementDao.save(a);
+            }
+        }
+        return "user with id : "+idPatient+" is banned ";
+    }
+
+    @Override
+    public String unBan(String idPatient){
+        List<Appointement> list= appointementDao.findAll();
+        for(Appointement a:list){
+            if(a.getIdPatient().equals(idPatient)){
+                a.setIsBanned(0);
+                appointementDao.save(a);
+            }
+        }
+        return "user with id : "+idPatient+" is unbanned ";
     }
 
     @Override

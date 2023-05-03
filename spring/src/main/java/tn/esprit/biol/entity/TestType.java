@@ -1,6 +1,5 @@
 package tn.esprit.biol.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +8,6 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name="TestType")
@@ -18,18 +16,11 @@ import java.util.Set;
 @ToString
 public class TestType {
    /* BloodTest,
-
-=======
-public enum TestType {
-    BloodTest,
->>>>>>> origin/Training_Management
     Urinalysis,
     MicrobialCultureTest,
     EnzymeTest,
     HormoneTest,
     TissueTest,
-<<<<<<< HEAD
-
     MolecuralTest*/
 
    @Id
@@ -38,8 +29,10 @@ public enum TestType {
    private Integer idTestType;
    private String testName;
 
-    @JsonIgnore
+
+
     @ManyToMany(mappedBy = "TestList" )
+    @JsonIgnore
     private List<Invoice> invoices = new ArrayList<>();
 
 
@@ -68,6 +61,4 @@ public enum TestType {
         this.idTestType = idTestType;
         this.testName = testName;
     }
-
-
 }

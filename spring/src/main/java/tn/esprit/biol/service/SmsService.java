@@ -2,8 +2,6 @@ package tn.esprit.biol.service;
 
 import com.twilio.http.TwilioRestClient;
 import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.rest.lookups.v1.PhoneNumber;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service

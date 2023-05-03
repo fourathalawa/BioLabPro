@@ -183,75 +183,45 @@
             </div>
           </div>
 
-          <!--
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
-              <div class="icon"><i class="fas fa-wheelchair"></i></div>
-              <h4><a href="">Dele cardo</a></h4>
-              <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
-              <div class="icon"><i class="fas fa-notes-medical"></i></div>
-              <h4><a href="">Divera don</a></h4>
-              <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-            </div>
-          </div>
-
-          -->
         </div>
 
       </div>
     </section><!-- End Services Section -->
-
+    <div >
     <!-- ======= Appointment Section ======= -->
-    <section id="appointment" class="appointment section-bg">
-      <div class="container">
+    <section id="appointmentsection" class="appointment section-bg"  >
+      <div class="container" >
 
         <div class="section-title">
           <h2>Make an Appointment</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>Please make sure to fill the current inputs</p>
         </div>
 
-        <form action="forms/appointment.php" method="post" role="form" class="php-email-form">
-          <div class="row">
-            <div class="col-md-4 form-group">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
+        <form #f="ngForm">
+          <div>
+            <div style="text-align:center">
+              <input required type="text" name="Appointement Type" class="form-control" id="name" placeholder="Appointement Type" #typeAppointement="ngModel" [(ngModel)]="p.typeAppointement">
             </div>
-            <div class="col-md-4 form-group mt-3 mt-md-0">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
-              <div class="validate"></div>
+            <br>
+            <div style="text-align:center">
+              <input type="datetime-local" class="form-control" name="date" id="date" #dateAppointement="ngModel" [(ngModel)]="p.dateAppointement" [ngClass]="{'is-invalid': dateAppointement.invalid && (dateAppointement.dirty || dateAppointement.touched)}">
+              <div  *ngIf="dateAppointement.invalid && (dateAppointement.dirty || dateAppointement.touched)" class="invalid-feedback">
+                Please enter a valid date and time after the current date and time.
+              </div>
             </div>
-            <div class="col-md-4 form-group mt-3 mt-md-0">
-              <input type="tel" class="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
+            <br>
+            <div style="text-align:center">
+              <button class="btn btn-primary" [disabled]="!f.valid || !isValidDate()" (click)="addAppointement()">Make an Appointment</button>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-4 form-group mt-3">
-              <input type="datetime" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
-            </div>
-            
-          </div>
-
-          <div class="form-group mt-3">
-            <textarea class="form-control" name="message" rows="5" placeholder="Message (Optional)"></textarea>
-            <div class="validate"></div>
-          </div>
-          <div class="mb-3">
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
-          </div>
-          <div class="text-center"><button type="submit">Make an Appointment</button></div>
         </form>
+                
 
       </div>
-    </section><!-- End Appointment Section -->
+    </section>
+    
+    <!-- End Appointment Section -->
+  </div>
 
     <!-- ======= Departments Section ======= -->
     <section id="departments" class="departments">

@@ -1,19 +1,15 @@
 package tn.esprit.biol.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.io.Serializable;
-
-
 import java.time.LocalDateTime;
-
-
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,10 +17,9 @@ import java.util.List;
 @Setter
 @Getter
 @ToString
+
 public class Invoice implements Serializable {
     private static final long serialVersionUID = 1L;
-
-
     /*
     -systeme de calcul de totalammount de facture en fonction des type de test choisi et en fonction de plage de total
      un taux de tva sera ajouté
@@ -34,20 +29,14 @@ public class Invoice implements Serializable {
     - Statistique (table facture )- chiffre affaire  etc ...
     (table TestType) - les pourcentages de type de Test
     * */
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idInvoice")
     private Integer idInvoice;
 
-
-
     //@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime dateInvoice;
     private String idPatient;
-
-
     private Float totalAmount;
     private String descreptionInvoice;
     //0 if not payed - 1 if its payed
@@ -56,11 +45,14 @@ public class Invoice implements Serializable {
 
 
 
-    @ManyToMany(cascade=CascadeType.ALL)
+
+    @ManyToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(name = "invoice_test_type",
             joinColumns = @JoinColumn(name = "invoice_id"),
             inverseJoinColumns = @JoinColumn(name = "test_type_id"))
-    private List<TestType> TestList = new ArrayList<>();
+    private List<TestType> TestList = new ArrayList<>(
+
+    );
 
 
 
@@ -77,6 +69,4 @@ public class Invoice implements Serializable {
         this.statusPayment = statusPayment;
         this.TestList = testList;
     }
-
 }
-

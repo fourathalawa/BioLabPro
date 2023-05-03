@@ -1,7 +1,6 @@
 package tn.esprit.biol.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.biol.entity.Appointement;
 import tn.esprit.biol.service.AppointementService;
@@ -17,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/Appointement")
 public class AppointementController {
     @Autowired
@@ -46,8 +46,8 @@ public class AppointementController {
     @PostMapping("/addAppointement")
     @ResponseBody
     public Appointement addAppointement(@RequestBody Appointement appointement) {
-
-        // 3 rendez vous pas valider ( aaml rendez vous 3 marrat w majech ) => BAN
+       return appointementService.AddAppointement(appointement);
+      /*  // 3 rendez vous pas valider ( aaml rendez vous 3 marrat w majech ) => BAN
         if(appointementService.NumberOfAppointementsNotValidatedByPatient(appointement.getIdPatient())>=3){
             //integration appointment.patientid | patientid getEmailPatient
             String to = "assyl.kriaa@gmail.com";
@@ -73,7 +73,7 @@ public class AppointementController {
             return appointementService.AddAppointement(appointement);}
         else return null;
 
-       }
+       }*/
     }
     @DeleteMapping("/deleteAppointement/{id}")
     @ResponseBody
@@ -128,6 +128,11 @@ public class AppointementController {
         return appointementService.NumberOfAppointementsByPatientByYearMonth(idPatient,month,year);
     }
 
+    @GetMapping("/NumberOfAppointementsThisMonth")
+    @ResponseBody
+    public Integer NumberOfAppointementsThisMonth() {
+        return appointementService.NumberOfAppointementsThisMonth();
+    }
     @GetMapping("/NumberOfAppointementsNotYetReachedThisMonth")
     @ResponseBody
     public Integer NumberOfAppointementsNotYetReachedThisMonth() {
@@ -154,10 +159,34 @@ public class AppointementController {
         return appointementService.NumberOfAppointementsNotValidatedByPatient(idPatient);
     }
 
+    @GetMapping("/NumberOfAppointementsNotReachedByPatient/{idPatient}")
+    @ResponseBody
+    public Integer NumberOfAppointementsNotReachedByPatient(@PathVariable String idPatient) {
+        return appointementService.NumberOfAppointementsNotReachedByPatient(idPatient);
+    }
+
+    @GetMapping("/AppointementsdByPatient/{idPatient}")
+    @ResponseBody
+    public List<Appointement> AppointementsdByPatient(@PathVariable String idPatient) {
+        return appointementService.AppointementsByPatient(idPatient);
+    }
+
     @GetMapping("/PatientBanned")
     @ResponseBody
     public List<String> PatientBanned() {
         return appointementService.PatientBanned();
+    }
+
+    @GetMapping("/BanPatient/{idPatient}")
+    @ResponseBody
+    public String BanPatient(@PathVariable String idPatient) {
+        return appointementService.Ban(idPatient);
+    }
+
+    @GetMapping("/unBanPatient/{idPatient}")
+    @ResponseBody
+    public String unBanPatient(@PathVariable String idPatient) {
+        return appointementService.unBan(idPatient);
     }
 
 

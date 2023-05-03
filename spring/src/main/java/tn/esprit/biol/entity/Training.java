@@ -20,7 +20,7 @@ import java.util.Set;
 public class Training {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int TrainigId;
+    int TrainingId;
     String TrainingName;
     String TrainingSubject;
     @Enumerated(EnumType.STRING)

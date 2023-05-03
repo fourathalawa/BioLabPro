@@ -12,13 +12,13 @@ import java.util.List;
 @Entity
 public class NightShift {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     String id;
     Date startDate;
     Date endDate;
     Integer numberOfEffectivByNight;
 
-   // @ManyToMany
-  //  @JsonIgnore
-  //  List<User> users;
+    // @ManyToMany
+    //  @JsonIgnore
+    //  List<User> users;
 }

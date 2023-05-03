@@ -1,0 +1,87 @@
+<app-header></app-header>
+<br>
+<br>
+<br>
+<section class="d-flex align-items-center">
+    <div class="container">
+        <div class="table" style=" text-align: center;">
+            <table class="table table-striped" style="width: 100%">
+                <tr class="tortor">
+                    <td>Invoice ID</td>
+                    <td>Invoice Date</td>
+                    <td>Total Amount</td>
+                    <td>Payment Status</td>
+                    <td>Invoice Descreption</td>
+                    <!-- <td>Test(s)</td>-->
+                </tr>
+                <!--afficher un tableau avec la boucle for-->
+                <tr *ngFor="let p of listInvoices ">
+                    <!-- <div *ngIf="p.price <= condition "> -->
+                        
+                    <td>{{p.idInvoice}}</td>
+                    <td>{{p.dateInvoice}}</td>
+                    <td>{{p.totalAmount}}</td>
+                    <td>{{p.statusPayment}}</td>
+                    <td>{{p.descreptionInvoice}}</td>
+                    <!--<td >{{p.TestList}}</td>-->
+
+                    
+                    <!--  </div>-->
+                    <!--
+    DATA-BINDING
+-->
+                    <!-- <td> <button (click)="buy(p)" *ngIf="p.quantity > 0 ">buy1</button></td> -->
+                    <!--<td> <button [hidden]="p.quantity == 0"(click)="buy(p)" >buy2</button></td>-->
+                    <!--<td> <button [disabled]="p.quantity == 0"(click)="buy(p)" >buy3</button></td>-->
+                    <!--<td> <button (click)="like(p)">like</button></td>-->
+                    <!--<td> <a [routerLink]="['/detail',p.id]">detail</a></td>-->
+                   
+                    <a target="_blank" href="http://localhost/PdfInvoices/{{p.idInvoice}}.pdf">viewPdf</a>
+
+                   <!-- <td> <button (click)="deleteInvoice(p.idInvoice)">Delete</button></td>-->
+                </tr>
+            </table>
+        </div>
+    </div>
+</section>
+
+<div class="row">
+    <div class="col-lg-6 col-md-12 col-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title d-flex align-items-start justify-content-between">
+            <div class="avatar flex-shrink-0">
+              <img src="../assets/img/icons/unicons/chart-success.png" alt="chart success" class="rounded">
+            </div>
+            <div class="dropdown">
+              
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+              
+              </div>
+            </div>
+          </div>
+          <span class="fw-semibold d-block mb-1">Paid Ammount</span>
+          <h3 class="card-title mb-2">{{payedAmount}}</h3>
+          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> {{payedAmount/total*100}}%</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-12 col-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title d-flex align-items-start justify-content-between">
+            <div class="avatar flex-shrink-0">
+              <img src="../assets/img/icons/unicons/wallet-info.png" alt="Credit Card" class="rounded">
+            </div>
+            <div class="dropdown">
+              <i class="fab fa-paypal"  ><a href="https://www.paypal.com/donate/?token=TOKEN"> pay </a></i> 
+            </div>
+          </div>
+          <span>Unpaid Ammount</span>
+          <h3 class="card-title text-nowrap mb-1">TND {{unpayedAmount}}</h3>
+          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> {{unpayedAmount/total*100}}%</small>
+        </div>
+      </div>
+    </div>
+  </div>
+<app-footer></app-footer>

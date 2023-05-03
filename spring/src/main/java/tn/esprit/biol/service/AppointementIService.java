@@ -3,7 +3,6 @@ package tn.esprit.biol.service;
 import tn.esprit.biol.entity.Appointement;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 public interface AppointementIService {
@@ -29,9 +28,15 @@ public interface AppointementIService {
     public Integer NumberOfAppointementsNotYetReachedThisMonth();
     public Integer NumberOfAppointementsValidatedThisMonth();
     public Integer NumberOfAppointementsNotValidatedThisMonth();
+    public Integer NumberOfAppointementsThisMonth();
     public Integer NumlberofAppointmentsValidatedByPatient(String idPatient);
     public Integer NumberOfAppointementsNotValidatedByPatient(String idPatient);
+
+    public Integer NumberOfAppointementsNotReachedByPatient(String idPatient);
+    public List<Appointement> AppointementsByPatient(String idPatient);
     public List<String> PatientBanned();
+    public String Ban(String idPatient);
+    public String unBan(String idPatient);
     //Stat
     public void envoyersms();
 }

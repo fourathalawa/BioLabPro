@@ -6,13 +6,11 @@ import org.springframework.stereotype.Service;
 import tn.esprit.biol.dao.AppointementDao;
 import tn.esprit.biol.dao.InvoiceDao;
 import tn.esprit.biol.dao.TestTypeDao;
-import tn.esprit.biol.entity.Appointement;
 import tn.esprit.biol.entity.Invoice;
 import tn.esprit.biol.entity.TestType;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.*;
+import java.util.List;
 
 @Service
 public class InvoiceService implements InvoiceIService{
@@ -29,10 +27,14 @@ public class InvoiceService implements InvoiceIService{
 
     @Autowired
     SmsService smsService;
+
+
     @Override
     public Invoice AddInvoice(Invoice a) {
+        TestType m = new TestType("BloodTest");
         Float total=(float)0;
         Float tvaRate=(float)0;
+        a.getTestList().add(m);
         List<TestType> liste = a.getTestList();
         for(TestType t :liste){
             if(t.getTestName().equals("BloodTest")){total = total + 20;}
@@ -70,6 +72,7 @@ public class InvoiceService implements InvoiceIService{
         Invoice ap  = invoiceDao.findInvoiceByIdInvoice(id);
         invoiceDao.delete(ap);
     }
+
 
     @Override
     public Invoice updateInvoice(Integer id, Invoice ap) {
@@ -136,9 +139,9 @@ public class InvoiceService implements InvoiceIService{
     }
 
     @Override
-    public void AddTestTypetoInvoice(Integer id, String testType) {
+    public void AddTestTypetoInvoice(Integer id, Integer testType) {
         Invoice invoice = invoiceDao.findInvoiceByIdInvoice(id);
-        invoice.getTestList().add(testTypeDao.findFirstByTestName(testType));
+        invoice.getTestList().add(testTypeDao.findTestTypeByIdTestType(testType));
     }
 
     @Override
@@ -176,7 +179,7 @@ public class InvoiceService implements InvoiceIService{
 
     @Override
     public Float AmmountNotPayedPerMont(Integer Month, Integer year) {
-        Float x = (float)0;
+        float x = 0.0F;
         for(Invoice i:invoiceDao.findAll()){
             if((i.getDateInvoice().getMonthValue()==Month)&&(i.getDateInvoice().getYear()==year)&&(i.getStatusPayment()==0)){
                 x = x+i.getTotalAmount();
@@ -191,6 +194,47 @@ public class InvoiceService implements InvoiceIService{
         for(Invoice i:invoiceDao.findAll()){
             if((i.getDateInvoice().getYear()==year)&&(i.getStatusPayment()==0)){
                 x = x+i.getTotalAmount();
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public List<Invoice> getInvoicesByidPatien(String id) {
+        return  invoiceDao.findAllByIdPatient(id);
+    }
+
+    @Override
+    public Float AmmountPayedPerPatient(String id) {
+        Float x = (float)0;
+        List<Invoice> list = invoiceDao.findAllByIdPatient(id);
+        for(Invoice i:list){
+            if(i.getStatusPayment()==1){
+                x=x+i.getTotalAmount();
+            }
+        }
+        return x;
+    }
+
+    @Override
+    public Float totalammountbypatient(String id) {
+        Float x = (float)0;
+        List<Invoice> list = invoiceDao.findAllByIdPatient(id);
+        for(Invoice i:list){
+
+                x=x+i.getTotalAmount();
+
+        }
+        return x;
+    }
+
+    @Override
+    public Float AmmountNotPayedPerPatient(String id) {
+        Float x = (float)0;
+        List<Invoice> list = invoiceDao.findAllByIdPatient(id);
+        for(Invoice i:list){
+            if(i.getStatusPayment()==0){
+                x=x+i.getTotalAmount();
             }
         }
         return x;

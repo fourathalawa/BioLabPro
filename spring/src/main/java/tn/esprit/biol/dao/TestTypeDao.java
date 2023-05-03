@@ -8,4 +8,6 @@ import tn.esprit.biol.entity.TestType;
 public interface TestTypeDao extends JpaRepository<TestType,Integer> {
 
     public TestType findFirstByTestName(String name);
+    public TestType findTestTypeByIdTestType(Integer name);
+
 }

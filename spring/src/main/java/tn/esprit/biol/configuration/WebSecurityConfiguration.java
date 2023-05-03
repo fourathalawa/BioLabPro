@@ -43,10 +43,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity.cors();
         httpSecurity.csrf().disable()
                 .authorizeRequests().antMatchers("/authenticate"
-                ,"/user/**",
-                "/Appointement/**",
-                "/Invoice/**","/sampleResult/**","/sample/**",
-                "/chat/**","/DaysOff/**","/Staff/**")
+                        ,"/user/**",
+                        "/Appointement/**",
+                        "/Invoice/**","/sampleResult/**","/sample/**",
+                        "/chat/**","/DaysOff/**","/Staff/**")
                 .permitAll()
                 .antMatchers(HttpHeaders.ALLOW).permitAll()
                 .anyRequest().authenticated()

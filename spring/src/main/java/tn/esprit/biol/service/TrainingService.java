@@ -100,7 +100,7 @@ public List<Training> RecommandedTraining(String iduser)
 
         for(Rating rs:ratingList)
         {
-            if(training.getTrainigId()==rs.getTraining().getTrainigId())
+            if(training.getTrainingId()==rs.getTraining().getTrainingId())
             {
                 score+=3.5*rs.getRating();
                 //  recommanded.put(training.getTrainingSubject(),score);

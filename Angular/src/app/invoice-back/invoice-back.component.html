@@ -1,0 +1,101 @@
+<body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu -->
+
+            <app-sidebar></app-sidebar>
+
+            <!-- Layout container -->
+            <div class="layout-page">
+                <!-- Navbar -->
+
+                <app-headerback></app-headerback>
+
+                <!-- / Navbar -->
+
+                <section class="d-flex align-items-center">
+                    <div class="container">
+                        <div class="table" style=" text-align: center;">
+                            <table class="table table-striped" style="width: 100%">
+                                <tr class="tortor">
+                                    <td>Invoice ID</td>
+                                    <td>Invoice Date</td>
+                                    <td>Total Amount</td>
+                                    <td>Payment Status</td>
+                                    <td>Invoice Descreption</td>
+                                    <!-- <td>Test(s)</td>-->
+                                </tr>
+                                <!--afficher un tableau avec la boucle for-->
+                                <tr *ngFor="let p of listInvoices ">
+                                    <!-- <div *ngIf="p.price <= condition "> -->
+
+                                    <td>{{p.idInvoice}}</td>
+                                    <td>{{p.dateInvoice}}</td>
+                                    <td>{{p.totalAmount}}</td>
+                                    <td>{{p.statusPayment}}</td>
+                                    <td>{{p.descreptionInvoice}}</td>
+
+                                    <td><a class="bi bi-file-pdf" target="_blank" href="http://localhost/PdfInvoices/{{p.idInvoice}}.pdf">Download PDF</a></td>
+                                    <td><a style="background-color:rgb(20, 80, 8); "class="btn btn-primary"  [routerLink]="['/back/addinvoice',p.idInvoice]">Update</a></td>
+                                    <td> <button class="btn btn-primary" style="background-color:red;"
+                                            (click)="deleteInvoice(p.idInvoice)">Delete</button></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                  <!-- {{Unpayed_AmmountMonth1}} -->
+                 
+                </section>
+
+
+                <a style="text-align: center;" class="link-primary" 
+                href="/back/addinvoice">
+                <i class="bi bi-arrow-right-circle"></i>
+                ADD INVOICE</a>
+
+                <br><br><br>
+
+
+
+
+                <!-- Footer -->
+                <footer class="content-footer footer bg-footer-theme">
+                    <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                        <div class="mb-2 mb-md-0">
+                            ©
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                            , made by ESPRIT STUDENT
+
+                        </div>
+                        <div>
+                            <a href="" class="footer-link me-4" target="_blank">License</a>
+                            <a href="" target="_blank" class="footer-link me-4">More Themes</a>
+
+                            <a href="" target="_blank" class="footer-link me-4">Documentation</a>
+
+                            <a href="" target="_blank" class="footer-link me-4">Support</a>
+                        </div>
+                    </div>
+                </footer>
+                <!-- / Footer -->
+
+                <div class="content-backdrop fade"></div>
+            </div>
+            <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+    </div>
+
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+
+    <!-- / Layout wrapper -->
+
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+</body>

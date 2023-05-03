@@ -1,0 +1,90 @@
+<style>
+    .number-ok{
+        width: 50;
+  font-size: 20;
+  font-weight: bold;
+  color: green;
+  text-align: center;
+}
+</style>
+<<<app-header></app-header>
+
+
+    <main id="main">
+        <br>
+        <br>
+        <section class="d-flex align-items-center">
+            <div class="container">
+                <div class="table" style=" text-align: center;">
+                    <table style="width: 100%">
+                        <tr class="tortor">
+                            <td>idAppointement</td>
+                            <td>dateAppointement</td>
+                            <td>typeAppointement</td>
+                            <td>statusAppointement</td>
+                        </tr>
+                        <!--afficher un tableau avec la boucle for-->
+                        <tr *ngFor="let p of listappointments ">
+                            <!-- <div *ngIf="p.price <= condition "> -->
+                                
+                            <td>{{p.idAppointement}}</td>
+                            <td>{{p.dateAppointement}}</td>
+                            <td>{{p.typeAppointement}}</td>
+                            <td>{{p.statusAppointement}}</td>
+                            <!--  </div>-->
+                            <!--
+            DATA-BINDING
+        -->
+                            <!-- <td> <button (click)="buy(p)" *ngIf="p.quantity > 0 ">buy1</button></td> -->
+                            <!--<td> <button [hidden]="p.quantity == 0"(click)="buy(p)" >buy2</button></td>-->
+                            <!--<td> <button [disabled]="p.quantity == 0"(click)="buy(p)" >buy3</button></td>-->
+                            <!--<td> <button (click)="like(p)">like</button></td>-->
+                            <!--<td> <a [routerLink]="['/detail',p.id]">detail</a></td>-->
+                            <td><a [routerLink]="['/appointmentsForm',p.idAppointement]">update</a></td>
+                            <td> <button (click)="deleteAppointement(p.idAppointement)">Delete</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section _ngcontent-ive-c52="" id="counts" class="counts">
+            <div _ngcontent-ive-c52="" class="container">
+                <div _ngcontent-ive-c52="" class="row">
+                    <div _ngcontent-ive-c52="" class="col-lg-3 col-md-6">
+                        <div _ngcontent-ive-c52="" class="count-box"><i _ngcontent-ive-c52=""
+                                class="fas fa-user-md"></i><span _ngcontent-ive-c52="" data-purecounter-start="0"
+                                data-purecounter-end="85" data-purecounter-duration="1" class="purecounter"></span>
+                           <strong> <p _ngcontent-ive-c52=""> total Number of Appointments</p></strong> 
+                           <div class="number-ok">{{totalnumber}}</div>
+                        </div>
+                    </div>
+                    <div _ngcontent-ive-c52="" class="col-lg-3 col-md-6 mt-5 mt-md-0">
+                        <div _ngcontent-ive-c52="" class="count-box"><i _ngcontent-ive-c52=""
+                                class="far fa-hospital"></i><span _ngcontent-ive-c52="" data-purecounter-start="0"
+                                data-purecounter-end="18" data-purecounter-duration="1" class="purecounter"></span>
+                                <strong> <p _ngcontent-ive-c52="">total of Appointments  Validated </p></strong> 
+                                <div class="number-ok">{{validated}}</div>
+                        </div>
+                    </div>
+                    <div _ngcontent-ive-c52="" class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+                        <div _ngcontent-ive-c52="" class="count-box"><i _ngcontent-ive-c52=""
+                                class="fas fa-flask"></i><span _ngcontent-ive-c52="" data-purecounter-start="0"
+                                data-purecounter-end="12" data-purecounter-duration="1" class="purecounter"></span>
+                                <strong> <p _ngcontent-ive-c52="">total of Appointments Not Validated</p></strong> 
+                                <div class="number-ok">{{notvalidated}}</div>
+                        </div>
+                    </div>
+                    <div _ngcontent-ive-c52="" class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+                        <div _ngcontent-ive-c52="" class="count-box"><i _ngcontent-ive-c52=""
+                                class="fas fa-dna"></i><span _ngcontent-ive-c52="" data-purecounter-start="0"
+                                data-purecounter-end="150" data-purecounter-duration="1" class="purecounter"></span>
+                                <strong> <p _ngcontent-ive-c52=""> total of Appointments Not Reached </p></strong> 
+                                <div class="number-ok">{{NotReached}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <app-footer></app-footer>
