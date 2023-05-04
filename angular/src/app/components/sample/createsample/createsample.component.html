@@ -2,11 +2,16 @@
 <form>
   <div>
     <label for="withdrawal-date">Date of Withdrawal:</label>
-    <input type="date" id="DateOfWithdrawal" name="DateOfWithdrawal" [(ngModel)]="sample.Dateofwithdrawl">
+    <input type="date" id="Dateofwithdrawl" name="DateOfWithdrawal" [(ngModel)]="sample.dateofwithdrawl " placeholder="yyyy-MM-dd" min="2023-01-01" max="2023-12-31">
   </div>
   <div>
+    <label for="userid">user id</label>
+    <input type="text"id="userid" name="userid"[(ngModel)]="sample.userid"> 
+  </div> 
+  <div>
     <label for="urgency">Urgency:</label>
-    <input type="checkbox" id="urgency" name="urgency" [(ngModel)]="sample.Urgency">
+    <input type="checkbox" id="Urgency" name="urgency" [(ngModel)]="sample.urgency">
   </div>
   <button type="button" (click)="addSample(sample)">Add Sample</button>
+  <button type="button" (click)="backfront()">return to list</button>
 </form>

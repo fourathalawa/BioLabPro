@@ -11,9 +11,13 @@
   <tr>
     <td><strong>Urgency:</strong></td>
     <td>{{ sample.urgency }}</td>
+  </tr> <tr>
+    <td><strong>First Name:</strong></td>
+    <td>{{ sample.userID.userFirstName }}</td>
+  </tr> <tr>
+    <td><strong>Last Name:</strong></td>
+    <td>{{ sample.userID.userLastName }}</td>
   </tr>
-  
 </table>    
-
-<button (click)=" (sample.sampleID)">Delete</button>
-<button (click)=" (sample.sampleID)">Update</button>
+<button (click)="deleteSample(sample.sampleID)">Delete</button>
+<button (click)="editSample(sample.sampleID)">update</button>

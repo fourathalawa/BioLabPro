@@ -1,22 +1,29 @@
+<input type="text" [(ngModel)]="searchTerm" placeholder="Search...">
+
+
+
 <table>
   <thead>
     <tr>
       <th>Sample ID</th>
       <th>Date of Withdrawal</th>
       <th>Urgency</th>
-      <th>Actions</th>
+      <th>First Name</th>
+      <th>Last Name</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let sample of Samples">
+    <tr *ngFor="let sample of filteredSamples | filter: searchTerm">
       <td>{{ sample.sampleID }}</td>
       <td>{{ sample.dateofwithdrawl }}</td>
       <td>{{ sample.urgency }}</td>
+      <td>{{ sample.userID.userFirstName }}</td>
+      <td>{{ sample.userID.userLastName }}</td>
       <td>
         <button (click)="showSampleDetails(sample.sampleID)">Show Details</button>
         <button (click)="deleteSample(sample.sampleID)">Delete</button>
-        <button (click)="editSample(sample.sampleID)">update</button>
-       </td>
+        <button (click)="editSample(sample.sampleID)">Update</button>
+      </td>
     </tr>
   </tbody>
   <button (click)="createsample(id)">create a new sample</button>

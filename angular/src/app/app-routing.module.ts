@@ -8,12 +8,14 @@ import { SampleComponent } from './components/sample/sample.component';
 import { SampledetailsComponent } from './components/sample/sampledetails/sampledetails.component';
 import { SampleeditComponent } from './components/sample/sampleedit/sampleedit.component';
 import { CreatesampleComponent } from './components/sample/createsample/createsample.component';
+import { SampleresultComponent } from './components/sampleresult/sampleresult.component';
 
 
 const routes: Routes = [
   {path:"login", component:LoginComponent},
     {path:"home", component:HomeComponent},
    {path:"sample", component:SampleComponent},
+   {path:"result", component:SampleresultComponent},
    { path: 'sample/:id', component: SampledetailsComponent },
    { path: 'sampleedit/:id', component: SampleeditComponent },
    { path: 'createsample', component: CreatesampleComponent },

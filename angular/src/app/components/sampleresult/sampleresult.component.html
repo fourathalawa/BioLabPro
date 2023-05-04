@@ -1,0 +1,32 @@
+<table>
+    <thead>
+      <tr>
+        <th>result id</th>
+        <th>date_result</th>
+        <th>note</th>
+        <th>rdescription</th>
+        <th>urgency</th>
+          </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let result of results">
+        <td>{{ result.resultID }}</td>
+        <td>{{ result.dateResult }}</td>
+        <td>{{ result.note }}</td>
+        <td>{{ result.rdescription }}</td>
+        <td>{{ result.sampleID.urgency }}</td>
+       <td>       
+           <button (click)="qr(result.resultID)">qrcode</button>
+<!-- 
+          <button (click)="showSampleDetails(result.sampleID)">Show Details</button>
+          <button (click)="deleteSample(result.sampleID)">Delete</button>
+          <button (click)="editSample(result.sampleID)">update</button>    -->      
+
+      </tr>
+    </tbody>
+<!--     <button (click)="createsample(id)">create a new sample</button>
+ -->  
+  </table>
+   
+  
+   

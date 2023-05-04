@@ -16,7 +16,7 @@ public class SampleController {
     @Autowired
     private SampleService sampleService;
 
-    @GetMapping("/")
+    @GetMapping("/show")
     public List<Sample> getAllSamples(){
         return sampleService.getAllSamples();
     }

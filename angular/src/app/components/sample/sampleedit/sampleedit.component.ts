@@ -24,8 +24,8 @@ export class SampleeditComponent implements OnInit {
   
   editSample(sample: Sample, sampleID: number) {
     // update the sample object with the values from the parameter
-     this.sample.Dateofwithdrawl = sample.Dateofwithdrawl;
-    this.sample.Urgency = sample.Urgency;
+     this.sample.Dateofwithdrawl = sample.dateofwithdrawl;
+    this.sample.Urgency = sample.urgency;
     //this.sample.userid = sample.userid;
 
     this.sampleService.editSample(this.sample, this.sampleID).subscribe(res => {

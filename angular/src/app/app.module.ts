@@ -18,6 +18,8 @@ import { SampleComponent } from './components/sample/sample.component';
 import { SampledetailsComponent } from './components/sample/sampledetails/sampledetails.component';
 import { SampleeditComponent } from './components/sample/sampleedit/sampleedit.component';
 import { CreatesampleComponent } from './components/sample/createsample/createsample.component';
+import { SampleresultComponent } from './components/sampleresult/sampleresult.component';
+import { FilterPipe } from './components/sample/filter.pipe';
  
 
 @NgModule({
@@ -34,6 +36,8 @@ import { CreatesampleComponent } from './components/sample/createsample/createsa
     SampledetailsComponent,
     SampleeditComponent,
     CreatesampleComponent,
+    SampleresultComponent,
+    FilterPipe,
  
   ],
   imports: [

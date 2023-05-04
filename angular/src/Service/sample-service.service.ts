@@ -6,7 +6,7 @@ import { Sample } from 'src/app/models/sample';
   providedIn: 'root'
 })
 export class SampleServiceService {
-
+ 
   readonly API_URL = 'http://localhost:8089/BioLabPro/sample';
   
   constructor(private httpClient: HttpClient) { }
@@ -20,14 +20,14 @@ export class SampleServiceService {
     return this.httpClient.get(`${this.API_URL}/${SampleID}`)
   }
   addSample(sample: Sample): Observable<Sample> {
-     return this.httpClient.post<Sample>(`${this.API_URL}/addsample`, sample);
+     return this.httpClient.post<Sample>(`${this.API_URL}/add`, sample);
   }
   editSample(Sample : Sample, SampleID:number){
-    return this.httpClient.put(`${this.API_URL}/updatesample/${SampleID}`, Sample)
+    return this.httpClient.put(`${this.API_URL}/${SampleID}`, Sample)
   }
   deleteSample(SampleID : number){
     
-    return  this.httpClient.delete(`${this.API_URL}/delete/${SampleID}`)
+    return  this.httpClient.delete(`${this.API_URL}/${SampleID}`)
     
   } 
 

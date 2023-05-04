@@ -64,6 +64,7 @@ public class SampleService implements ISampleService {
         return sampleRepository.findSamplesWithResult();
     }
 
+
     public List<Sample> getSamplesWithoutResult() {
         return sampleRepository.findSamplesWithoutResult();
     }

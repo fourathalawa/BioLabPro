@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { SampleServiceService } from 'src/Service/sample-service.service';
 import { Sample } from 'src/app/models/sample';
 
@@ -12,18 +12,22 @@ import { Sample } from 'src/app/models/sample';
 export class CreatesampleComponent implements OnInit {
   sample: Sample = new Sample();
   p:any;
-  constructor(private sampleService: SampleServiceService,private router: ActivatedRoute) { }
+  constructor(private sampleService: SampleServiceService,private router: Router) { }
   ngOnInit() { 
     
   }
    
+  backfront(){
+    this.router.navigate(['/sample']); 
+   }
   addSample(sample: Sample): void {
-    this.sample.Dateofwithdrawl = sample.Dateofwithdrawl;
-    this.sample.Urgency = sample.Urgency;
+    this.sample.dateofwithdrawl = sample.dateofwithdrawl;
+    this.sample.urgency = sample.urgency;
+    this.sample.userid = sample.userid;
     this.sampleService.addSample(this.sample)
       .subscribe();
-      console.log(sample.Dateofwithdrawl);
-      console.log(sample.Urgency);
+      console.log(sample.dateofwithdrawl);
+      console.log(sample.urgency);
     this.sample = new Sample();
   
 }

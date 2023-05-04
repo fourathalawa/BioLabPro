@@ -19,5 +19,4 @@ import java.util.List;
  @Query("select s from Sample s where s.SampleID not in (select r.sampleID from SampleResult r )")
  List<Sample> findSamplesWithoutResult();
 
-
 }

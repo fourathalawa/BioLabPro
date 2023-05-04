@@ -1,8 +1,8 @@
 export class Sample {
 
     SampleID:any ;
-    Dateofwithdrawl: any ;
-    Urgency:any;
+    dateofwithdrawl: any ;
+    urgency:any;
     userid:any;
 
 
