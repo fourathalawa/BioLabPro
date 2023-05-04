@@ -1,0 +1,81 @@
+<app-header></app-header>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+	<div class="row">
+        <div class="span12">
+            <form method="get" action="/" class="form-inline" >
+              
+                <input name="search" class="span5" type="text"   #searchWord >
+                <button type="submit" class="btn btn-primary" (click)="search(searchWord.value)"> <i class="icon-search icon-white"></i></button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+   
+   
+    <div class="container">
+        <div class="row">         
+    <div class=" col-md-9 col-lg-9 "> 
+      <table class="table table-user-information">
+        <div class="col-sm-6" *ngFor="let t of trainings" >
+        <tbody>
+            <tr>
+                <td><h2>Training {{t.trainingId}}</h2></td>
+              </tr>
+          <tr>
+            <td>Training Name:</td>
+            <td>{{t.trainingName}}</td>
+          </tr>
+          <tr>
+            <td>Training Subject:</td>
+            <td>{{t.trainingSubject}}</td>
+          </tr>
+          <tr>
+            <td>Training Methode</td>
+            <td>{{t.trainingMethod}}</td>
+          </tr>
+       
+            <tr>
+            <td>Training Start Date</td>
+            <td>{{t.training_startdate}}</td>
+          </tr>
+          <tr>
+            <td>Training End Date</td>
+            <td>{{t.training_enddate}}</td>
+          </tr>
+          <br>
+          <button (click)='update(t.trainingId)'>Update Training</button>
+          <button (click)='delete(t)' >Delete Training</button>
+          
+         <br> <br>
+        </tbody>
+    </div>
+      </table>
+      
+    </div>
+</div>
+    </div>
+  </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<app-footer></app-footer>

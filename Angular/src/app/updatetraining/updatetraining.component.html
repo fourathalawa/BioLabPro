@@ -1,0 +1,94 @@
+<app-header></app-header>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container-xxl" style="width: 500px" >
+    
+    <div>
+      <div >
+        <h2> Update a training</h2>
+          <form id="tab" #f="ngForm" >
+            <label>Training name</label>
+            <br>
+            <input type="text" name="trainingName"  class="input-xlarge"  value="{{t.trainingName}}" [(ngModel)]="t.trainingName" #trainingName="ngModel" required>
+            <div *ngIf="trainingName && trainingName.touched">
+                <div class="error" *ngIf="trainingName.errors?.['required']">
+                    
+                   Training Name obligatoire
+                </div>
+            </div>
+            <br>
+            <label>Training Subject</label>
+            <br>
+            <input type="text"  name="trainingSubject" value="{{t.trainingSubject}}"  class="input-xlarge"[(ngModel)]="t.trainingSubject" #trainingSubject="ngModel" required>
+            <div *ngIf="trainingSubject && trainingSubject.touched">
+                <div  class="error" *ngIf="trainingSubject.errors?.['required']">
+                    
+                   Training Subject obligatoire
+                </div>
+            </div>
+            <br>
+            <label>Training Methode</label>
+            <br>
+            <select   class="input-xlarge" value="{{t.trainingMethod}}"  name="trainingMethod" [(ngModel)]="t.trainingMethod" #trainingMethod="ngModel" required>
+                <option >Enligne</option>
+                <option  >Face_to_face</option>
+                <option     > ViaPlateforme</option>
+            </select>
+            <div *ngIf="trainingMethod && trainingMethod.touched">
+                <div  class="error" *ngIf="trainingMethod.errors?.['required']">
+                    
+                   Training Method obligatoire
+                </div>
+            </div>
+            <br>
+            <label>Training Start date</label>
+            <br>
+            <input type="datetime-local" class="input-xlarge"  value="{{t.training_startdate}}"  name="training_startdate" [(ngModel)]="t.training_startdate" #training_startdate="ngModel" required>
+            <div *ngIf="training_startdate && training_startdate.touched">
+                <div class="error" *ngIf="training_startdate.errors?.['required']">
+                    
+                   Training Strat Date obligatoire
+                </div>
+                   <div class="error" *ngIf="!isStartDateValid()">
+                    
+                   Training Strat Date not valid
+                </div>
+            </div>
+            <br>
+            <label>Training End date</label>
+            <br>
+            <input type="datetime-local" class="input-xlarge" value="{{t.training_enddate}}"  name="training_enddate" [(ngModel)]="t.training_enddate" #training_enddate="ngModel" required>
+
+            <div *ngIf="training_enddate && training_enddate.touched">
+                <div  class="error" *ngIf="training_enddate.errors?.['required']">
+                    
+                   Training Strat Date obligatoire
+                </div>
+                   <div class="error" *ngIf="!isendDateValid()">
+                    
+                   Training End Date not valid
+                </div>
+            </div>
+            <br>
+            <br>
+          	<div>
+        	    <button class="btn btn-primary" (click)='Update()'>Update Training</button>
+        	</div>
+       
+        </form>
+      
+      </div> </div> </div>
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+
+<app-footer></app-footer>
