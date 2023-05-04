@@ -34,6 +34,16 @@
 
           <div class="card">
             <h5 class="card-header">Utilisateurs </h5>
+            <div  *ngIf="isAlert" class="alert alert-danger alert-dismissible fade show" role="alert" style="width: 550px; border-radius: 30px;margin-left: 300px;margin-top: 50px;background-color: #FFE0DB">
+              <strong style="color: #FF3E1D">Are you sure you want to ban this item?</strong>
+              <button (click)="ban2()" type="button" class="close" data-dismiss="alert" aria-label="Close" style="background-color: #3291E6 ; margin-left: 15px;border-radius: 30px;" >
+                <span aria-hidden="true">YES </span>
+              </button>
+              <button (click)="hideNotif()" type="button" class="close" data-dismiss="alert" aria-label="Close" style="margin-left: 35px ;border-radius: 30px;">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <fieldset >
             <div class="table-responsive text-nowrap">
               <table class="table">
                 <thead>
@@ -103,7 +113,9 @@
                         <a *ngIf="user.isBanned" (click)="allow(user.id)" class="dropdown-item" href="javascript:void(0);"
                         ><i class="bx bx-trash me-1"></i> Allow </a
                         >
-
+                        <a  (click)="redirectToChat(user.id)" class="dropdown-item" href="javascript:void(0);"
+                        ><i class="bx bx-trash me-1"></i> Send Message </a
+                        >
                       </div>
                     </div>
                   </td>
@@ -115,6 +127,7 @@
                 </tbody>
               </table>
             </div>
+            </fieldset>
           </div>
           <!--/ Contextual Classes -->
 

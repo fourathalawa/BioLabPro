@@ -12,12 +12,16 @@ import {Router} from "@angular/router";
 export class GestionuserComponent implements OnInit {
 
   users: User[] | undefined;
+  isAlert : boolean |undefined;
+
+  idBan : string |undefined;
   constructor(private httpClient: HttpClient,
               private userService:UserService,
               private router: Router) { }
 
   ngOnInit(): void {
     this.retrieveUsers();
+    this.isAlert=false;
   }
 
   retrieveUsers(): void {
@@ -42,15 +46,29 @@ export class GestionuserComponent implements OnInit {
     this.router.navigate([url])
   }
 
-
+  redirectToChat(identifiant:any):void {
+    console.log("test"+identifiant)
+    const url = `chat/${identifiant}`;
+    this.router.navigate([url])
+  }
 
   ban(identifiant:any):void {
     console.log("test"+identifiant)
-    this.userService.banUser(identifiant)
+    this.isAlert=true;
+    this.idBan=identifiant;
+  }
+
+  ban2():void {
+    console.log("test"+this.idBan)
+    this.userService.banUser(this.idBan)
       .subscribe( (response) => {
 
         window.location.reload();
       });
+  }
+
+  hideNotif():void {
+  this.isAlert=false;
   }
 
   allow(identifiant:any):void {

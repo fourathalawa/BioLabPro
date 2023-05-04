@@ -56,13 +56,14 @@
                       <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                         <span class="d-none d-sm-block">Upload new photo</span>
                         <i class="bx bx-upload d-block d-sm-none"></i>
-                        <input
+                        <input (change)="onFileChanged($event)"
                           type="file"
                           id="upload"
                           class="account-file-input"
                           hidden
                           accept="image/png, image/jpeg"
                         />
+                        <input (click)="onUpload()" class="button" type="submit" value="Register"  />
                       </label>
                       <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
                         <i class="bx bx-reset d-block d-sm-none"></i>
@@ -94,7 +95,7 @@
                       </div>
                       <div class="mb-3 col-md-6">
                         <label for="email" class="form-label">E-mail</label>
-                        <input [(ngModel)]="email"
+                        <input [(ngModel)]="email" #mailv="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}"
                           class="form-control"
                           type="text"
                           id="email"
@@ -102,19 +103,25 @@
                           value="{{user.email}}"
 
                         />
+                        <div *ngIf="mailv.hasError('pattern')" class="error-message" style="color: red ; font-size: 14px">
+                          <i class="bi bi-exclamation-triangle-fill"></i> Entrer une adresse email Correcte
+                        </div>
                       </div>
 
                       <div class="mb-3 col-md-6">
                         <label class="form-label" for="phoneNumber">Phone Number</label>
                         <div class="input-group input-group-merge">
                           <span class="input-group-text">TN (+216)</span>
-                          <input  [(ngModel)]="tel"
+                          <input  [(ngModel)]="tel" #telv="ngModel" pattern="[0-9]{8}"
                             type="text"
                             id="phoneNumber"
                             name="phoneNumber"
                             class="form-control"
                             value="{{user.tel}}"
                           />
+                          <div *ngIf="telv.hasError('pattern')" class="error-message" style="color: red ; font-size: 14px">
+                            <i class="bi bi-exclamation-triangle-fill"></i> Entrer un Numero de telephone Correct qui se compose de 8 chiffres
+                          </div>
                         </div>
                       </div>
                       <div class="mb-3 col-md-6">
@@ -177,14 +184,6 @@
         <!-- Footer -->
         <footer class="content-footer footer bg-footer-theme">
           <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-            <div class="mb-2 mb-md-0">
-              ©
-              <script>
-                document.write(new Date().getFullYear());
-              </script>
-              , made with ❤️ by
-              <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-            </div>
             <div>
               <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
               <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>

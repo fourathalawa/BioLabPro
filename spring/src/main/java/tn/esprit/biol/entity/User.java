@@ -55,6 +55,9 @@ public class User implements Serializable {
     private Set<Training> trainings;
 
     @OneToOne
+    @JoinColumn(name = "image_id", referencedColumnName = "id")
+    private ImageModel image;
+    @OneToOne
     @JoinColumn(name = "trainer_id")
     Training training;
     /**
@@ -74,7 +77,6 @@ public class User implements Serializable {
     @JsonIgnore
     @ManyToMany
     Set<NightShift> nightsShift;
-
 
 
 

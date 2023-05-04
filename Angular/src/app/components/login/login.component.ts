@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
 
           console.log("statut"+statut);
 
-          if (role === 'Patient') {
+          if (role === 'Patient' ||role === 'Biologist'||role === 'Trainer' || role === 'Doctor') {
             this.router.navigate(['/home']);
           } else  if (role === 'HeadSupervisor')  {
             this.router.navigate(['/back']);

@@ -113,7 +113,7 @@ public class UserService implements  IUserService {
         biologistUser.setTel("+21653120000");
         Set<Role> biologistRoles = new HashSet<>();
         biologistRoles.add(biologist);
-        patientUser.setRole(biologistRoles);
+        biologistUser.setRole(biologistRoles);
         userDao.save(biologistUser);
 
 

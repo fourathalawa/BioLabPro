@@ -38,13 +38,15 @@ const routes: Routes = [
   },
 
   {
-    path: 'chat/:user', component: ChatComponent ,
-    
+    path: 'chat/:user', component: ChatComponent,
+    canActivate: [AuthGuard],
+    data: {roles: ['HeadSupervisor','Biologist','Trainer','Doctor']}
+
   },
 
    {path:"**", redirectTo:"/login", pathMatch:"full"}
 
-  
+
 
 
 

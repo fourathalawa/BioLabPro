@@ -33,11 +33,13 @@ export class AuthGuard implements CanActivate {
     if (this.userAuthService.getToken() !== null) {
       const role = route.data['roles'] as Array<string>;
       if (role) {
+        console.log('role is'+role)
         const match = this.userService.roleMatch(role);
         if (match) {
           return true;
         } else {
-          window.alert("role problem");
+
+          this.router.navigate([`home`])
           return false;
         }
       }
