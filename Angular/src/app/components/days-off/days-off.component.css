@@ -11,10 +11,9 @@
 	-webkit-transform: translateY(-50%);
 	transform: translateY(-50%);
 }
-
 #booking {
 	font-family: 'PT Sans', sans-serif; 
-	/*background-image: url('../src/assets/img/days/daysOff.jpg');*/
+	background-image: url('src\assets\img\background\fond.jpg');
 	background-size: cover;
 	background-position: center;
 }
@@ -23,11 +22,14 @@
 	background: rgba(0, 0, 0, 0.7);
 	padding: 40px;
 	border-radius: 6px;
+
 }
 
 .booking-form .form-group {
 	position: relative;
 	margin-bottom: 20px;
+	
+
 }
 
 .booking-form .form-control {
@@ -41,6 +43,8 @@
 	box-shadow: none;
 	border-radius: 40px;
 	padding: 0px 25px;
+	margin-top: 20px;
+
 }
 
 .booking-form .form-control::-webkit-input-placeholder {
@@ -133,7 +137,7 @@
 	width: 0px;
 	height: 0px;
 	border-radius: 50%;
-	background-color: #f23e3e;
+	background-color: #3a51c8ab;
 	-webkit-transition: 0.2s all;
 	transition: 0.2s all;
 	-webkit-transform: translate(-50%, -50%);
@@ -156,7 +160,7 @@
 
 .booking-form .submit-btn {
 	color: #fff;
-	background-color: #f23e3e;
+	background-color: #166ab5;
 	font-weight: 400;
 	height: 50px;
 	font-size: 14px;

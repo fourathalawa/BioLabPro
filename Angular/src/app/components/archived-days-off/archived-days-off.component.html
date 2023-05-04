@@ -8,27 +8,29 @@
     <div class="col-md-10">
       <!-- page content here -->
       <div class="card">
-        <div class="content">
-          <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-            <form [formGroup]="searchForm" (ngSubmit)="searchByFirstName()">
-              <div class="form-group">
-                <input type="text" class="form-control" formControlName="search" placeholder="Search By First Name">
-              </div>
-              <button type="submit" class="btn btn-primary">Search</button>
-            </form>
-            
-          </nav>
+        <!--
+        <div class="header">
+          <h2 class="title">Says Off List</h2>
         </div>
+        <div class="content">
+          <form #f="ngForm">
+            <div class="form-group">
+              <label for="to">User Name</label>
+              <input  id="to" name="to" class="form-control">
+            </div>
+            <button [disabled]="!f?.valid" class="btn btn-primary">Search</button>
+            <a [routerLink]="['../flights', 'new' ]" class="btn btn-default ml-2">New</a>
+          </form>
+        </div>
+      </div>
+      -->
+      <div class="card ">
         <div class="table-responsive">
 
           <table class="table table-centered table-hover mt-2" id="datatable">
             <thead>
               <tr>
                 <th class="border-top-0" scope="col">Id</th>
-                <th class="border-top-0" scope="col">First Name</th>
-                <th class="border-top-0" scope="col">Last Name</th>
-                <th class="border-top-0" scope="col">Email</th>
-                <th class="border-top-0" scope="col">Tel</th>
                 <th class="border-top-0" scope="col">Start Date</th>
                 <th class="border-top-0" scope="col">End Date</th>
                 <th class="border-top-0" scope="col">Justification</th>
@@ -40,14 +42,9 @@
             </thead>
             <tbody>
               <ng-container *ngFor="let item of listDaysOff">
-                <tr *ngIf="item.archive === 0">
+                <tr *ngIf="item.archive === 1">
                   <td>{{item.user.id}}</td>
-                  <td>{{item.user.userFirstName}}</td>
-                  <td>{{item.user.userLastName}}</td>
-                  <td>{{item.user.email}}</td>
-                  <td>{{item.user.tel}}</td>
-                  <td>{{item.startDate}}</td>  
-
+                  <td>{{item.startDate}}</td>
                   <td>{{item.endDate}}</td>
                   <td>{{item.justification}}</td>
                   <td>
@@ -56,10 +53,7 @@
                   </td>
                   <td>{{item.etat}}</td>
                   <td style="white-space: nowrap">
-                    <a [routerLink]="['/daysOffEdit', item.id ]" class="btn btn-secondary">Edit</a>
-                    <button (click)="archiveDaysOff(item)" class="btn btn-warning">Archive</button>
-                    <button class="btn btn-primary" (click)="genererPdf(item)">Generate PDF</button>
-
+                    <button (click)="deleteDaysOff(item.id)" class="btn btn-danger">Delete</button>
                   </td>
                 </tr>
               </ng-container>
@@ -71,3 +65,4 @@
       </div>
     </div>
   </div>
+</div>

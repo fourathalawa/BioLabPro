@@ -1,9 +1,11 @@
 export class DaysOff {
-endDate:any
+endDate!:any
 etat:any
 id:any
-justification:any
+justification!:any
 request:any
-startDate:any
+startDate!:any
+user:any
+archive:any
 
 }

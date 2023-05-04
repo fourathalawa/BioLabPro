@@ -68,9 +68,13 @@ public class User implements Serializable {
     /**
      *  Houde
      * */
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_nights_shift",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "night_shift_id", referencedColumnName = "id")}
+    )
     Set<NightShift> nightsShift;
-
 
 
 

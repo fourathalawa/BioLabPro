@@ -23,7 +23,7 @@ public class DaysOff  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
-
+Integer Archive;
     LocalDate startDate;
     LocalDate endDate;
     Boolean request;

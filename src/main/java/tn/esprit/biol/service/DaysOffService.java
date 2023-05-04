@@ -42,7 +42,7 @@ public class DaysOffService implements IDaysOffService {
         // Envoi de l'email de demande de congé
 
         if (validateLeaveRequest(startDate, endDate)) {
-            emailService.sendLeaveRequestEmail(to, "Demande Congé", justification);
+           // emailService.sendLeaveRequestEmail(to, "Demande Congé", justification);
             // Sauvegarde de la demande de congé
             User user = userDao.findById(id).get();
             DaysOff daysOff = new DaysOff();
@@ -50,6 +50,9 @@ public class DaysOffService implements IDaysOffService {
             daysOff.setStartDate(startDate);
             daysOff.setEndDate(endDate);
             daysOff.setJustification(justification);
+            daysOff.setArchive(0);
+
+
             daysOff.setUser(user);
             daysOffDao.save(daysOff);
 
@@ -61,12 +64,9 @@ public class DaysOffService implements IDaysOffService {
 
     public boolean validateLeaveRequest(LocalDate startDate, LocalDate endDate) {
         LocalDate currentDate = LocalDate.now();
-        long daysNotice = ChronoUnit.DAYS.between(currentDate, startDate);
         if (startDate.isAfter(endDate)) {
             return false;
-        } else if (daysNotice <= 5) //si demande de congé n'est pas envoyé avant 5 jrs de date debut de demande
-        {
-            return false;
+
         } else {
             return true;
         }
@@ -93,7 +93,7 @@ public class DaysOffService implements IDaysOffService {
             int nbJoursCongeUtilisateur = 0;
 
             if ((nbJoursCongeUtilisateur + nbJoursCongeDemande) > daysOff.getUser().getStaff_details().getNbrDaysOffPerYears()) {
-                daysOff.setEtat(Etat.Refuse);
+                daysOff.setEtat(Etat.Refused);
                 return "Demande de congé refusée : l'utilisateur a dépassé le nombre maximum de jours de congé par année.";
             }
 

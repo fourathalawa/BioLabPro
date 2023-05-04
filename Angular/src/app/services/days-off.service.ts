@@ -26,6 +26,7 @@ export class DaysOffService {
     } 
     
 
+
   constructor(private _http:HttpClient, private dialog: MatDialog,private router:Router) { }
   getDaysOff() : Observable<any> {
     return this._http.get<string[]>(this.daysOffUrl);
@@ -51,5 +52,30 @@ export class DaysOffService {
             })
           );
       }
+      addDaysOff(daysOff:DaysOff){
+       return this._http.post<DaysOff>("http://localhost:8089/BioLabPro/DaysOff/RequestDaysOff",daysOff);
+
+      }
+        archiveEntity(id: number) {
+          return this._http.put("http://localhost:8089/BioLabPro/DaysOff/archive/"+ id,[]);
+        }
+        
+        genererPdf(daysOff:DaysOff) {
+          console.log("test")
+          this._http.post("http://localhost:8089/BioLabPro/DaysOff/test/", daysOff, { responseType: 'blob' })
+            .subscribe((response: Blob) => {
+              // Create a new blob object that contains the PDF file
+              const file = new Blob([response], { type: 'application/pdf' });
+        
+              // Generate a URL for the PDF file
+              const fileURL = URL.createObjectURL(file);
+        
+              // Open the PDF file in a new tab
+              window.open(fileURL);
+            }, (error: any) => {
+              console.log(error);
+            });
+        }
+        
 }
 

@@ -50,21 +50,14 @@ public class DaysOffController {
 
 
     @PostMapping("/RequestDaysOff")
+        public ResponseEntity<String> sendRequest(@RequestBody DaysOff daysOff) throws Exception {
 
-    public ResponseEntity<String> sendRequest(@RequestParam("justif") String justification,
-                                              @RequestParam("debut") String startDate,
-                                              @RequestParam("fin") String endDate)
-            throws Exception {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String jus = "Le biologiste ayant l'identifiant 07998550 demande les codes des résultats de la période allant du " + daysOff.getStartDate() + " jusqu'au " + daysOff.getEndDate() + " avec la justification ci -dessus " + daysOff.getJustification();
 
-        LocalDate sdate = LocalDate.parse(startDate, formatter);
-        LocalDate edate = LocalDate.parse(endDate, formatter);
-
-        String jus = "Le biologiste ayant l'identifiant 07998550 demande les codes des résultats de la période allant du " + startDate + " jusqu'au " + endDate + " avec la justification ci -dessus " + justification;
 
         // Envoyer la demande de congé
-        boolean success = daysOffService.sendLeaveRequest("houda.koubaa@esprit.tn", "07998550", sdate, edate, jus);
+        boolean success = daysOffService.sendLeaveRequest("houda.koubaa@esprit.tn", "07998550", daysOff.getStartDate(), daysOff.getEndDate(), jus);
 
         if (!success) {
             return ResponseEntity.badRequest().body("La demande n'est pas valide, vérifiez vos dates.");
@@ -129,5 +122,19 @@ public class DaysOffController {
     public ResponseEntity<Object> updateDaysOff(@PathVariable(value = "id") String id,@RequestBody DaysOff s) {
 
         return daysOffService.updateDaysOff(id,s);
+    }
+
+
+    @PutMapping("/archive/{id}")
+    public void archiveEntity(@PathVariable Integer id) {
+        DaysOff entity = daysOffDao.findDaysOffById(id);
+        entity.setArchive(1);
+        daysOffDao.save(entity);
+    }
+
+    @PostMapping("/test/")
+    public void genererPdf(@RequestBody DaysOff s) throws Exception {
+        daysOffService.genererPdf(s);
+
     }
 }

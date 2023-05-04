@@ -8,7 +8,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BackhomeComponent } from './backoffice/backhome/backhome.component';
 import { SidebarComponent } from './backoffice/sidebar/sidebar.component';
 import { HeaderbackComponent } from './backoffice/headerback/headerback.component';
@@ -20,6 +20,7 @@ import { DaysOffEditComponent } from './components/days-off-edit/days-off-edit.c
 import { MyDialogComponentComponent } from './components/my-dialog-component/my-dialog-component.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ArchivedDaysOffComponent } from './components/archived-days-off/archived-days-off.component';
 
 
 
@@ -37,6 +38,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ListDaysOffComponent,
     DaysOffComponent,
     DaysOffEditComponent,
+    ArchivedDaysOffComponent,
 
   ],
   imports: [
@@ -47,6 +49,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CommonModule,
     MatDialogModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

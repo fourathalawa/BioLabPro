@@ -1,5 +1,5 @@
 package tn.esprit.biol.entity;
 
 public enum Etat {
-   Refuse,EnCour,terminé
+   Accepted,Refused,EnCour,terminé
 }

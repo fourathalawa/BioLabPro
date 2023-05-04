@@ -7,19 +7,19 @@ import {LoginComponent} from "./components/login/login.component";
 import { ListDaysOffComponent } from './components/list-days-off/list-days-off.component';
 import { DaysOffComponent } from './components/days-off/days-off.component';
 import { DaysOffEditComponent } from './components/days-off-edit/days-off-edit.component';
+import { ArchivedDaysOffComponent } from './components/archived-days-off/archived-days-off.component';
 
 
 const routes: Routes = [
   {path:"login", component:LoginComponent},
-   {path:"", redirectTo:"/login", pathMatch:"full"},
-   {path:"home", component:HomeComponent},
+  {path:"", redirectTo:"/login", pathMatch:"full"},
+  {path:"home", component:HomeComponent},
   {path:"back", component:BackhomeComponent},
   {path:"listdaysOff", component:ListDaysOffComponent},
   {path:"daysOffEdit/:id", component:DaysOffEditComponent},
-
   {path:"daysOff", component:DaysOffComponent},
-
-   {path:"**", redirectTo:"/login", pathMatch:"full"},
+  {path:"archiveDaysOff", component:ArchivedDaysOffComponent},
+  {path:"**", redirectTo:"/login", pathMatch:"full"},
 
 
 
