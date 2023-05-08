@@ -69,6 +69,9 @@ search(sampleID: number) {
    backfront(){
     this.router.navigate(['/sample']); 
    }
+   gotoresults(){
+    this.router.navigate(['/result']); 
+   }
 
   
 }

@@ -13,11 +13,11 @@ export class FilterPipe implements PipeTransform {
     searchTerm = searchTerm.toLowerCase();
 
     return items.filter(item =>
-      item.sampleID.toString().toLowerCase().includes(searchTerm) /* ||
+      item.sampleID.toString().toLowerCase().includes(searchTerm)  ||
+      //item.urgency.toLowerCase().includes(searchTerm) ||
+      item.userID.userFirstName.toLowerCase().includes(searchTerm) /* ||
       item.dateofwithdrawl.toLowerCase().includes(searchTerm) ||
-      item.urgency.toLowerCase().includes(searchTerm) ||
-      item.userID.userFirstName.toLowerCase().includes(searchTerm) ||
-      item.userID.userLastName.toLowerCase().includes(searchTerm) */
+      item.userID.userLastName.toLowerCase().includes(searchTerm)   */
     );
   }
 
