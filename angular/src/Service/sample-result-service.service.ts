@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { I } from '@fullcalendar/core/internal-common';
 import { Observable } from 'rxjs';
 import { SampleResult } from 'src/app/models/sample-result';
 
@@ -21,10 +22,7 @@ export class SampleResultServiceService {
     return this.httpClient.get(`${this.API_URL}/searchBySampleID/${resultid}`)
   }
 
-
-  sms(resultid:number) {
-    return this.httpClient.get(`${this.API_URL}/sendSMS/${resultid}`)
-  }
+ 
 
   addSample(SampleResult: SampleResult): Observable<SampleResult> {
      return this.httpClient.post<SampleResult>(`${this.API_URL}/save`, SampleResult);
@@ -39,8 +37,14 @@ export class SampleResultServiceService {
   } 
   qrcode(resultid:number) {
     return this.httpClient.get(`${this.API_URL}/generateQRCodeForSampleResult/${resultid}`)
-  console.log(resultid);
-  
-  
+  console.log(resultid);  
+  }
+  pdf(SampleResult:any) {
+    return this.httpClient.get(`${this.API_URL}/pdf/${SampleResult}`)
+
+  }
+  sms(number:String) {
+    return this.httpClient.get(`${this.API_URL}/sendSMS/${number}`)
+
   }
 }

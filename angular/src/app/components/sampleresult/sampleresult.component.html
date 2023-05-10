@@ -17,6 +17,8 @@
         <td>{{ result.sampleID.urgency }}</td>
        <td>       
            <button (click)="qr(result.resultID)">qrcode</button>
+           <button (click)="pdf(result.sampleID.userID.id)">pdf</button>
+           <button (click)="sms(result.sampleID.userID.tel)">sms</button>
 <!-- 
           <button (click)="showSampleDetails(result.sampleID)">Show Details</button>
           <button (click)="deleteSample(result.sampleID)">Delete</button>

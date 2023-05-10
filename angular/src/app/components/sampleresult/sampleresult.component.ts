@@ -20,4 +20,17 @@ export class SampleresultComponent implements OnInit {
     this.router.navigate(['/result']);
      console.log(resultid)
    }
+   pdf(resultid : any){
+    this.resultservice.pdf(resultid).subscribe();      
+    console.log(resultid);
+    this.router.navigate(['/result']);
+     console.log(resultid)
+   }
+   sms(number:any){
+    this.resultservice.sms(number).subscribe();      
+    console.log(number);
+    this.router.navigate(['/result']);
+     console.log(number)
+
+   }
 }

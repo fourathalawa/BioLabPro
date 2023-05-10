@@ -58,6 +58,8 @@ search(sampleID: number) {
     this.router.navigate(['/sample']);
     this.SampleService.getAllSample().subscribe(res=>{console.log(res); 
       this.Samples=res});
+      this.router.navigate(['/sample']);
+
    }/*
   */
 
