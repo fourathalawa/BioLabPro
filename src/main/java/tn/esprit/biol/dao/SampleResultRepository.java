@@ -20,6 +20,10 @@ public interface SampleResultRepository extends JpaRepository<SampleResult, Inte
 
     @Query("SELECT u.tel FROM SampleResult sr INNER JOIN Sample s ON sr.sampleID = s.SampleID INNER JOIN User u ON s.userID = u.id WHERE sr.ResultID =:ResultID")
     String getUserTelBySampleId(@Param("ResultID") Integer ResultID);
+
+    @Query("SELECT u.userFirstName FROM SampleResult sr INNER JOIN Sample s ON sr.sampleID = s.SampleID INNER JOIN User u ON s.userID = u.id WHERE sr.ResultID =:ResultID")
+    String getusername(@Param("ResultID") Integer ResultID);
+
     /*
 
         @Query("SELECT s FROM SampleResult s WHERE s.DateResult =dateResult")

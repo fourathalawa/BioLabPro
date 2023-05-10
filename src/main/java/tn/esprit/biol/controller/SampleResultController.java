@@ -88,17 +88,15 @@ public class SampleResultController {
     }
 
 
-    @PostMapping(value="/sendSMS/{ResultID}" )
-    public String sendSMS(@PathVariable("ResultID") Integer ResultID){
-        String x = sampleResultsRepository.getUserTelBySampleId(ResultID);
-        System.out.println(x);
-        try {
-            Twilio.init("AC19f1eec1d681257ac2ed943bf6a59243", "c7c671780fd48a57010b8b01dc94e321");
+    @GetMapping(value="/sendSMS/{ResultID}" )
+    public String sendSMS(@PathVariable("ResultID") String  ResultID){
+          try {                                                                   /*c2a6dae6221dedd9932d5e0fad6762bb*/
+            Twilio.init("AC19f1eec1d681257ac2ed943bf6a59243", "c2a6dae6221dedd9932d5e0fad6762bb");
 
             Message message = Message.creator(
-                            new PhoneNumber(x),
+                            new PhoneNumber(ResultID),
                             new PhoneNumber("+12706755516"),
-                            "ntasti yé lowléd chiheb chiheb")
+                            "your sample analysis is ready")
                     .create();
 
             return "message sent successfully";
