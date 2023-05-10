@@ -7,5 +7,6 @@ request:any
 startDate!:any
 user:any
 archive:any
+status:any;
 
 }

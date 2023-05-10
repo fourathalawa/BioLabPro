@@ -17,6 +17,7 @@ export class DaysOffService {
   daysOffUrl="http://localhost:8089/BioLabPro/DaysOff/all-DaysOff";
   daysOffEdit="http://localhost:8089/BioLabPro/DaysOff/getDaysOff";
   daysOffUpdate="http://localhost:8089/BioLabPro/DaysOff/updateDaysOff";
+  private baseUrl = 'http://localhost:8080/api/daysoffbyid';
 
   
   httpOptions = { 
@@ -76,6 +77,9 @@ export class DaysOffService {
               console.log(error);
             });
         }
+      public getDaysOffByUserId(userId: number): Observable<DaysOff[]> {
+  return this._http.get<DaysOff[]>(this.baseUrl + '/daysoffbyid/' + userId);
+}
         
 }
 

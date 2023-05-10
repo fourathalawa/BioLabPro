@@ -17,10 +17,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import tn.esprit.biol.dao.DaysOffDao;
-import tn.esprit.biol.entity.DaysOff;
-import tn.esprit.biol.entity.Equipment;
-import tn.esprit.biol.entity.Etat;
-import tn.esprit.biol.entity.Staff_Details;
+import tn.esprit.biol.entity.*;
 import tn.esprit.biol.service.DaysOffService;
 import tn.esprit.biol.service.EmailService;
 import tn.esprit.biol.service.ImageUtils;
@@ -136,5 +133,10 @@ public class DaysOffController {
     public void genererPdf(@RequestBody DaysOff s) throws Exception {
         daysOffService.genererPdf(s);
 
+    }
+
+    @GetMapping("/daysoffbyid/{id}")
+    public DaysOff getDaysOffByid(@PathVariable Integer id) {
+        return daysOffService.getById(id);
     }
 }

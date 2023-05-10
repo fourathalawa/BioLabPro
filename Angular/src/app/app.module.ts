@@ -25,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { HistoryComponent } from './history/history.component';
 
  
 
@@ -45,6 +46,7 @@ import interactionPlugin from '@fullcalendar/interaction';
     DaysOffEditComponent,
     ArchivedDaysOffComponent,
     CalendarComponent,
+    HistoryComponent,
 
   ],
   imports: [

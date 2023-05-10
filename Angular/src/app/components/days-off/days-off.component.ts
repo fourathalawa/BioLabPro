@@ -45,7 +45,7 @@ export class DaysOffComponent implements OnInit {
         },
         (error) => {
           alert('Your request has been successfully submitted.');
-          this._router.navigateByUrl('/home');
+          this._router.navigateByUrl('/history');
         }
       );
     }
