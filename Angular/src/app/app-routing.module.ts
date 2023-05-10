@@ -8,6 +8,7 @@ import { ListDaysOffComponent } from './components/list-days-off/list-days-off.c
 import { DaysOffComponent } from './components/days-off/days-off.component';
 import { DaysOffEditComponent } from './components/days-off-edit/days-off-edit.component';
 import { ArchivedDaysOffComponent } from './components/archived-days-off/archived-days-off.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,8 @@ const routes: Routes = [
   {path:"daysOffEdit/:id", component:DaysOffEditComponent},
   {path:"daysOff", component:DaysOffComponent},
   {path:"archiveDaysOff", component:ArchivedDaysOffComponent},
+  {path:"garde", component:CalendarComponent},
+
   {path:"**", redirectTo:"/login", pathMatch:"full"},
 
 

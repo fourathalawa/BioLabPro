@@ -176,3 +176,7 @@
 .booking-form .submit-btn:focus {
 	opacity: 0.9;
 }
+.error-message {
+    color: red;
+    font-size: 14px;
+}
