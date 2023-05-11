@@ -136,7 +136,8 @@ public class DaysOffController {
     }
 
     @GetMapping("/daysoffbyid/{id}")
-    public DaysOff getDaysOffByid(@PathVariable Integer id) {
-        return daysOffService.getById(id);
+    public List<DaysOff> getDaysOffByUserId(@PathVariable String id) {
+        return daysOffService.findDaysOffByUserId( id);
     }
+
 }

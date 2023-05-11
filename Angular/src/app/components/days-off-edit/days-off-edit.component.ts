@@ -30,7 +30,8 @@ ngOnInit (){
     this.daysOff.request = true;
     this.daysOff.etat = 'Accepted';
 
-    this.update();
+    this.router.navigate(['/listdaysOff']);
+
   }
   
   refuse() {

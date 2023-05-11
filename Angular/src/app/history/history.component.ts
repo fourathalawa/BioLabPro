@@ -9,19 +9,17 @@ import { DaysOffService } from 'src/app/services/days-off.service';
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit {
-  userId!: number;
+  userId!: string; // Utilisez le type de données correct (string) pour correspondre à votre implémentation du service
   daysOff!: DaysOff[];
   daysOffList: DaysOff[] = [];
 
   constructor(private _daysOffService: DaysOffService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const idParam = this.route.snapshot.paramMap.get('id');
-    this.userId = +this.route.snapshot.paramMap.get('id')!;
+    this.userId = this.route.snapshot.paramMap.get('id')!;
     this.getDaysOff();
   }
   
-
   getDaysOff() {
     this._daysOffService.getDaysOffByUserId(this.userId).subscribe(
       data => {
@@ -33,9 +31,3 @@ export class HistoryComponent implements OnInit {
     )
   }
 }
-
-
-
-
-
-

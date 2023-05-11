@@ -21,6 +21,9 @@ export class DaysOffComponent implements OnInit {
 
    public addDaysOff(): void {
     console.log('Days Off:', this.daysOff);
+     // set the user property of the daysOff object
+  this.daysOff.user = new User();
+  this.daysOff.user.id = "07998550"; // replace with the actual user ID
   
     // get today's date and convert it to a Date object
     const today = new Date();
@@ -45,7 +48,7 @@ export class DaysOffComponent implements OnInit {
         },
         (error) => {
           alert('Your request has been successfully submitted.');
-          this._router.navigateByUrl('/history');
+          this._router.navigateByUrl('/home');
         }
       );
     }

@@ -24,6 +24,8 @@ public interface DaysOffDao extends JpaRepository<DaysOff,Integer> {
     @Query("SELECT COUNT(d) FROM DaysOff d WHERE d.etat = :etat AND :date BETWEEN d.startDate AND d.endDate")
     long countByEtatAndDateBetween(@Param("etat") Etat etat, @Param("date") Date date);
 
-    public DaysOff findDaysOffById(Integer id);
 
+    DaysOff findDaysOffById(Integer id);
+
+    List<DaysOff> findByUserId(String id);
 }

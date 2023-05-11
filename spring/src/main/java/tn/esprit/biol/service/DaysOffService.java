@@ -203,9 +203,10 @@ public ResponseEntity<Object> updateDaysOff(String id, DaysOff s) {
     return ResponseEntity.notFound().build();
 }
 
-    public DaysOff getById(Integer id) {
-    return  daysOffDao.findDaysOffById(id);
+    public List<DaysOff> findDaysOffByUserId(String id) {
+        return daysOffDao.findByUserId(id);
     }
+
 
 
 }

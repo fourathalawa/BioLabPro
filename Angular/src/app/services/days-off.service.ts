@@ -77,7 +77,7 @@ export class DaysOffService {
               console.log(error);
             });
         }
-      public getDaysOffByUserId(userId: number): Observable<DaysOff[]> {
+      public getDaysOffByUserId(userId: string): Observable<DaysOff[]> {
   return this._http.get<DaysOff[]>(this.baseUrl + '/daysoffbyid/' + userId);
 }
         
