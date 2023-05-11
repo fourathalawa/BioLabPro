@@ -38,6 +38,7 @@ public class InvoiceController {
     TestTypeService testTypeService;
     @Autowired
     PdfGenerateService pdfGenerateService;
+
     @Autowired
     EmailService emailService;
     @GetMapping("/retreiveAllInvoices")
@@ -50,6 +51,12 @@ public class InvoiceController {
         return invoiceService.findInvoiceById(id);
     }
 
+
+    @PostMapping("/sendMailReclamation/{to}/{subject}/{text}")
+    public String SendMail(@PathVariable String to,@PathVariable String subject,@PathVariable String text) throws MessagingException {
+        emailService.sendSimpleMessage(to,subject,text);
+        return "mail sended";
+    }
 
     @PostMapping("/addInvoice")
     @ResponseBody

@@ -36,28 +36,35 @@
                                     <td>{{p.statusPayment}}</td>
                                     <td>{{p.descreptionInvoice}}</td>
 
-                                    <td><a class="bi bi-file-pdf" target="_blank" href="http://localhost/PdfInvoices/{{p.idInvoice}}.pdf">Download PDF</a></td>
-                                    <td><a style="background-color:rgb(20, 80, 8); "class="btn btn-primary"  [routerLink]="['/back/addinvoice',p.idInvoice]">Update</a></td>
+                                    <td><a class="bi bi-file-pdf" target="_blank"
+                                            href="http://localhost/PdfInvoices/{{p.idInvoice}}.pdf">Download PDF</a>
+                                    </td>
+                                    <td><a style="background-color:rgb(20, 80, 8); " class="btn btn-primary"
+                                            [routerLink]="['/back/addinvoice',p.idInvoice]">Update</a></td>
                                     <td> <button class="btn btn-primary" style="background-color:red;"
                                             (click)="deleteInvoice(p.idInvoice)">Delete</button></td>
                                 </tr>
                             </table>
                         </div>
                     </div>
-                  <!-- {{Unpayed_AmmountMonth1}} -->
-                 
+                    <!-- {{Unpayed_AmmountMonth1}} -->
+
                 </section>
+                
 
+               
+                 
+              
 
-                <a style="text-align: center;" class="link-primary" 
-                href="/back/addinvoice">
-                <i class="bi bi-arrow-right-circle"></i>
-                ADD INVOICE</a>
+                <a style="text-align: center;" class="link-primary" href="/back/addinvoice">
+                    <i class="bi bi-arrow-right-circle"></i>
+                    ADD INVOICE</a>
 
                 <br><br><br>
+                
 
-
-
+                <app-chart-invoice></app-chart-invoice>
+                
 
                 <!-- Footer -->
                 <footer class="content-footer footer bg-footer-theme">

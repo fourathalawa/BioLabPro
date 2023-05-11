@@ -24,6 +24,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChartInvoiceComponent } from './components/chart-invoice/chart-invoice.component';
+import * as ApexCharts from 'apexcharts';
+import { EmailSenderComponent } from './email-sender/email-sender.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     InvoiceFrontComponent,
     InvoiceBackComponent,
     FormBackInvoiceComponent,
+    ChartInvoiceComponent,
+    EmailSenderComponent,
     
   ],
   imports: [
@@ -51,7 +56,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent, HomeComponent, AppointementComponent]
