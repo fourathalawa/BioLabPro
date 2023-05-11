@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {userAuthService} from "../../services/user-auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-headerback',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderbackComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userAuthService:userAuthService,
+              private router:Router) { }
 
   ngOnInit(): void {
   }
-
+  logout() {
+    this.userAuthService.clear();
+    this.router.navigate(['/home']); // Redirection vers la route 'accueil'
+  }
 }

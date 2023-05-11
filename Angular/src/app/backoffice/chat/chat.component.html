@@ -1,19 +1,29 @@
+<body>
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    <!-- Menu -->
+
+    <app-sidebar></app-sidebar>
+    <!-- / Menu -->
+
+    <!-- Layout container -->
+    <div class="layout-page">
+      <!-- Navbar -->
+
+      <app-headerback></app-headerback>
 <link
   href="https://fonts.googleapis.com/icon?family=Material+Icons"
   rel="stylesheet"
 />
-<div class="component" >
-  <div class="container-fluid h-100">
-    <div class="row justify-content-center h-100">
-      <div class="card-footer"></div>
-    </div>
-  </div>
-  <div class="col-md-8 col-xl-6 chat">
+<div class="component" style="width: 1000px">
+
+  <div class="col-md-10 col-xl-6 chat">
     <div class="card">
       <div class="card-header msg_head">
         <div class="d-flex bd-highlight">
           <div class="img_cont_msg">
-            <img src="" alt="Avatar" >
+            <img src="assets/img/avatars/1.png" alt="Avatar" width="45px">
           </div>
           <div class="user_info">
             <span>Chat {{ otherUser?.userFirstName }}</span>
@@ -29,7 +39,7 @@
           >
             <div class="img_cont_msg">
               <img
-                [src]=""
+                src="assets/img/avatars/1.png"
                 class="rounded-circle user_img_msg"
               />
             </div>
@@ -51,7 +61,7 @@
               </div>
               <div class="img_cont_msg">
                 <img
-                [src]=""
+                src="assets/img/avatars/1.png"
                   class="rounded-circle user_img_msg"
                 />
               </div>
@@ -83,3 +93,16 @@
     </div>
   </div>
 </div>
+    </div>
+    <!-- / Layout page -->
+  </div>
+
+  <!-- Overlay -->
+  <div class="layout-overlay layout-menu-toggle"></div>
+</div>
+<!-- / Layout wrapper -->
+
+
+
+
+</body>
